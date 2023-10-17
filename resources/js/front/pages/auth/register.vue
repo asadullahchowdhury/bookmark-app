@@ -11,7 +11,7 @@
                                v-model="registerParam.first_name"
                                autocomplete="off">
                         <img class="placeholder-icon" :src="`/images/global/user.svg`" alt="f-name">
-                        <div class="error-report"></div>
+                        <div class="error-report ms-2"></div>
                     </div>
 
                     <div class="form-group mb-3">
@@ -19,7 +19,7 @@
                                v-model="registerParam.last_name"
                                autocomplete="off">
                         <img class="placeholder-icon" :src="`/images/global/type.svg`" alt="t">
-                        <div class="error-report"></div>
+                        <div class="error-report ms-2"></div>
                     </div>
 
                     <div class="form-group mb-3">
@@ -27,7 +27,7 @@
                                v-model="registerParam.email"
                                autocomplete="off">
                         <img class="placeholder-icon" :src="`/images/global/mail.svg`" alt="mail">
-                        <div class="error-report"></div>
+                        <div class="error-report ms-2"></div>
                     </div>
 
                     <div class="form-group mb-3">
@@ -35,7 +35,7 @@
                                v-model="registerParam.phone"
                                autocomplete="off">
                         <img class="placeholder-icon" :src="`/images/global/voicemail.svg`" alt="phone">
-                        <div class="error-report"></div>
+                        <div class="error-report ms-2"></div>
                     </div>
 
                     <div class="form-group mb-3">
@@ -43,7 +43,7 @@
                                v-model="registerParam.password"
                                name="password" autocomplete="off">
                         <img class="placeholder-icon" :src="`/images/global/lock.svg`" alt="lock">
-                        <div class="error-report"></div>
+                        <div class="error-report ms-2"></div>
                     </div>
 
                     <div class="form-group mb-3">
@@ -51,7 +51,7 @@
                                v-model="registerParam.password_confirmation"
                                name="password_confirmation" autocomplete="off">
                         <img class="placeholder-icon" :src="`/images/global/lock.svg`" alt="lock">
-                        <div class="error-report"></div>
+                        <div class="error-report ms-2"></div>
                     </div>
 
                     <div class="form-group ms-2">

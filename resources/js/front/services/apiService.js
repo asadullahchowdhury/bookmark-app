@@ -51,7 +51,6 @@ const apiService = {
 
 
     ErrorHandler(errors) {
-        console.log($('.form-group'),'form')
         $('.is-invalid').removeClass('is-invalid');
         $('.error-report').html('');
         $('.error-report-g').html('');
@@ -59,7 +58,7 @@ const apiService = {
             if (i === 'error') {
                 $('.error-report-g').html('<p class="alert alert-danger rounded-pill">' + v + '</p>')
             } else {
-                $('[name=' + i + ']').addClass('is-invalid');
+                // $('[name=' + i + ']').addClass('is-invalid');
                 $('[name=' + i + ']').closest('.form-group').find('.error-report').html(v);
             }
         });

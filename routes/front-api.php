@@ -17,7 +17,7 @@ use App\Http\Controllers\AuthController;
 */
 
 
-Route::group(['middleware' => ['AdminAuth'], 'prefix' => 'auth'], function () {
+Route::group(['middleware' => ['UserAuth']], function () {
     Route::post('login', [AuthController::class, 'login'])->name('Auth.login');
     Route::post('register', [AuthController::class, 'register'])->name('Auth.Register');
 });

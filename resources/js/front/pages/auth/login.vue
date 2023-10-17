@@ -9,12 +9,14 @@
 
                     <div class="text-center fs-3 text-white mb-4">Login here</div>
 
+                    <div class="error-report-g"></div>
+
                     <div class="form-group mb-3">
                         <input type="text" class="form-control shadow-none" placeholder="Email Address" name="email"
                                v-model="loginParam.email"
                                autocomplete="off">
                         <img class="placeholder-icon" :src="`/images/global/mail.svg`" alt="mail">
-                        <div class="error-report"></div>
+                        <div class="error-report ms-2"></div>
                     </div>
 
                     <div class="form-group mb-3">
@@ -27,7 +29,7 @@
                             <img v-if="passwordFieldType === 'password' " :src="`/images/global/eye-off.svg`"
                                  alt="eye-off">
                         </div>
-                        <div class="error-report"></div>
+                        <div class="error-report ms-2"></div>
                     </div>
 
                     <div class="form-group small d-flex justify-content-between ms-2">
