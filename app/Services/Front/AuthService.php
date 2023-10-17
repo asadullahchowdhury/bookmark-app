@@ -45,7 +45,7 @@ class AuthService
                 [
                     'first_name' => 'required|min:3',
                     'last_name' => 'required|min:3',
-                    'email' => 'required|unique:admins,email',
+                    'email' => 'required|unique:users,email',
                     'password' => 'required|min:6|confirmed'
                 ]
             );

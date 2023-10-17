@@ -72,7 +72,6 @@
 import apiRoutes from "../../services/apiRoutes.js";
 import apiService from "../../services/apiService";
 import {createToaster} from "@meforma/vue-toaster";
-
 const toaster = createToaster({
     position: 'top-right',
 });

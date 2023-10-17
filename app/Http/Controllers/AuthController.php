@@ -13,4 +13,9 @@ class AuthController extends Controller
         $rv = AuthService::login($request);
         return response()->json($rv, 200);
     }
+
+    public function register(Request  $request){
+        $rv = AuthService::register($request);
+        return response()->json($rv, 200);
+    }
 }
