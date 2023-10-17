@@ -5,6 +5,7 @@ import Login from '../pages/auth/login.vue'
 import Register from '../pages/auth/register.vue'
 import Layout from "../pages/layout/layout.vue";
 import Home from "../pages/home/home.vue";
+import Forgot from "../pages/auth/forgot.vue";
 
 const ROOT_URL = '/'
 
@@ -12,6 +13,7 @@ const routes = [
     // Authentication
     {path: ROOT_URL + 'login', name: 'Login', component: Login, meta: {title: 'Login'}},
     {path: ROOT_URL + 'register', name: 'Register', component: Register, meta: {title: 'Register'}},
+    {path: ROOT_URL + 'forgot', name: 'Forgot', component: Forgot, meta: {title: 'Forgot'}},
 
 
     {

@@ -24,7 +24,7 @@
                         <div class="error-report"></div>
                     </div>
 
-                    <div class="form-group ms-2">
+                    <div class="form-group small d-flex justify-content-between ms-2">
                         <div class="checkbox-wrapper">
                             <input class="inp-cbx" id="remember" type="checkbox"/>
                             <label class="cbx" for="remember">
@@ -36,6 +36,10 @@
                                 <span class="text-white">Remember Me?</span>
                             </label>
                         </div>
+
+                        <router-link :to="{name:'Forgot'}" class="text-danger fw-semibold underline-anim red">Forgot
+                            Password?
+                        </router-link>
                     </div>
 
                     <div class="form-group mt-4">

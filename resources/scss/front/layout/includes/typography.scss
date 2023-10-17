@@ -1,14 +1,22 @@
-.underline-anim{
+.underline-anim {
     position: relative;
     display: inline-block;
     text-decoration: none;
     transition: .3s all ease-in-out;
-    &.white{
-        &:before{
+
+    &.white {
+        &:before {
             background-color: var(--white);
         }
     }
-    &:before{
+
+    &.red {
+        &:before {
+            background-color: var(--bs-danger);
+        }
+    }
+
+    &:before {
         content: '';
         position: absolute;
         bottom: -3px;
@@ -19,7 +27,8 @@
         transform: scale(0);
         transition: .3s all ease-in-out;
     }
-    &:hover:before{
+
+    &:hover:before {
         transition: .3s all ease-in-out;
         transform: scale(1);
     }
