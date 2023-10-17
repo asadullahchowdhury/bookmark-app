@@ -1,0 +1,13 @@
+.btn-theme {
+    background-color: var(--theme-color);
+    color: var(--white);
+    border-radius: 30px;
+    padding: 10px 20px;
+    transition: .2s all ease-out;
+
+    &:hover {
+        transition: .2s all ease-out;
+        background-color:darken(var(--theme-color),10%);
+        box-shadow: 0 3px 8px 0 rgb(0, 0, 0, 17%);
+    }
+}
