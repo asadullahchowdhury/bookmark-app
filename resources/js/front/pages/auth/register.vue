@@ -4,14 +4,15 @@
             <div class="auth-box">
                 <form action="" class="auth-form p-4" autocomplete="off">
                     <div class="box-title display-6 mb-5 text-center"><span>B</span>ookmark <span>A</span>pp</div>
+                    <div class="text-center fs-3 text-white mb-4">Register here</div>
 
-                    <div class="text-center fs-3 text-white mb-4">Login here</div>
                     <div class="form-group mb-3">
                         <input type="text" class="form-control shadow-none" placeholder="Email Address" name="email"
                                autocomplete="off">
                         <img class="placeholder-icon" :src="`/images/global/mail.svg`" alt="mail">
                         <div class="error-report"></div>
                     </div>
+
                     <div class="form-group mb-3">
                         <input :type="passwordFieldType" class="form-control shadow-none" placeholder="Password"
                                name="password" autocomplete="off">
@@ -39,16 +40,15 @@
                     </div>
 
                     <div class="form-group mt-4">
-                        <button type="button" class="btn btn-theme w-100">
-                            Login
+                        <button type="button" class="btn btn-theme w-100">Sign Up
                             <span class="ms-2"><img :src="`/images/global/arrow-right.svg`" alt="arrow-right"></span>
                         </button>
                     </div>
 
                     <div class="bottom-text text-center mt-4 text-white">
-                        Not a member?
-                        <router-link :to="{name:'Register'}" href="javascript:void(0)"
-                                     class="underline-anim text-white white fw-semibold ms-2">Create an Account
+                        Already have an account?
+                        <router-link :to="{name:'Login'}" href="javascript:void(0)"
+                                     class="underline-anim text-white white fw-semibold ms-2">Login Here..
                         </router-link>
                     </div>
                 </form>

@@ -4,10 +4,12 @@
     border-radius: 30px;
     padding: 10px 20px;
     transition: .2s all ease-out;
-
+    border: none;
     &:hover {
         transition: .2s all ease-out;
-        background-color:darken(var(--theme-color),10%);
+        background-color:darken(#f96332,10%)!important;
+        color: var(--white)!important;
+        border: none;
         box-shadow: 0 3px 8px 0 rgb(0, 0, 0, 17%);
     }
 }
