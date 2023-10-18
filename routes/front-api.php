@@ -20,6 +20,8 @@ use App\Http\Controllers\AuthController;
 Route::group(['middleware' => ['UserAuth']], function () {
     Route::post('login', [AuthController::class, 'login'])->name('Auth.login');
     Route::post('register', [AuthController::class, 'register'])->name('Auth.Register');
+    Route::post('forgot', [AuthController::class, 'forgot'])->name('Auth.Forgot');
+    Route::post('reset', [AuthController::class, 'reset'])->name('Auth.Reset');
 });
 
 Route::get('logout', [AuthController::class, 'logout'])->name('Auth.logout');

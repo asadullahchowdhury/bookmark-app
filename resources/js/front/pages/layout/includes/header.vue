@@ -41,6 +41,10 @@
 <script>
 import apiService from "../../../services/apiService.js";
 import apiRoutes from "../../../services/apiRoutes.js";
+import {createToaster} from "@meforma/vue-toaster";
+const toaster = createToaster({
+    position: 'top-right',
+});
 
 export default {
     data(){
@@ -74,6 +78,7 @@ export default {
             apiService.GET(apiRoutes.Logout,(res)=>{
                 this.logoutLoading = false;
                 if (parseInt(res.status) === 200){
+                    toaster.info(res.msg)
                     window.location.reload();
                 }
             })

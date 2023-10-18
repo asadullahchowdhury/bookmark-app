@@ -3,19 +3,20 @@
         <div class="auth-page-wrap" style="background-image: url('/images/auth/bookmark.jpg')">
             <div class="auth-box">
                 <!--Forgot password section start-->
-                <form action="" class="auth-form p-4" autocomplete="off" v-if="forgotType === 1">
+                <form @submit.prevent="forgot" class="auth-form p-4" autocomplete="off" v-if="forgotType === 1">
                     <div class="box-title display-6 mb-4 text-center"><span>B</span>ookmark <span>A</span>pp</div>
 
                     <div class="text-center fs-3 text-white mb-4">Forgot Password</div>
                     <div class="form-group mb-3">
                         <input type="text" class="form-control shadow-none" placeholder="Email Address" name="email"
+                               v-model="forgotParam.email"
                                autocomplete="off">
                         <img class="placeholder-icon" :src="`/images/global/mail.svg`" alt="mail">
-                        <div class="error-report"></div>
+                        <div class="error-report ms-2"></div>
                     </div>
 
                     <div class="form-group mt-4">
-                        <button type="button" class="btn btn-theme w-100">
+                        <button type="submit" class="btn btn-theme w-100">
                             Forgot Password
                             <span class="ms-2"><img :src="`/images/global/arrow-right.svg`" alt="arrow-right"></span>
                         </button>
@@ -102,11 +103,24 @@
 </template>
 
 <script>
+
+import apiRoutes from "../../services/apiRoutes.js";
+import apiService from "../../services/apiService.js";
+import {createToaster} from "@meforma/vue-toaster";
+
+const toaster = createToaster({
+    position: 'top-right',
+});
+
 export default {
     data() {
         return {
             forgotType: 1,
             passwordFieldType: 'password',
+            forgotLoading: false,
+            forgotParam: {
+                email: '',
+            }
         }
     },
     mounted() {
@@ -118,6 +132,19 @@ export default {
             } else {
                 this.passwordFieldType = 'password';
             }
+        },
+
+        forgot() {
+            this.forgotLoading = true;
+            apiService.POST(apiRoutes.Forgot, this.forgotParam, (res) => {
+                this.forgotLoading = false;
+                if (parseInt(res.status) === 200) {
+                    toaster.info(res.msg)
+                    this.forgotType = 2;
+                } else {
+                    apiService.ErrorHandler(res.error)
+                }
+            })
         }
     }
 }

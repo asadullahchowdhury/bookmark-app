@@ -5,6 +5,8 @@ const apiRoutes = {
     // Auth
     Login: apiVersion + 'login',
     Register: apiVersion + 'register',
+    Forgot: apiVersion + 'forgot',
+    Reset: apiVersion + 'reset',
     Logout: apiVersion + 'logout',
 
 

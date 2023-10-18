@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('phone')->nullable();
             $table->string('avatar')->nullable();
             $table->timestamp('email_verified_at')->nullable();
+            $table->bigInteger('reset_code')->nullable();
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();
