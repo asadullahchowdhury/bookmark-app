@@ -13,3 +13,41 @@
         box-shadow: 0 3px 8px 0 rgb(0, 0, 0, 17%);
     }
 }
+
+
+.btn-loading {
+    padding: 12px;
+    position: relative;
+
+    &.black {
+        &:after {
+            border-right-color: var(--black);
+        }
+    }
+
+    &:after {
+        content: '';
+        display: block;
+        width: 1.2em;
+        height: 1.2em;
+        position: absolute;
+        left: calc(50% - 0.75em);
+        top: calc(50% - 0.60em);
+        border: 0.15em solid transparent;
+        border-right-color: var(--white);
+        border-radius: 50%;
+        animation: button-anim 0.7s linear infinite;
+        opacity: 1;
+    }
+}
+
+
+/*for button loading*/
+@keyframes button-anim {
+    from {
+        transform: rotate(0);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
