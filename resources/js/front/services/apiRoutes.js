@@ -7,6 +7,9 @@ const apiRoutes = {
     Register: apiVersion + 'register',
     Logout: apiVersion + 'logout',
 
+
+// profile
+    ProfileDetails: apiVersion + 'profile/details'
 }
 
 export default apiRoutes;
