@@ -1,7 +1,9 @@
 <template>
-    <div class="d-flex align-items-center ">
-        home
 
+    <div class="container">
+        <div class="text-center">
+            <h1 class="display-1 my-5">Home</h1>
+        </div>
     </div>
 </template>
 
