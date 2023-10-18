@@ -28,7 +28,7 @@
                         </li>
 
                         <li class="nav-item d-lg-none d-block underline-anim white">
-                            <a class="nav-link " href="javascript:void(0)">Your Profile</a>
+                            <router-link :to="{name:'Profile'}" class="nav-link " href="javascript:void(0)">Your Profile</router-link>
                         </li>
 
                         <li class="nav-item d-lg-none d-block underline-anim white">
@@ -48,7 +48,7 @@
                         <div class="header-dropdown-wrap position-relative">
                             <ul class="header-dropdown rounded-4">
                                 <li>
-                                    <a href="javascript:void(0)">Your Profile</a>
+                                    <router-link :to="{name:'Profile'}" href="javascript:void(0)">Your Profile</router-link>
                                 </li>
                                 <li>
                                     <a href="javascript:void(0)">Settings</a>
@@ -75,7 +75,6 @@
 import apiService from "../../../services/apiService.js";
 import apiRoutes from "../../../services/apiRoutes.js";
 import {createToaster} from "@meforma/vue-toaster";
-
 const toaster = createToaster({
     position: 'top-right',
 });

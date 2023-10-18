@@ -1,0 +1,34 @@
+.profile-page {
+    .profile-header {
+        margin-bottom: 150px;
+
+        @media screen and (max-width: 991px) {
+            margin-bottom: 50px;
+            margin-top: 50px;
+
+        }
+
+        .profile-pic {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            background-color: var(--black);
+            position: absolute;
+            top: -100px;
+            overflow: hidden;
+
+            @media screen and (max-width: 991px) {
+                position: initial;
+
+            }
+
+
+            img {
+                object-fit: cover;
+                width: 100%;
+                height: 100%;
+                border-radius: 50%;
+            }
+        }
+    }
+}
