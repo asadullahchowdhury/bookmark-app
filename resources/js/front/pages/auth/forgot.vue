@@ -18,7 +18,9 @@
                     <div class="form-group mt-4">
                         <button type="submit" class="btn btn-theme w-100">
                             Forgot Password
-                            <span class="ms-2"><img :src="`/images/global/arrow-right.svg`" alt="arrow-right"></span>
+                            <span class="ms-2" v-if="forgotLoading != true"><img :src="`/images/global/arrow-right.svg`"
+                                                                                 alt="arrow-right"></span>
+                            <span class="ms-2 btn-loading" v-if="forgotLoading === true"></span>
                         </button>
                     </div>
 
@@ -32,21 +34,24 @@
                 <!--Forgot password section end  -->
 
                 <!--Reset password section start-->
-                <form action="" class="auth-form p-4" autocomplete="off" v-if="forgotType === 2">
+                <form @submit.prevent="reset" class="auth-form p-4" autocomplete="off" v-if="forgotType === 2">
                     <div class="box-title display-6 mb-4 text-center"><span>B</span>ookmark <span>A</span>pp</div>
 
                     <div class="text-center fs-3 text-white mb-4">Reset Password</div>
 
                     <div class="form-group mb-3">
                         <input type="text" class="form-control shadow-none" placeholder="Email Address" name="email"
+                               disabled v-model="resetParam.email"
                                autocomplete="off">
                         <img class="placeholder-icon" :src="`/images/global/mail.svg`" alt="mail">
                         <div class="error-report"></div>
                     </div>
 
                     <div class="form-group mb-3">
-                        <input type="text" class="form-control shadow-none" placeholder="Verification Code"
-                               name="verification_code"
+                        <input type="text" class="form-control shadow-none" placeholder="Reset Code"
+                               @keypress="checkNumber($event)"
+                               v-model="resetParam.code"
+                               name="code"
                                autocomplete="off">
                         <img class="placeholder-icon" :src="`/images/global/hash.svg`" alt="hash">
                         <div class="error-report"></div>
@@ -54,6 +59,7 @@
 
                     <div class="form-group mb-3">
                         <input :type="passwordFieldType" class="form-control shadow-none" placeholder="New Password"
+                               v-model="resetParam.password"
                                name="password" autocomplete="off">
                         <img class="placeholder-icon" :src="`/images/global/lock.svg`" alt="lock">
                         <div class="error-report"></div>
@@ -61,6 +67,7 @@
 
                     <div class="form-group mb-3">
                         <input :type="passwordFieldType" class="form-control shadow-none"
+                               v-model="resetParam.password_confirmation"
                                placeholder="Password Confirmation"
                                name="password_confirmation" autocomplete="off">
                         <img class="placeholder-icon" :src="`/images/global/lock.svg`" alt="lock">
@@ -83,9 +90,10 @@
                     </div>
 
                     <div class="form-group mt-4">
-                        <button type="button" class="btn btn-theme w-100">
-                            Forgot Password
-                            <span class="ms-2"><img :src="`/images/global/arrow-right.svg`" alt="arrow-right"></span>
+                        <button type="submit" class="btn btn-theme w-100">
+                            Reset Password
+                            <span class="ms-2" v-if="resetLoading === false"><img :src="`/images/global/arrow-right.svg`" alt="arrow-right"></span>
+                            <span class="ms-2 btn-loading" v-if="resetLoading === true"></span>
                         </button>
                     </div>
 
@@ -107,6 +115,7 @@
 import apiRoutes from "../../services/apiRoutes.js";
 import apiService from "../../services/apiService.js";
 import {createToaster} from "@meforma/vue-toaster";
+import router from "../../router/router.js";
 
 const toaster = createToaster({
     position: 'top-right',
@@ -118,14 +127,24 @@ export default {
             forgotType: 1,
             passwordFieldType: 'password',
             forgotLoading: false,
+            resetLoading: false,
             forgotParam: {
                 email: '',
+            },
+            resetParam: {
+                email: '',
+                code: '',
+                password: '',
+                password_confirmation: '',
             }
         }
     },
     mounted() {
     },
     methods: {
+        /*================================================
+        * Password visibility
+        =================================================*/
         passwordVisibility() {
             if (this.passwordFieldType === 'password') {
                 this.passwordFieldType = 'text';
@@ -134,6 +153,9 @@ export default {
             }
         },
 
+        /*================================================
+        * Forgot api
+        =================================================*/
         forgot() {
             this.forgotLoading = true;
             apiService.POST(apiRoutes.Forgot, this.forgotParam, (res) => {
@@ -141,11 +163,55 @@ export default {
                 if (parseInt(res.status) === 200) {
                     toaster.info(res.msg)
                     this.forgotType = 2;
+                    this.resetParam.email = this.forgotParam.email;
                 } else {
                     apiService.ErrorHandler(res.error)
                 }
             })
-        }
+        },
+
+
+        /*================================================
+        * Check number
+        =================================================*/
+        reset() {
+            this.resetLoading = true;
+            apiService.POST(apiRoutes.Reset, this.resetParam, (res) => {
+                this.resetLoading = false;
+                if (parseInt(res.status) === 200) {
+                    toaster.info(res.msg)
+                    router.push({name: 'Login'})
+
+                } else {
+                    apiService.ErrorHandler(res.error)
+                }
+            })
+        },
+
+        /*================================================
+        * Check number
+        =================================================*/
+        checkNumber(evt) {
+            var theEvent = evt || window.event;
+
+            // Handle paste
+            if (theEvent.type === 'paste') {
+                // @ts-ignore
+                key = event.clipboardData.getData('text/plain');
+            } else {
+                // Handle key press
+                var key = theEvent.keyCode || theEvent.which;
+                key = String.fromCharCode(key);
+            }
+            var regex = /^\d*\.?\d*$/;
+            if (!regex.test(key)) {
+                theEvent.returnValue = false;
+                if (theEvent.preventDefault) theEvent.preventDefault();
+            }
+
+        },
+
+
     }
 }
 </script>

@@ -72,7 +72,8 @@
 
                     <div class="form-group mt-4">
                         <button type="submit" class="btn btn-theme w-100">Sign Up
-                            <span class="ms-2"><img :src="`/images/global/arrow-right.svg`" alt="arrow-right"></span>
+                            <span class="ms-2" v-if="registerLoading === false"><img :src="`/images/global/arrow-right.svg`" alt="arrow-right"></span>
+                            <span class="ms-2 btn-loading" v-if="registerLoading === true"></span>
                         </button>
                     </div>
 

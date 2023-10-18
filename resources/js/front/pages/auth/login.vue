@@ -53,7 +53,8 @@
                     <div class="form-group mt-4">
                         <button type="submit" class="btn btn-theme w-100">
                             Login
-                            <span class="ms-2"><img :src="`/images/global/arrow-right.svg`" alt="arrow-right"></span>
+                            <span class="ms-2" v-if="loginLoading === false"><img :src="`/images/global/arrow-right.svg`" alt="arrow-right"></span>
+                            <span class="ms-2 btn-loading" v-if="loginLoading === true"></span>
                         </button>
                     </div>
 

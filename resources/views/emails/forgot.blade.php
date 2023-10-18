@@ -9,7 +9,7 @@
     <link href="https://fonts.googleapis.com/css?family=Raleway:300,400,500,700" rel="stylesheet">
 </head>
 <body>
-<div class="text-center">.
+<div class="text-center">
     <div>Hello, <strong>{{$userInfo->name}}</strong></div>
     <h5></h5>
     Your Reset code is:
