@@ -22,7 +22,7 @@ Route::group(['middleware' => ['UserAuth']], function () {
     Route::post('register', [AuthController::class, 'register'])->name('Auth.Register');
 });
 
-Route::post('logout', [AuthController::class, 'logout'])->name('Auth.logout');
+Route::get('logout', [AuthController::class, 'logout'])->name('Auth.logout');
 
 // Profile
 Route::prefix('profile')->group(function () {
