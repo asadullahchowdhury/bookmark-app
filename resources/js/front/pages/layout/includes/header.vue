@@ -4,40 +4,40 @@
             <div class="container">
                 <a class="navbar-brand" href="#"><span>B</span>ook<span>M</span>ark</a>
 
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                <button class="navbar-toggler py-2 text-white" type="button" data-bs-toggle="collapse"
                         data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
+<!--                    <span class="navbar-toggler-icon"></span>-->
+                    <span><img src="/images/global/menu.svg" alt="menu"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                        <li class="nav-item">
-                            <router-link :to="{name:'Home'}" class="nav-link underline-anim white" aria-current="page"
+                        <li class="nav-item underline-anim white">
+                            <router-link :to="{name:'Home'}" class="nav-link" aria-current="page"
                                          href="#">Home
                             </router-link>
                         </li>
 
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-                               aria-expanded="false">
-                                Dropdown
+                        <li class="nav-item underline-anim white">
+                            <a class="nav-link" href="javascript:void(0)">
+                                Bookmarks
                             </a>
-                            <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="#">Action</a></li>
-                                <li><a class="dropdown-item" href="#">Another action</a></li>
-                                <li>
-                                    <hr class="dropdown-divider">
-                                </li>
-                                <li><a class="dropdown-item" href="#">Something else here</a></li>
-                            </ul>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link disabled" aria-disabled="true">Disabled</a>
+                        <li class="nav-item underline-anim white">
+                            <a class="nav-link " href="javascript:void(0)">Settings</a>
+                        </li>
+
+                        <li class="nav-item d-lg-none d-block underline-anim white">
+                            <a class="nav-link " href="javascript:void(0)">Your Profile</a>
+                        </li>
+
+                        <li class="nav-item d-lg-none d-block underline-anim white">
+                            <a class="nav-link" href="javascript:void(0)">Logout</a>
                         </li>
                     </ul>
                 </div>
 
-                <div class="right-side-header">
+                <div class="right-side-header d-lg-block d-none">
 
                     <div class="user-wrap d-flex">
                         <div class="user-avatar-wrap shadow">

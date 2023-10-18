@@ -6,6 +6,10 @@
     background-position: center;
     position: relative;
 
+    @media screen and (max-width: 991px) {
+        height: auto;
+    }
+
     &:before {
         content: '';
         position: absolute;
@@ -62,8 +66,8 @@
                     transition: .3s al ease-in-out;
                 }
 
-                .header-dropdown-wrap{
-                    .header-dropdown{
+                .header-dropdown-wrap {
+                    .header-dropdown {
                         width: 200px;
                         background-color: var(--white);
                         margin: 0;
@@ -75,6 +79,7 @@
                         visibility: hidden;
                         transition: .3s all ease-in-out;
                         transform: scale(0);
+
                         &:before {
                             position: absolute;
                             content: '';
@@ -87,15 +92,18 @@
                             top: -10px;
                             right: 45px;
                         }
-                        li{
+
+                        li {
                             list-style: none;
-                            a{
+
+                            a {
                                 display: block;
-                                padding:10px 15px;
+                                padding: 10px 15px;
                                 text-decoration: none;
                                 color: var(--black);
                                 transition: .3s all ease-in-out;
-                                &:hover{
+
+                                &:hover {
                                     transition: .3s all ease-in-out;
                                     background-color: var(--checkbox-border-color);
                                 }
@@ -106,11 +114,12 @@
 
                 &:hover {
 
-                   .user-chevron{
-                       transform: rotate(180deg);
-                       transition: .3s all ease-in-out;
-                   }
-                    .header-dropdown{
+                    .user-chevron {
+                        transform: rotate(180deg);
+                        transition: .3s all ease-in-out;
+                    }
+
+                    .header-dropdown {
                         transition: .3s all ease-in-out;
                         transform: scale(1);
                         opacity: 1;
