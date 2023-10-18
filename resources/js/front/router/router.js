@@ -19,7 +19,7 @@ const routes = [
     {
         path: ROOT_URL, name: 'Layout', component: Layout,
         children: [
-            {path: ROOT_URL + '', name:'home' ,component:Home, meta:{title: 'Home'}}
+            {path: ROOT_URL + '', name:'Home' ,component:Home, meta:{title: 'Home'}}
         ]
     }
 ]
