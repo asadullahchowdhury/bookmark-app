@@ -22,13 +22,15 @@ Route::group(['middleware' => ['UserAuth']], function () {
     Route::post('register', [AuthController::class, 'register'])->name('Auth.Register');
 });
 
+Route::post('logout', [AuthController::class, 'logout'])->name('Auth.logout');
+
 // Profile
-/*Route::prefix('profile')->group(function () {
-    Route::get('details', [AdminAuthController::class, 'profile_details'])->name('Admin.Profile.Details');
-    Route::post('update', [AdminAuthController::class, 'profile_update'])->name('Admin.Profile.Update');
-    Route::post('update/password', [AdminAuthController::class, 'profile_update_password'])->name('Admin.Profile.Update.Password');
-    Route::get('logout', [AdminAuthController::class, 'profile_logout'])->name('Admin.Profile.Logout');
-});*/
+Route::prefix('profile')->group(function () {
+    Route::get('details', [AuthController::class, 'profile_details'])->name('Profile.Details');
+    Route::post('update', [AuthController::class, 'profile_update'])->name('Profile.Update');
+    Route::post('update/password', [AuthController::class, 'profile_update_password'])->name('Profile.Update.Password');
+//    Route::get('logout', [AuthController::class, 'logout'])->name('Profile.Logout');
+});
 
 // Media
 Route::prefix('media')->group(function () {

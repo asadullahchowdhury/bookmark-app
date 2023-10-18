@@ -9,7 +9,7 @@
 
                     <div class="text-center fs-3 text-white mb-4">Login here</div>
 
-                    <div class="error-report-g"></div>
+                    <div class="error-report-g text-center"></div>
 
                     <div class="form-group mb-3">
                         <input type="text" class="form-control shadow-none" placeholder="Email Address" name="email"
@@ -114,6 +114,7 @@ export default {
                 if (parseInt(res.status) === 200) {
                     console.log(res.status);
                     toaster.info(res.msg)
+                    window.location.reload()
                 } else {
                     apiService.ErrorHandler(res.errors)
                 }

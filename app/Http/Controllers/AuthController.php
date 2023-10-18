@@ -18,4 +18,10 @@ class AuthController extends Controller
         $rv = AuthService::register($request);
         return response()->json($rv, 200);
     }
+
+
+    public function logout(Request  $request){
+        $rv = AuthService::logout($request);
+        return response()->json($rv, 200);
+    }
 }

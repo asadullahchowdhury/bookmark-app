@@ -25,8 +25,8 @@ class AuthService
             }
 
             $credential = ['email' => $request->email, 'password' => $request->password];
-            if (Auth::guard('web')->attempt($credential, $request->remember)) {
-                $user = Auth::guard('web')->user();
+            if (Auth::attempt($credential, $request->remember)) {
+                $user = Auth::user();
                 return ['status' => 200, 'data' =>  $user, 'msg' => 'Login successful'];
             } else {
                 return ['status' => 500, 'errors' => ['error' => 'Invalid Credentials! Please try again']];
@@ -57,7 +57,7 @@ class AuthService
             $user->last_name = $request->last_name;
             $user->email = $request->email;
             $user->password = bcrypt($request->password);
-            $user->mobile = $request->mobile ?? null;
+            $user->phone = $request->phone ?? null;
             $user->avatar =  null;
             $user->save();
 
@@ -85,11 +85,11 @@ class AuthService
     }
 
 
-    public static function profile_logout($request)
+    public static function logout($request)
     {
         try {
-            Auth::guard('users')->logout();
-            return ['status' => 200];
+            Auth::logout();
+            return ['status' => 200 , 'msg' => 'Logout Successfully'];
         } catch (\Exception $e) {
             return ['status' => 500, 'errors' => $e->getMessage(), 'line' => $e->getLine()];
         }

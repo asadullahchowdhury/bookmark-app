@@ -31,7 +31,7 @@
                     </div>
 
                     <div class="form-group mb-3">
-                        <input type="text" class="form-control shadow-none" placeholder="Phone" name="phone"
+                        <input type="text" class="form-control shadow-none" placeholder="Phone" name="phone" @keypress="checkNumber($event)"
                                v-model="registerParam.phone"
                                autocomplete="off">
                         <img class="placeholder-icon" :src="`/images/global/voicemail.svg`" alt="phone">
@@ -92,8 +92,10 @@
 
 import apiService from "../../services/apiService.js";
 import apiRoutes from "../../services/apiRoutes.js";
+import router from '../../router/router'
 import {createToaster} from "@meforma/vue-toaster";
 import toast from "bootstrap/js/src/toast.js";
+
 const toaster = createToaster({
     position: 'top-right',
 });
@@ -134,15 +136,39 @@ export default {
             this.registerLoading = true;
             apiService.POST(apiRoutes.Register, this.registerParam, (res) => {
                 this.registerLoading = false;
-                if (parseInt(res.status) === 200){
+                if (parseInt(res.status) === 200) {
                     console.log(res)
                     toaster.info(res.msg)
-                }else {
+                    router.push({name: 'Login'})
+                } else {
                     apiService.ErrorHandler(res.errors)
                 }
             })
 
-        }
+        },
+
+        /*================================================
+        * Check number
+        =================================================*/
+        checkNumber(evt) {
+            var theEvent = evt || window.event;
+
+            // Handle paste
+            if (theEvent.type === 'paste') {
+                // @ts-ignore
+                key = event.clipboardData.getData('text/plain');
+            } else {
+                // Handle key press
+                var key = theEvent.keyCode || theEvent.which;
+                key = String.fromCharCode(key);
+            }
+            var regex = /^\d*\.?\d*$/;
+            if (!regex.test(key)) {
+                theEvent.returnValue = false;
+                if (theEvent.preventDefault) theEvent.preventDefault();
+            }
+
+        },
     }
 }
 </script>

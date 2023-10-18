@@ -16,7 +16,7 @@ class UserAuth
      */
     public function handle(Request $request, Closure $next)
     {
-        if (!Auth::guard('web')->check()) {
+        if (!Auth::check()) {
             return $next($request);
         }
         return response()->json(['status' => 403, 'msg' => 'You are already logged in.'], 403);
