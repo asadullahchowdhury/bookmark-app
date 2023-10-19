@@ -8,7 +8,7 @@
 
                     <div class="text-center fs-3 text-white mb-4">Forgot Password</div>
                     <div class="form-group mb-3">
-                        <input type="text" class="form-control shadow-none" placeholder="Email Address" name="email"
+                        <input type="email" class="form-control shadow-none" placeholder="Email Address" name="email"
                                v-model="forgotParam.email"
                                autocomplete="off">
                         <img class="placeholder-icon" :src="`/images/global/mail.svg`" alt="mail">

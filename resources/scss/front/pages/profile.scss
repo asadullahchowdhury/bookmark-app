@@ -1,0 +1,65 @@
+.profile-page {
+    .profile-header {
+        margin-bottom: 150px;
+
+        @media screen and (max-width: 991px) {
+            margin-bottom: 50px;
+            margin-top: 50px;
+
+        }
+
+        .profile-pic {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            background-color: var(--black);
+            position: absolute;
+            top: -100px;
+            overflow: hidden;
+
+            @media screen and (max-width: 991px) {
+                position: initial;
+
+            }
+
+
+            img {
+                object-fit: cover;
+                width: 100%;
+                height: 100%;
+                border-radius: 50%;
+            }
+        }
+    }
+}
+
+
+.modal-avatar-wrap {
+    position: relative;
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+
+    .upload-label {
+        padding: 6px 10px;
+        position: absolute;
+        z-index: 1;
+        border: 2px dashed var(--checkbox-border-color);
+        border-radius: 50%;
+        bottom: -15px;
+        left: 55%;
+
+        .edit-icon {
+            width: 16px;
+            height: 16px;
+        }
+
+    }
+
+    .modal-avatar {
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        object-fit: cover;
+    }
+}
