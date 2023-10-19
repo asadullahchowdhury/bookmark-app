@@ -14,6 +14,7 @@ use App\Http\Controllers\FrontController;
 |
 */
 
+Route::middleware('LoginCheck')->get('/auth/{any}', [FrontController::class,'index'])->where('any','.*')->name('lvs.auth');
 Route::middleware('LoginCheck')->get('/', [FrontController::class,'index'])->where('any','.*')->name('lvs.home');
-Route::middleware('LoginCheck')->get('/{any}', [FrontController::class,'index'])->where('any','.*')->name('lvs.any');
+Route::middleware('LoginCheck')->get('/{any}', [FrontController::class,'index'])->where('any','.*')->name('lvs.home');
 

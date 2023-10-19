@@ -18,16 +18,16 @@ class LoginCheck
     {
         $path = \Illuminate\Support\Facades\Request::route()->getName();
         if (Auth::check()) {
-            if($path == 'lvs.any') {
-                return redirect()->route('lvs.any','');
+            if($path == 'lvs.auth') {
+                return redirect()->route('lvs.home','/');
             } else {
                 return $next($request);
             }
         } else {
-            if($path == 'lvs.any') {
+            if($path == 'lvs.auth') {
                 return $next($request);
             } else {
-                return redirect()->route('lvs.any', 'login');
+                return redirect()->route('lvs.auth', 'login');
             }
         }
     }

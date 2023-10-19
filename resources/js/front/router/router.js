@@ -12,15 +12,15 @@ const ROOT_URL = '/'
 
 const routes = [
     // Authentication
-    {path: ROOT_URL + 'login', name: 'Login', component: Login, meta: {title: 'Login'}},
-    {path: ROOT_URL + 'register', name: 'Register', component: Register, meta: {title: 'Register'}},
-    {path: ROOT_URL + 'forgot', name: 'Forgot', component: Forgot, meta: {title: 'Forgot'}},
+    {path: ROOT_URL + 'auth/login', name: 'Login', component: Login, meta: {title: 'Login'}},
+    {path: ROOT_URL + 'auth/register', name: 'Register', component: Register, meta: {title: 'Register'}},
+    {path: ROOT_URL + 'auth/forgot', name: 'Forgot', component: Forgot, meta: {title: 'Forgot'}},
 
 
     {
         path: ROOT_URL, name: 'Layout', component: Layout,
         children: [
-            {path: ROOT_URL + '', name:'Home' ,component:Home, meta:{title: 'Home'}},
+            {path: ROOT_URL , name:'Home' ,component:Home, meta:{title: 'Home'}},
             {path: ROOT_URL + 'profile', name:'Profile' ,component:Profile, meta:{title: 'Profile'}}
         ]
     }
