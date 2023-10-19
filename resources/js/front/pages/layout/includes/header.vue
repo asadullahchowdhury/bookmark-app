@@ -1,5 +1,5 @@
 <template>
-    <div class="header" style="background-image: url('/images/global/cover-2.jpeg')">
+    <div class="header">
         <nav class="navbar navbar-expand-lg">
             <div class="container">
                 <a class="navbar-brand" href="#"><span>B</span>ook<span>M</span>ark</a>
