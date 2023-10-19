@@ -14,6 +14,10 @@ export default {
         }
     },
     created() {
+
+    },
+
+    mounted() {
         if(this.UserInfo == null){
             router.push({name: 'Login'})
         }
