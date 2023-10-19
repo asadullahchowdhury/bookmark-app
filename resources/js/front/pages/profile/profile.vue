@@ -43,21 +43,60 @@
 
 
     <!--Profile Modal start-->
-    <div class="modal fade" id="profileUpdateModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    <div class="modal modal-lg fade" id="profileUpdateModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
          aria-labelledby="profileUpdateLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
-                <div class="modal-header">
+                <div class="modal-header justify-content-center border-0 pt-4">
                     <h1 class="modal-title fs-5" id="profileUpdateLabel">Edit Profile</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="modal-body">
-                    ...
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Understood</button>
-                </div>
+                <form action="">
+                    <div class="modal-body px-4">
+                      <div class="form-group mb-5 d-flex justify-content-center">
+                          <div class="modal-avatar-wrap">
+                              <img class="modal-avatar" :src="`/images/global/book-cover.jpg`" alt="avatar">
+                              <label for="avatar-upload " class="upload-label btn btn-light" data-toggle="tooltip" data-placement="top" title="Tooltip on top">
+                                  <input type="file" class="d-none" id="avatar-upload">
+                                  <img class="edit-icon" :src="`/images/global/edit.svg`" alt="edit">
+                              </label>
+                          </div>
+                      </div>
+
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="form-group mb-3">
+                                    <input type="text" class="form-control form-control-lg rounded-pill" placeholder="First Name" name="first_name">
+                                    <div class="error-report"></div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="form-group mb-3">
+                                    <input type="text" class="form-control form-control-lg rounded-pill" placeholder="Last Name" name="last_name">
+                                    <div class="error-report"></div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="form-group mb-3">
+                                    <input type="email" class="form-control form-control-lg rounded-pill" placeholder="Email Address" name="email">
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="form-group mb-3">
+                                    <input type="text" class="form-control form-control-lg rounded-pill" placeholder="Phone Number" name="phone">
+                                </div>
+                            </div>
+                            <div class="col-lg-12">
+                                <textarea class="form-control form-control-lg rounded-pill" name="address" placeholder="Address" id="" cols="30" rows="2"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer border-0 justify-content-center">
+                        <button type="button" class="btn btn-outline-dark w-120px rounded-pill py-9px"
+                                data-bs-dismiss="modal">Cancel
+                        </button>
+                        <button type="button" class="btn btn-theme w-120px">Confirm</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
@@ -75,21 +114,26 @@
 
 
                     <div class="modal-body px-4">
-                     <div class="form-group mb-3">
-                         <input type="text" class="form-control form-control-lg rounded-pill" placeholder="Current Password" name="password">
-                     </div>
-
                         <div class="form-group mb-3">
-                            <input type="text" class="form-control form-control-lg rounded-pill" placeholder="New Password" name="new_password">
+                            <input type="text" class="form-control form-control-lg rounded-pill"
+                                   placeholder="Current Password" name="password">
                         </div>
 
                         <div class="form-group mb-3">
-                            <input type="text" class="form-control form-control-lg rounded-pill" placeholder="Confirm New Password" name="password_confirmation">
+                            <input type="text" class="form-control form-control-lg rounded-pill"
+                                   placeholder="New Password" name="new_password">
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <input type="text" class="form-control form-control-lg rounded-pill"
+                                   placeholder="Confirm New Password" name="password_confirmation">
                         </div>
 
                     </div>
                     <div class="modal-footer justify-content-center border-0">
-                        <button type="button" class="btn btn-outline-dark rounded-pill w-120px py-10px" data-bs-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-outline-dark rounded-pill w-120px py-9px"
+                                data-bs-dismiss="modal">Cancel
+                        </button>
                         <button type="button" class="btn btn-theme w-120px">Confirm</button>
                     </div>
                 </form>
