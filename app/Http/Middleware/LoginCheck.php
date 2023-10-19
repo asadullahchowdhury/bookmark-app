@@ -18,7 +18,7 @@ class LoginCheck
     {
         $path = \Illuminate\Support\Facades\Request::route()->getName();
         if (Auth::check()) {
-            if($path == 'lvs.any') {
+            if($path != 'lvs.any') {
                 return redirect()->route('lvs.any','');
             } else {
                 return $next($request);

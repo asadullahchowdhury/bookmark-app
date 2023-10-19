@@ -41,9 +41,5 @@ class AuthController extends Controller
     }
 
 
-    public function profile_details(Request $request)
-    {
-        $rv = AuthService::profile_details($request);
-        return response()->json($rv, 200);
-    }
+
 }
