@@ -13,6 +13,9 @@ return new class extends Migration
     {
         Schema::create('media', function (Blueprint $table) {
             $table->id();
+            $table->tinyInteger('media_type')->comment('1.image, 2.video, 3.file');
+            $table->string('file_path');
+            $table->text('attrs');
             $table->timestamps();
         });
     }

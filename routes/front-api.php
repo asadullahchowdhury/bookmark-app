@@ -4,6 +4,7 @@ use App\Http\Controllers\MediaController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,9 +29,9 @@ Route::get('logout', [AuthController::class, 'logout'])->name('Auth.logout');
 
 // Profile
 Route::prefix('profile')->group(function () {
-    Route::get('details', [AuthController::class, 'profile_details'])->name('Profile.Details');
-    Route::post('update', [AuthController::class, 'profile_update'])->name('Profile.Update');
-    Route::post('update/password', [AuthController::class, 'profile_update_password'])->name('Profile.Update.Password');
+    Route::get('details', [UserController::class, 'profile_details'])->name('Profile.Details');
+    Route::post('update', [UserController::class, 'profile_update'])->name('Profile.Update');
+    Route::post('update/password', [UserController::class, 'profile_update_password'])->name('Profile.Update.Password');
 //    Route::get('logout', [AuthController::class, 'logout'])->name('Profile.Logout');
 });
 

@@ -9,11 +9,23 @@
     <!--Google font-->
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 
-    @vite('resources/js/front/app.js')
+
 </head>
 <body>
 <div id="app">
     <app></app>
 </div>
+
+<script>
+    window.core = {
+        @if(auth()->check())
+        UserInfo: {!! auth()->user() !!},
+        @else
+        UserInfo: null
+        @endif
+    }
+</script>
+@vite('resources/js/front/app.js')
 </body>
 </html>
+
