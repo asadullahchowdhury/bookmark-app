@@ -1,4 +1,18 @@
 <template>
+    <Header/>
     <router-view></router-view>
-    hey
 </template>
+
+<script>
+import Header from '../layout/includes/header.vue'
+export default {
+    components:{
+        Header,
+    },
+    data(){
+        return{
+
+        }
+    }
+}
+</script>

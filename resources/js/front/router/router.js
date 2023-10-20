@@ -6,7 +6,7 @@ import Register from '../pages/auth/register.vue'
 import Layout from "../pages/layout/layout.vue";
 import Home from "../pages/home/home.vue";
 import Forgot from "../pages/auth/forgot.vue";
-import Profile from  "../pages/profile/profile.vue"
+import Profile from "../../portal/pages/profile/profile.vue"
 
 const ROOT_URL = '/'
 
@@ -23,7 +23,7 @@ const routes = [
             {path: ROOT_URL + 'forgot', name: 'Forgot', component: Forgot, meta: {title: 'Forgot'}},
 
             {path: ROOT_URL , name:'Home' ,component:Home, meta:{title: 'Home'}},
-            {path: ROOT_URL + 'profile', name:'Profile' ,component:Profile, meta:{title: 'Profile'}}
+
         ]
     }
 ]

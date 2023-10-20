@@ -1,0 +1,28 @@
+:root {
+    --white: #fff;
+    --black: #000;
+    --theme-color: #f96332;
+    --checkbox-border-color: #e3e3e3;
+    --font-family: 'Montserrat', sans-serif;
+    --portal-boody-bg:#212121;
+}
+
+body {
+    background-color:var(--portal-boody-bg) ;
+    font-family: var(--font-family);
+}
+
+
+.error-report {
+    font-size: 12px;
+    color: var(--bs-danger);
+}
+
+.w-120px {
+    width: 120px;
+}
+
+.py-9px{
+    padding-top: 9px;
+    padding-bottom: 9px;
+}

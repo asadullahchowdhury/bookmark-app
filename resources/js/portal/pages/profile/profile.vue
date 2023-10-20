@@ -172,10 +172,10 @@
 
 
 <script>
-import apiService from "../../services/apiService.js";
-import apiRoute from "../../services/apiRoutes.js";
+import apiService from "../../../front/services/apiService.js";
+import apiRoute from "../../../front/services/apiRoutes.js";
 import {createToaster} from "@meforma/vue-toaster";
-import apiRoutes from "../../services/apiRoutes.js";
+import apiRoutes from "../../../front/services/apiRoutes.js";
 
 const toaster = createToaster({
     position: 'top-right',
