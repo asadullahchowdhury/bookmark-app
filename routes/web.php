@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FrontController;
+use App\Http\Controllers\PortalController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,3 +18,7 @@ use App\Http\Controllers\FrontController;
 Route::get('/', [FrontController::class,'index'])->where('any','.*')->name('lvs.home');
 Route::get('/{any}', [FrontController::class,'index'])->where('any','.*')->name('lvs.any');
 
+
+
+Route::get('/portal', [PortalController::class,'index'])->where('any','.*')->name('lvs.home');
+Route::get('/portal/{any}', [PortalController::class,'index'])->where('any','.*')->name('lvs.any');
