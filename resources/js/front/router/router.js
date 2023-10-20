@@ -9,6 +9,7 @@ import Forgot from "../pages/auth/forgot.vue";
 import Profile from "../../portal/pages/profile/profile.vue"
 
 const ROOT_URL = '/'
+const PORTAL_URL = '/portal/'
 
 const routes = [
 
@@ -17,13 +18,13 @@ const routes = [
     {
         path: ROOT_URL, name: 'Layout', component: Layout,
         children: [
+
+            {path: ROOT_URL , name:'Home' ,component:Home, meta:{title: 'Home'}},
+
             // Authentication
             {path: ROOT_URL + 'login', name: 'Login', component: Login, meta: {title: 'Login'}},
             {path: ROOT_URL + 'register', name: 'Register', component: Register, meta: {title: 'Register'}},
             {path: ROOT_URL + 'forgot', name: 'Forgot', component: Forgot, meta: {title: 'Forgot'}},
-
-            {path: ROOT_URL , name:'Home' ,component:Home, meta:{title: 'Home'}},
-
         ]
     }
 ]
