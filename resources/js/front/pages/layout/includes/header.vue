@@ -1,5 +1,5 @@
 <template>
-    <div class="header">
+    <div class="header" :class="{'black' : route.path === '/portal'}">
         <nav class="navbar navbar-expand-lg">
             <div class="container">
                 <router-link :to="{name:'Home'}" class="navbar-brand" :class="{'me-auto': profileData === null}">
@@ -10,7 +10,6 @@
                         v-if="profileData != null"
                         data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
-                    <!--                    <span class="navbar-toggler-icon"></span>-->
                     <span><img src="/images/global/menu.svg" alt="menu"></span>
                 </button>
 
@@ -85,6 +84,7 @@
 import apiService from "../../../services/apiService.js";
 import apiRoutes from "../../../services/apiRoutes.js";
 import {createToaster} from "@meforma/vue-toaster";
+import {useRoute} from 'vue-router'
 
 const toaster = createToaster({
     position: 'top-right',
@@ -95,11 +95,16 @@ export default {
         return {
             profileLoading: false,
             logoutLoading: false,
-            profileData: null
+            profileData: null,
+            route:''
+
         }
     },
 
     mounted() {
+        this.route = useRoute();
+        const routeName = this.route.matched.some(route => route.name === 'portalLayout');
+        console.log(routeName)
         this.getProfile()
     },
 
