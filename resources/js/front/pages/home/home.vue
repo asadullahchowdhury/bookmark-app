@@ -103,6 +103,80 @@
             </div>
         </div>
         <!--what we do section end  -->
+
+
+        <!--Our advantages section start-->
+        <div class="section-wrap py-5">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-7">
+                        <div class="our-advantage-title display-4 mb-3">Our Advantages</div>
+                        <div class="display-6 fs-4 text-muted">Why Choose Us for Your Bookmarking Needs</div>
+                        <ul class="advantage-list list-unstyled p-0 mt-4">
+                            <li class="d-flex mb-3">
+                                <span class="icon"><img :src="`/images/global/check-orange-theme.svg`"
+                                                        alt="check orange"></span>
+
+                                <div class="list-text ps-3">
+                                    <strong>Organize Your Digital Life:</strong> <span class="text-muted"> Easily manage and
+                                    organize your web
+                                    links, articles, and online resources in one central location.</span>
+                                </div>
+                            </li>
+
+                            <li class="d-flex mb-3">
+                                <span class="icon"><img :src="`/images/global/check-orange-theme.svg`"
+                                                        alt="check orange"></span>
+
+                                <div class="list-text ps-3">
+                                    <strong>Access Anywhere:</strong> <span class="text-muted"> Access your bookmarks from any device with an internet connection, ensuring you always have your favorite links at your fingertips.</span>
+                                </div>
+                            </li>
+
+
+                            <li class="d-flex mb-3">
+                                <span class="icon"><img :src="`/images/global/check-orange-theme.svg`"
+                                                        alt="check orange"></span>
+
+                                <div class="list-text ps-3">
+                                    <strong>Sync Across Devices:</strong> <span class="text-muted"> Synchronize your bookmarks across multiple devices, keeping your collections up to date and consistent.</span>
+                                </div>
+                            </li>
+
+
+                            <li class="d-flex mb-3">
+                                <span class="icon"><img :src="`/images/global/check-orange-theme.svg`"
+                                                        alt="check orange"></span>
+
+                                <div class="list-text ps-3">
+                                    <strong>Efficient Categorization:</strong> <span class="text-muted"> Create folders and tags to categorize your bookmarks, making it simple to find what you need quickly.</span>
+                                </div>
+                            </li>
+
+                            <li class="d-flex mb-3">
+                                <span class="icon"><img :src="`/images/global/check-orange-theme.svg`"
+                                                        alt="check orange"></span>
+
+                                <div class="list-text ps-3">
+                                    <strong>Smart Search:</strong> <span class="text-muted"> Enjoy a powerful search function that helps you find specific bookmarks in seconds, even within extensive collections.</span>
+                                </div>
+                            </li>
+
+                        </ul>
+
+                        <button type="button" class="btn btn-theme mt-4">Read more
+                            <span class="ms-2"><img :src="`/images/global/arrow-right.svg`" alt="arrow-right"></span>
+                        </button>
+                    </div>
+                    <div class="col-md-5">
+                       <div class="w-100 mt-3 mt-md-0 h-100 d-flex justify-content-center">
+                           <img class="img-fluid w-75 " src="/images/global/advantage.svg" alt="advantage-cover">
+                       </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--Our advantages section end  -->
     </div>
 </template>
 
