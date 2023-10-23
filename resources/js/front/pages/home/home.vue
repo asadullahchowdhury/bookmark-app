@@ -172,7 +172,7 @@
                     </div>
                     <div class="col-md-5">
                         <div class="w-100 mt-3 mt-md-0 h-100 d-flex justify-content-center">
-                            <img class="img-fluid w-75 " src="/images/global/advantage.svg" alt="advantage-cover">
+                            <img class="img-fluid w-75 " :src="`/images/global/advantage.svg`" alt="advantage-cover">
                         </div>
                     </div>
                 </div>
@@ -251,10 +251,12 @@
                     <div class="col-lg-6">
                         <div class="ready-content text-center w-100 h-100 p-5">
                             <div class="display-4 mb-4">Are You Ready to Enjoy?</div>
-                            <p class="text-muted">Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat,
-                                vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio
-                                dignissim qui blandit praesent luptatum zzril delenit augue duis dolore. Claritas est
-                                etiam processus dynamicus, qui sequitur mutationem consuetudium lectorum.</p>
+                            <p class="text-muted">Are you ready to enjoy a world of limitless possibilities? Dive into
+                                the realm of bookmarks, where every click opens a new door to discovery. Whether it's
+                                your favorite articles, essential resources, or treasured websites, our bookmark
+                                template is your key to effortless organization and instant access. Embrace the
+                                convenience of curated collections, smart categorization, and seamless synchronization
+                                across all your devices. Your digital adventure awaits. Are you ready to embark?</p>
                         </div>
                     </div>
                     <div class="col-lg-6">
@@ -266,6 +268,26 @@
             </div>
         </div>
         <!--ready to enjoy section end  -->
+
+
+        <!--Partners section start-->
+        <div class="section-wrap py-5">
+            <div class="container">
+                <div class="display-4 mb-4">Our Partners</div>
+                <p class="fs-4 mb-5 text">Trusted Collaborations that Enrich Your Bookmarking Experience</p>
+
+                <div class="partners-wrap owl-carousel text-center">
+                    <div class="each-partner">
+                        <img :src="`/images/global/client-1.png`" alt="partner 1" class="img-fluid w-100">
+                    </div>
+
+                    <div class="each-partner">
+                        <img :src="`/images/global/client-2.png`" alt="partner 2" class="img-fluid w-100">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--Partners section end  -->
     </div>
 </template>
 
@@ -289,11 +311,11 @@ export default {
     },
     mounted() {
 
-        this.carousel()
-
+        this.feedBackCarousel()
+        this.partnersCarousel()
     },
     methods: {
-        carousel() {
+        feedBackCarousel() {
             $('.feedback-content').owlCarousel({
                 loop: true,
                 margin: 30,
@@ -310,7 +332,27 @@ export default {
                     }
                 }
             })
+        },
+
+        partnersCarousel() {
+            $('.partners-wrap').owlCarousel({
+                loop: true,
+                margin: 100,
+                nav: false,
+                responsive: {
+                    0: {
+                        items: 1
+                    },
+                    600: {
+                        items: 3
+                    },
+                    1000: {
+                        items: 5
+                    }
+                }
+            })
         }
+
     }
 }
 </script>
