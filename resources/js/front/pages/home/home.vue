@@ -22,7 +22,7 @@
                     enim explicabo ipsa molestiae natus sequi soluta?</p>
 
                 <div class="row">
-                    <div class="col-md-4">
+                    <div class="col-lg-4 col-md-6 mb-4">
                         <div class="service-box">
                             <div class="icon-box shadow">
                                 <img :src="`/images/global/heart-white.png`" alt="heart white">
@@ -39,7 +39,7 @@
                         </div>
                     </div>
 
-                    <div class="col-md-4">
+                    <div class="col-lg-4 col-md-6 mb-4">
                         <div class="service-box">
                             <div class="icon-box shadow">
                                 <img :src="`/images/global/leaf-white.png`" alt="leaf white">
@@ -56,7 +56,7 @@
                         </div>
                     </div>
 
-                    <div class="col-md-4">
+                    <div class="col-lg-4 col-md-6 mb-4">
                         <div class="service-box">
                             <div class="icon-box shadow">
                                 <img :src="`/images/global/money-bag-white.png`" alt="money bag">
@@ -294,7 +294,7 @@
         <div class="section-wrap">
             <div class="newsletter-section d-flex justify-content-center align-items-center flex-column" style="background-image: url('/images/global/newsletter-cover.jpg')">
                 <div class="container">
-                   <div class="p-5 text-center ">
+                   <div class="p-md-5 text-center ">
                        <div class="display-4 fs-1 text-white mb-5">Sign Up For Our Monthly Newsletter</div>
 
                        <form action="" class="newsletter-form d-flex justify-content-center align-items-center">

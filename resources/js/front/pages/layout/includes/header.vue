@@ -55,7 +55,7 @@
                         <img class="user-chevron ms-2" src="/images/global/chevron-down.svg" alt="chevron-down">
 
                         <div class="header-dropdown-wrap position-relative">
-                            <ul class="header-dropdown rounded-4">
+                            <ul class="header-dropdown shadow rounded-4">
                                 <li>
                                     <router-link :to="{name:'Profile'}" href="javascript:void(0)">Your Profile
                                     </router-link>
