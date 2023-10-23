@@ -2,7 +2,7 @@
     <div class="header" :class="{'black' : route.path === '/portal'}">
         <nav class="navbar navbar-expand-lg">
             <div class="container">
-                <router-link :to="{name:'Home'}" class="navbar-brand" :class="{'me-auto': profileData === null}">
+                <router-link :to="{name:'Home'}" class="navbar-brand ps-3" :class="{'me-auto': profileData === null}">
                     <span>B</span>ook<span>M</span>ark
                 </router-link>
 
@@ -41,12 +41,12 @@
                     <router-link :to="{name:'Login'}" class="text-decoration-none text-white underline-anim white">Login</router-link>
                 </div>
 
-                <div class="right-side-header d-lg-block d-none">
+                <div class="right-side-header pe-3 d-lg-block d-none">
                     <div class="user-wrap d-flex" v-if="profileData != null">
                         <div class="user-avatar-wrap shadow">
                             <img :src="`/images/global/book-cover.jpg`" alt="user">
                         </div>
-                        <img class="user-chevron ms-2" src="/images/global/chevron-down.svg" alt="chevron-down">
+<!--                        <img class="user-chevron ms-2" src="/images/global/chevron-down.svg" alt="chevron-down">-->
 
                         <div class="header-dropdown-wrap position-relative">
                             <ul class="header-dropdown shadow rounded-4">
