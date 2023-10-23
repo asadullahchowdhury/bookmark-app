@@ -12,9 +12,65 @@
         </div>
         <!--Banner section end  -->
 
-<!--Service section start-->
-        
-<!--Service section end  -->
+        <!--Service section start-->
+        <div class="section-wrap py-5">
+            <div class="container">
+                <div class="display-5 mb-3">We provide services</div>
+                <p class="fs-5 mb-5">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci amet<br> dolore
+                    enim explicabo ipsa molestiae natus sequi soluta?</p>
+
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="service-box">
+                            <div class="icon-box shadow">
+                                <img :src="`/images/global/heart-white.png`" alt="heart white">
+                            </div>
+                            <div class="content">
+                                <a href="javascript:void(0)" class="service-title">Carefully Crafted Design</a>
+                                <small>
+                                    <p class="mb-0 text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Modi,
+                                        molestias, velit.</p>
+                                </small>
+                                <small> <a href="javascript:void(0)" class="underline-anim text-theme">Learn More...</a></small>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="service-box">
+                            <div class="icon-box shadow">
+                                <img :src="`/images/global/leaf-white.png`" alt="leaf white">
+                            </div>
+                            <div class="content">
+                                <a href="javascript:void(0)" class="service-title">Clean and Modern Code</a>
+                                <small>
+                                    <p class="mb-0 text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Modi,
+                                    molestias, velit.</p>
+                                </small>
+                                <small> <a href="javascript:void(0)" class="underline-anim text-theme">Learn More...</a></small>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="service-box">
+                            <div class="icon-box shadow">
+                                <img :src="`/images/global/money-bag-white.png`" alt="money bag">
+                            </div>
+                            <div class="content">
+                                <a href="javascript:void(0)" class="service-title">Responsive designs</a>
+                                <small>
+                                    <p class="mb-0 text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Modi,
+                                        molestias, velit.</p>
+                                </small>
+                                <small> <a href="javascript:void(0)" class="underline-anim text-theme">Learn More...</a></small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--Service section end  -->
     </div>
 </template>
 
