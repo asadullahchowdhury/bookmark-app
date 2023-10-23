@@ -17,6 +17,9 @@ import Home from "../pages/home/home.vue";
 //Profile
 import Profile from  "../pages/profile/profile.vue"
 
+// Dashboard
+import Dashboard from "../pages/dashboard/dashboard.vue"
+
 //URL
 const ROOT_URL = '/';
 const PORTAL_URL = "/portal/";
@@ -42,7 +45,8 @@ const routes = [
     {
       path: PORTAL_URL, name: 'portalLayout', component: PortalLayout,
         children: [
-            {path: ROOT_URL + 'profile', name:'Profile' ,component:Profile, meta:{title: 'Profile'}}
+            {path: PORTAL_URL , name:'Dashboard' ,component:Dashboard, meta:{title: 'Dashboard'}},
+            {path: PORTAL_URL + 'profile', name:'Profile' ,component:Profile, meta:{title: 'Profile'}}
         ]
     }
 ]

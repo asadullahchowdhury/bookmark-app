@@ -21,7 +21,7 @@ export default {
     created() {
         //if user info is null. it will redirect you to login page.
         if(this.UserInfo == null){
-            router.push({name: 'login'});
+            router.push({name: 'Login'});
         }
     },
 }
