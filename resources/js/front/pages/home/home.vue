@@ -169,14 +169,77 @@
                         </button>
                     </div>
                     <div class="col-md-5">
-                       <div class="w-100 mt-3 mt-md-0 h-100 d-flex justify-content-center">
-                           <img class="img-fluid w-75 " src="/images/global/advantage.svg" alt="advantage-cover">
-                       </div>
+                        <div class="w-100 mt-3 mt-md-0 h-100 d-flex justify-content-center">
+                            <img class="img-fluid w-75 " src="/images/global/advantage.svg" alt="advantage-cover">
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
         <!--Our advantages section end  -->
+
+
+        <!--our Customer section start-->
+        <div class="section-wrap py-5">
+            <div class="container">
+                <div class="display-4 text-center mb-5">Our <span class="text-theme">Customers Says</span> About Us
+                </div>
+
+                <div class="feedback-content owl-carousel">
+                    <div class="each-feedback border rounded-4 p-4 text-center">
+                        <div class="client-wrap">
+                            <div class="client-img d-inline-block">
+                                <img :src="`/images/global/testimonial-1.png`" class="img-fluid" alt="testimonial 1">
+                            </div>
+                            <div class="client-info">
+                                <div class="name">Anna Taylor</div>
+                                <p class="comp text-muted small">Company inc</p>
+                            </div>
+                            <div class="text-muted">"Lorem ipsum dolor sit amet, consectetur adipisicing elit. Expedita
+                                laudantium provident quibusdam ratione repellendus. A aliquid assumenda blanditiis
+                                corporis facilis nobis odio quis, quos reprehenderit, repudiandae rerum sapiente
+                                voluptas voluptate!"
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="each-feedback border rounded-4 p-4 text-center">
+                        <div class="client-wrap">
+                            <div class="client-img d-inline-block">
+                                <img :src="`/images/global/testimonial-2.png`" class="img-fluid" alt="testimonial 1">
+                            </div>
+                            <div class="client-info">
+                                <div class="name">William json</div>
+                                <p class="comp text-muted small">Company inc</p>
+                            </div>
+                            <div class="text-muted">"Lorem ipsum dolor sit amet, consectetur adipisicing elit. Expedita
+                                laudantium provident quibusdam ratione repellendus. A aliquid assumenda blanditiis
+                                corporis facilis nobis odio quis, quos reprehenderit, repudiandae rerum sapiente
+                                voluptas voluptate!"
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="each-feedback border rounded-4 p-4 text-center">
+                        <div class="client-wrap">
+                            <div class="client-img d-inline-block">
+                                <img :src="`/images/global/testimonial-3.png`" class="img-fluid" alt="testimonial 1">
+                            </div>
+                            <div class="client-info">
+                                <div class="name">Abby white</div>
+                                <p class="comp text-muted small">Company inc</p>
+                            </div>
+                            <div class="text-muted">"Lorem ipsum dolor sit amet, consectetur adipisicing elit. Expedita
+                                laudantium provident quibusdam ratione repellendus. A aliquid assumenda blanditiis
+                                corporis facilis nobis odio quis, quos reprehenderit, repudiandae rerum sapiente
+                                voluptas voluptate!"
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--our Customer section end  -->
     </div>
 </template>
 
@@ -185,6 +248,7 @@
 import apiRoutes from "../../services/apiRoutes.js";
 import apiService from "../../services/apiService.js";
 import router from "../../router/router.js";
+
 
 export default {
     data() {
@@ -197,6 +261,30 @@ export default {
             router.push({name: 'Dashboard'});
         }
     },
-    methods: {}
+    mounted() {
+
+        this.carousel()
+
+    },
+    methods: {
+        carousel() {
+            $('.feedback-content').owlCarousel({
+                loop: true,
+                margin: 30,
+                nav: false,
+                responsive: {
+                    0: {
+                        items: 1
+                    },
+                    600: {
+                        items: 1
+                    },
+                    1000: {
+                        items: 3
+                    }
+                }
+            })
+        }
+    }
 }
 </script>
