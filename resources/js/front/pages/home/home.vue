@@ -7,7 +7,9 @@
                 <br>
                 <p class="fs-4">Where Every Bookmark Unveils a New Adventure</p>
 
-                <button class="btn btn-theme mt-3">Learn More.</button>
+                <router-link :to="{name:'Register'}" class="btn btn-theme mt-3 ">Join now
+                    <span class="ms-2"><img :src="`/images/global/arrow-right.svg`" alt="arrow-right"></span>
+                </router-link>
             </div>
         </div>
         <!--Banner section end  -->
@@ -240,6 +242,30 @@
             </div>
         </div>
         <!--our Customer section end  -->
+
+
+        <!--ready to enjoy section start-->
+        <div class="section-wrap py-5">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="ready-content text-center w-100 h-100 p-5">
+                            <div class="display-4 mb-4">Are You Ready to Enjoy?</div>
+                            <p class="text-muted">Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat,
+                                vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio
+                                dignissim qui blandit praesent luptatum zzril delenit augue duis dolore. Claritas est
+                                etiam processus dynamicus, qui sequitur mutationem consuetudium lectorum.</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="w-100 mt-3 mt-md-0 h-100 d-flex justify-content-center">
+                            <img class="img-fluid w-75 " :src="`/images/global/ready-to-enjoy.svg`" alt="ready-cover">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--ready to enjoy section end  -->
     </div>
 </template>
 

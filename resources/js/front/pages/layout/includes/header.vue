@@ -45,7 +45,6 @@
 
                 <div class="" v-if="profileData === null">
                     <router-link :to="{name:'Login'}" class="text-decoration-none text-white underline-anim white">Login</router-link>
-                    <router-link :to="{name:'Register'}" class="btn btn-theme ms-4">Join</router-link>
                 </div>
 
                 <div class="right-side-header d-lg-block d-none">
