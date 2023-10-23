@@ -27,6 +27,10 @@ body {
 }
 
 
-.text-theme{
-    color: var(--theme-color);
+
+.bg-lg-dark{
+    @media screen and (max-width: 991px) {
+background-color: var(--bs-dark);
+    }
 }
+

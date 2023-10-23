@@ -13,19 +13,14 @@
                     <span><img src="/images/global/menu.svg" alt="menu"></span>
                 </button>
 
-                <div class="collapse navbar-collapse" id="navbarSupportedContent" v-if="profileData != null">
-                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <div class="collapse navbar-collapse bg-lg-dark" id="navbarSupportedContent" v-if="profileData != null">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0 p-lg-0 p-4">
                         <li class="nav-item underline-anim white">
-                            <router-link :to="{name:'Home'}" class="nav-link" aria-current="page"
+                            <router-link :to="{name:'Dashboard'}" class="nav-link" aria-current="page"
                                          href="#">Home
                             </router-link>
                         </li>
 
-                        <li class="nav-item underline-anim white">
-                            <a class="nav-link" href="javascript:void(0)">
-                                Bookmarks
-                            </a>
-                        </li>
                         <li class="nav-item underline-anim white">
                             <a class="nav-link " href="javascript:void(0)">Settings</a>
                         </li>
