@@ -288,6 +288,29 @@
             </div>
         </div>
         <!--Partners section end  -->
+
+
+        <!--newsletter section start-->
+        <div class="section-wrap">
+            <div class="newsletter-section d-flex justify-content-center align-items-center flex-column" style="background-image: url('/images/global/newsletter-cover.jpg')">
+                <div class="container">
+                   <div class="p-5 text-center ">
+                       <div class="display-4 fs-1 text-white mb-5">Sign Up For Our Monthly Newsletter</div>
+
+                       <form action="" class="newsletter-form d-flex justify-content-center align-items-center">
+                           <div class="input-grp">
+                               <input type="text" class="form-control form-control-lg rounded-pill shadow-none ps-5" placeholder="Your E-mail Address">
+                               <button type="button" class="btn btn-lg btn-theme btn-theme-absolute">Subscribe</button>
+                           </div>
+                       </form>
+
+                   </div>
+                </div>
+            </div>
+        </div>
+        <!--newsletter section end  -->
+
+
     </div>
 </template>
 
