@@ -1,14 +1,14 @@
 <template>
-    <div class="dashboard" style="background-image: url('/images/auth/bookmark.jpg')">
+    <div class="dashboard">
 
         <div class="container pt-5">
-            <div class="card card-glass mt-5 mb-4 rounded-4 py-3 px-0">
+            <div class="card mt-5 mb-4 rounded-4 py-3 px-0 shadow border-0">
                 <div class="card-header bg-transparent border-0 d-flex justify-content-between align-items-center ">
                     <h3 class="card-title">Your Bookmarks</h3>
                     <button class="btn btn-theme" data-bs-toggle="modal" data-bs-target="#bookmarkModal">New <span class="d-sm-inline d-none">Bookmark</span></button>
                 </div>
 
-                <div class="card-body glass-body">
+                <div class="card-body">
                     <div class="no-data">
                         <div class="icon">
                             <img :src="`/images/global/no-data.svg`" alt="no data">

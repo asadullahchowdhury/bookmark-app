@@ -112,4 +112,25 @@
             }
         }
     }
+
+//    dark version
+
+    &.dark{
+        .navbar{
+            .navbar-brand{
+                color:var(--black);
+                span{
+                    -webkit-text-stroke-color: var(--black);
+                }
+            }
+
+            .navbar-nav {
+                .nav-item {
+                    .nav-link {
+                        color: var(--black);
+                    }
+                }
+            }
+        }
+    }
 }

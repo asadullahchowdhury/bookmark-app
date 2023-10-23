@@ -200,6 +200,10 @@
         <!--newsletter section end  -->
 
 
+<!--footer start-->
+        <Footer/>
+<!--footer end  -->
+
     </div>
 </template>
 
@@ -208,6 +212,7 @@
 import apiRoutes from "../../services/apiRoutes.js";
 import apiService from "../../services/apiService.js";
 import router from "../../router/router.js";
+import Footer from "../../pages/layout/includes/footer.vue"
 
 
 export default {
@@ -215,6 +220,9 @@ export default {
         return {
             UserInfo: window.core.UserInfo,
         }
+    },
+    components:{
+        Footer,
     },
     created() {
         if (this.UserInfo != null) {
