@@ -1,8 +1,8 @@
 .header {
     width: 100%;
-    position: fixed;
+    position: absolute;
     z-index: 1;
-
+    top: 0;
     .navbar {
         .navbar-brand {
             color: var(--white);

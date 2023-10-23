@@ -1,9 +1,8 @@
 <template>
-
-    <div class="container">
-        <div class="text-center">
-            <h1 class="display-1 my-5">Home</h1>
-        </div>
+    <div class="homepage">
+<!--Banner section start-->
+        <div class="home-banner" style="background-image: url('/images/global/book-cover.jpg')"></div>
+<!--Banner section end  -->
     </div>
 </template>
 
