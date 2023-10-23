@@ -1,8 +1,17 @@
+//root
 @import "root";
+
+//layout
 @import "../../scss/front/layout/layout";
-@import "../../scss/front/pages/auth";
-@import "../../scss/front/pages/profile";
+
+//components
 @import "layout/includes/buttons";
 @import "layout/includes/checkbox";
 @import "layout/includes/typography";
+
+//pages
+@import "../../scss/front/pages/auth";
+@import "../../scss/front/pages/profile";
+@import "../../scss/front/pages/home";
+@import "../../scss/front/pages/dashboard";
 

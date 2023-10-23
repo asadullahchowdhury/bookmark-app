@@ -74,6 +74,7 @@
 <script>
 import apiRoutes from "../../services/apiRoutes.js";
 import apiService from "../../services/apiService";
+import router from '../../router/router'
 import {createToaster} from "@meforma/vue-toaster";
 const toaster = createToaster({
     position: 'top-right',
@@ -86,11 +87,17 @@ export default {
             loginParam: {
                 email: '',
                 password: '',
-            }
+            },
+            UserInfo: window.core.UserInfo,
         }
     },
     mounted() {
 
+    },
+    created() {
+        if(this.UserInfo != null){
+            router.push({name: 'Dashboard'});
+        }
     },
     methods: {
 

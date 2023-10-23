@@ -1,0 +1,14 @@
+.dashboard {
+    .card-glass {
+        background-color: transparent;
+        border: none;
+        box-shadow: 0 0 35px rgba(255, 255, 255, .1);
+        backdrop-filter: blur(10px);
+        color: var(--white);
+
+        .glass-body{
+            height: 650px;
+            overflow: auto;
+        }
+    }
+}

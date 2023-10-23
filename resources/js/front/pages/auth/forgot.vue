@@ -92,7 +92,8 @@
                     <div class="form-group mt-4">
                         <button type="submit" class="btn btn-theme w-100">
                             Reset Password
-                            <span class="ms-2" v-if="resetLoading === false"><img :src="`/images/global/arrow-right.svg`" alt="arrow-right"></span>
+                            <span class="ms-2" v-if="resetLoading === false"><img
+                                :src="`/images/global/arrow-right.svg`" alt="arrow-right"></span>
                             <span class="ms-2 btn-loading" v-if="resetLoading === true"></span>
                         </button>
                     </div>
@@ -136,10 +137,16 @@ export default {
                 code: '',
                 password: '',
                 password_confirmation: '',
-            }
+            },
+            UserInfo: window.core.UserInfo,
         }
     },
     mounted() {
+    },
+    created() {
+        if (this.UserInfo != null) {
+            router.push({name: 'Dashboard'});
+        }
     },
     methods: {
         /*================================================

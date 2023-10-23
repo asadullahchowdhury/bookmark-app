@@ -1,6 +1,7 @@
 :root {
     --white: #fff;
     --black: #000;
+    --text-1: #2d3748;
     --theme-color: #f96332;
     --checkbox-border-color: #e3e3e3;
     --font-family: 'Montserrat', sans-serif;
@@ -24,3 +25,12 @@ body {
     padding-top: 9px;
     padding-bottom: 9px;
 }
+
+
+
+.bg-lg-light{
+    @media screen and (max-width: 991px) {
+background-color: var(--bs-light);
+    }
+}
+

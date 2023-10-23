@@ -11,10 +11,12 @@ import Toaster from "@meforma/vue-toaster";
 *  Jquery
 * *******************************************************************
 */
+/*
 import jQuery from "jquery";
 
 const $ = jQuery;
 window.$ = $;
+*/
 
 
 import App from "./App.vue";

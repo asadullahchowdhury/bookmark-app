@@ -114,12 +114,18 @@ export default {
                 avatar: null,
                 password: '',
                 password_confirmation: '',
-
-            }
+            },
+            userInfo:window.core.UserInfo
         }
     },
     mounted() {
     },
+    created() {
+        if(this.UserInfo != null){
+            router.push({name: 'Dashboard'});
+        }
+    },
+
     methods: {
         passwordVisibility() {
             if (this.passwordFieldType === 'password') {

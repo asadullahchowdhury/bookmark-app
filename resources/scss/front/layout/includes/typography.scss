@@ -33,3 +33,23 @@
         transform: scale(1);
     }
 }
+
+
+.text-theme {
+    color: var(--theme-color);
+}
+
+
+.no-data {
+    padding: 100px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+    .icon{
+        img{
+            width: 200px;
+        }
+    }
+}

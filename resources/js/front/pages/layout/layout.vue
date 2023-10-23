@@ -18,9 +18,7 @@ export default {
     },
 
     mounted() {
-        if(this.UserInfo == null){
-            router.push({name: 'Login'})
-        }
+
     },
     components: {
         Header,

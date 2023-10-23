@@ -1,8 +1,8 @@
 .header {
     width: 100%;
-    position: fixed;
-    z-index: 1;
-
+    position: absolute;
+    z-index: 100;
+    top: 0;
     .navbar {
         .navbar-brand {
             color: var(--white);
@@ -45,9 +45,9 @@
                     }
                 }
 
-                .user-chevron {
+              /*  .user-chevron {
                     transition: .3s al ease-in-out;
-                }
+                }*/
 
                 .header-dropdown-wrap {
                     .header-dropdown {
@@ -97,16 +97,37 @@
 
                 &:hover {
 
-                    .user-chevron {
+                /*    .user-chevron {
                         transform: rotate(180deg);
                         transition: .3s all ease-in-out;
-                    }
+                    }*/
 
                     .header-dropdown {
                         transition: .3s all ease-in-out;
                         transform: scale(1);
                         opacity: 1;
                         visibility: visible;
+                    }
+                }
+            }
+        }
+    }
+
+//    dark version
+
+    &.dark{
+        .navbar{
+            .navbar-brand{
+                color:var(--black);
+                span{
+                    -webkit-text-stroke-color: var(--black);
+                }
+            }
+
+            .navbar-nav {
+                .nav-item {
+                    .nav-link {
+                        color: var(--black);
                     }
                 }
             }
