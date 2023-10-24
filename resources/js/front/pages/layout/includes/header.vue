@@ -13,7 +13,8 @@
                     <span><img :src="`/images/global/menu.svg`" alt="menu"></span>
                 </button>
 
-                <div class="collapse navbar-collapse bg-lg-light" id="navbarSupportedContent" v-if="profileData != null">
+                <div class="collapse navbar-collapse bg-lg-light" id="navbarSupportedContent"
+                     v-if="profileData != null">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0 p-lg-0 p-4">
                         <li class="nav-item underline-anim">
                             <router-link :to="{name:'Dashboard'}" class="nav-link" aria-current="page"
@@ -49,7 +50,9 @@
                 <div class="right-side-header pe-3 d-lg-block d-none">
                     <div class="user-wrap d-flex" v-if="profileData != null">
                         <div class="user-avatar-wrap shadow">
-                            <img :src="`/images/global/book-cover.jpg`" alt="user">
+                            <img id="profile-avatar" v-if="profileData.media === null"
+                                 :src="`https://ui-avatars.com/api/?name=`+ profileData.full_name" alt="user">
+                            <img id="profile-avatar" v-if="profileData.media != null" :src="profileData.media.full_file_path" alt="user">
                         </div>
                         <!--                        <img class="user-chevron ms-2" src="/images/global/chevron-down.svg" alt="chevron-down">-->
 
@@ -120,8 +123,6 @@ export default {
                 if (res.status === 200) {
                     this.profileData = res.data
                     this.profileData.full_name = this.profileData.first_name + ' ' + this.profileData.last_name;
-                    const headerAvatar = document.querySelector('.user-avatar-wrap img');
-                    headerAvatar.src = this.profileData.avatar !== null ? this.profileData.media.full_file_path : `https://ui-avatars.com/api/?name=${this.profileData.full_name}`;
                 }
             })
 

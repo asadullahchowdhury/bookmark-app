@@ -16,7 +16,8 @@ return new class extends Migration
             $table->tinyInteger('media_type')->comment('1.image, 2.video, 3.file');
             $table->string('file_path');
             $table->text('attrs');
-            $table->timestamps();
+            $table->dateTime('created_at')->useCurrent();
+            $table->timestamp('updated_at')->nullable()->useCurrentOnUpdate();
         });
     }
 

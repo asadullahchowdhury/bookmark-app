@@ -2,6 +2,7 @@
 
 namespace App\Services\Front;
 
+use App\Models\LoginHistory;
 use App\Models\User;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
@@ -29,6 +30,12 @@ class AuthService
             $credential = ['email' => $request->email, 'password' => $request->password];
             if (Auth::attempt($credential, $request->remember)) {
                 $user = Auth::user();
+                $ipAddress = $request->ip();
+                $log = new LoginHistory();
+                $log->user_id = $user->id;
+                $log->ip_address = $ipAddress;
+                $log->save();
+
                 return ['status' => 200, 'data' =>  $user, 'msg' => 'Login successful'];
             } else {
                 return ['status' => 500, 'errors' => ['error' => 'Invalid Credentials! Please try again']];

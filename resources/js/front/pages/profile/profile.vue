@@ -3,7 +3,9 @@
         <div class="container">
             <div class="profile-header d-flex justify-content-center position-relative">
                 <div class="profile-pic shadow">
-                    <img src="/images/global/book-cover.jpg" alt="profile" class="img-fluid">
+                    <img v-if="profileData.media === null"
+                         :src="`https://ui-avatars.com/api/?name=`+ profileData.full_name" alt="profile">
+                    <img v-if="profileData.media != null" :src="profileData.media.full_file_path" alt="profile">
                 </div>
             </div>
 
@@ -48,8 +50,7 @@
                         <button type="button" class="btn btn-theme w-50 mx-2 mb-sm-0 mb-4" @click="editModal(1)">Edit
                             Profile
                         </button>
-                        <button type="button" class="btn btn-theme w-50 mx-2" data-bs-toggle="modal"
-                                data-bs-target="#changePassModal">Change Password
+                        <button type="button" class="btn btn-theme w-50 mx-2" @click="passwordModal(1)">Change Password
                         </button>
                     </div>
                 </div>
@@ -71,8 +72,11 @@
                     <div class="modal-body px-4">
                         <div class="form-group mb-5 d-flex justify-content-center">
                             <div class="modal-avatar-wrap">
-                                <img class="modal-avatar" v-if="editParam.avatar != null" :src="editParam.avatarFilePath" alt="avatar">
-                                <img class="modal-avatar" v-if="editParam.avatar === null" :src="`/images/global/book-cover.jpg`" alt="avatar">
+                                <img class="modal-avatar" v-if="profileData.media != null"
+                                     :src="editParam.avatarFilePath" alt="avatar">
+                                <img class="modal-avatar" v-if="profileData.media === null"
+                                     :src="`https://ui-avatars.com/api/?name=`+ profileData.full_name"
+                                     alt="avatar dummy">
                                 <label for="avatar-upload" class="upload-label btn btn-light">
                                     <input type="file" class="d-none" id="avatar-upload" @change="attachAvatar($event)">
                                     <img class="edit-icon" :src="`/images/global/edit.svg`" alt="edit">
@@ -136,31 +140,39 @@
                 <div class="modal-header pt-4 border-0 justify-content-center">
                     <h1 class="modal-title fs-5" id="changePassLabel">Change Password</h1>
                 </div>
-                <form>
+                <form @submit.prevent="updatePassword()">
 
 
                     <div class="modal-body px-4">
                         <div class="form-group mb-3">
                             <input type="text" class="form-control form-control-lg rounded-pill"
-                                   placeholder="Current Password" name="password">
+                                   placeholder="Current Password" name="current_password"
+                                   v-model="passwordParam.current_password">
+                            <div class="error-report ms-2"></div>
                         </div>
 
                         <div class="form-group mb-3">
                             <input type="text" class="form-control form-control-lg rounded-pill"
-                                   placeholder="New Password" name="new_password">
+                                   placeholder="New Password" name="password" v-model="passwordParam.password">
+                            <div class="error-report ms-2"></div>
                         </div>
 
                         <div class="form-group mb-3">
                             <input type="text" class="form-control form-control-lg rounded-pill"
-                                   placeholder="Confirm New Password" name="password_confirmation">
+                                   placeholder="Confirm New Password" name="password_confirmation"
+                                   v-model="passwordParam.password_confirmation">
+                            <div class="error-report ms-2"></div>
                         </div>
 
                     </div>
                     <div class="modal-footer justify-content-center border-0">
                         <button type="button" class="btn btn-outline-dark rounded-pill w-120px py-9px"
-                                data-bs-dismiss="modal">Cancel
+                                @click="passwordModal(2)">Cancel
                         </button>
-                        <button type="button" class="btn btn-theme w-120px">Confirm</button>
+                        <button type="submit" class="btn btn-theme w-120px">
+                            <span v-if="updatePasswordLoading === false">Confirm</span>
+                            <span class="btn-loading" v-if="updatePasswordLoading === true">  </span>
+                        </button>
                     </div>
                 </form>
             </div>
@@ -173,9 +185,9 @@
 
 <script>
 import apiService from "../../services/apiService.js";
-import apiRoute from "../../services/apiRoutes.js";
-import {createToaster} from "@meforma/vue-toaster";
 import apiRoutes from "../../services/apiRoutes.js";
+import {createToaster} from "@meforma/vue-toaster";
+
 
 const toaster = createToaster({
     position: 'top-right',
@@ -185,6 +197,7 @@ export default {
     data() {
         return {
             profileLoading: false,
+            uploadLoading: false,
             profileData: {},
             editParam: {
                 id: '',
@@ -193,40 +206,54 @@ export default {
                 email: '',
                 phone: '',
                 avatar: '',
-                avatarFilePath:null,
+                avatarFilePath: null,
+            },
+            passwordParam: {
+                current_password: '',
+                password: '',
+                password_confirmation: '',
+
             },
             updateProfileLoading: false,
             updatePasswordLoading: false,
+            historyParam:{
+                limit:10,
+            }
         }
     },
 
     mounted() {
         this.getProfile()
+        this.getHistory()
     },
 
     methods: {
+        /*==========================================
+        * Get profile data API
+        ============================================*/
         getProfile() {
             this.profileLoading = true;
             apiService.ClearErrorHandler();
-            apiService.GET(apiRoute.ProfileDetails, (res) => {
+            apiService.GET(apiRoutes.ProfileDetails, (res) => {
                 this.profileLoading = false;
                 if (res.status === 200) {
                     this.profileData = res.data
                     this.profileData.full_name = this.profileData.first_name + ' ' + this.profileData.last_name;
-                    const headerAvatar = document.querySelector('.profile-pic img');
-                    headerAvatar.src = this.profileData.avatar !== null ? this.profileData.media.full_file_path : `https://ui-avatars.com/api/?name=${this.profileData.full_name}`;
+
                 }
             })
         },
 
 
+
+        /*==========================================
+        * Profile edit modal open/close
+        ============================================*/
         editModal(type) {
             if (type === 1) {
                 let modal = new bootstrap.Modal(document.getElementById('profileUpdateModal'))
                 modal.show();
                 this.profileData.full_name = this.profileData.first_name + ' ' + this.profileData.last_name;
-                const avatar = document.querySelector('.modal-avatar');
-                avatar.src = this.profileData.avatar !== null ? this.profileData.media.full_file_path : `https://ui-avatars.com/api/?name=${this.profileData.full_name}`;
                 let userData = this.profileData;
                 this.editParam = {
                     id: userData.id,
@@ -235,6 +262,7 @@ export default {
                     email: userData.email,
                     phone: userData.phone,
                     avatar: userData.avatar,
+                    avatarFilePath: userData.media.full_file_path
                 }
             } else if (type === 2) {
                 const Modal = document.querySelector('#profileUpdateModal');
@@ -243,7 +271,9 @@ export default {
             }
         },
 
-
+        /*==========================================
+        * Profile update API
+        ============================================*/
         updateProfile() {
             this.updateProfileLoading = true;
             apiService.POST(apiRoutes.ProfileUpdate, this.editParam, (res) => {
@@ -252,13 +282,17 @@ export default {
                     toaster.info(res.msg)
                     this.editModal(2)
                     this.getProfile();
+                    $('#profile-avatar').attr('src', this.editParam.avatarFilePath);
                 } else apiService.ErrorHandler(res.errors)
             })
         },
 
 
-        /* avatar attachment */
+        /*==========================================
+       * Avatar image upload API
+       ============================================*/
         attachAvatar(event) {
+
             let file = event.target.files[0];
             let formData = new FormData();
             formData.append("file", file)
@@ -266,13 +300,63 @@ export default {
             apiService.UPLOAD(apiRoutes.Media, formData, (res) => {
                 event.target.value = '';
                 if (res.status === 200) {
-                    this.editParam.avatarFilePath = res.data.full_file_path
+                    // this.profileData.media.full_file_path = res.data.full_file_path
+                    this.editParam.avatarFilePath = res.data.full_file_path;
                     this.editParam.avatar = res.data.id
                 }
             })
 
         },
 
+
+        /*==========================================
+        * Password Changing API
+        ============================================*/
+        updatePassword() {
+            this.updatePasswordLoading = true;
+            apiService.POST(apiRoutes.PasswordUpdate, this.passwordParam, (res) => {
+                this.updatePasswordLoading = false;
+                if (res.status === 200) {
+                    toaster.info(res.msg)
+                    this.passwordModal(2);
+                } else {
+                    apiService.ErrorHandler(res.errors)
+                }
+
+            })
+        },
+
+
+        /*password modal open*/
+        passwordModal(type) {
+            if (type === 1) {
+                this.passwordParam = {
+                    password: '',
+                    current_password: '',
+                    password_confirmation: '',
+                }
+                let modal = new bootstrap.Modal(document.getElementById('changePassModal'))
+                modal.show();
+            } else {
+                const Modal = document.querySelector('#changePassModal');
+                const Instance = bootstrap.Modal.getInstance(Modal);
+                Instance.hide();
+            }
+
+        },
+
+        /*==========================================
+        * Bookmark list API
+        ============================================*/
+        getHistory() {
+            this.listLoading = true;
+            apiService.POST(apiRoutes.HistoryList, this.historyParam, (res) => {
+                this.listLoading = false;
+                if (parseInt(res.status) === 200) {
+                    console.log(res.data)
+                }
+            })
+        }
     }
 }
 </script>
