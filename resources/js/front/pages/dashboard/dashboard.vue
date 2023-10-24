@@ -5,7 +5,7 @@
             <div class="card mt-5 mb-4 rounded-4 py-3 px-0 shadow border-0">
                 <div class="card-header bg-transparent border-0 d-flex justify-content-between align-items-center ">
                     <h3 class="card-title">Your Bookmarks</h3>
-                    <button class="btn btn-theme" data-bs-toggle="modal" data-bs-target="#bookmarkModal">New <span
+                    <button class="btn btn-theme" @click="bookmarkModal(1,null)">New <span
                         class="d-sm-inline d-none">Bookmark</span></button>
                 </div>
 
@@ -33,7 +33,7 @@
                 <div class="modal-header pt-4 border-0 justify-content-center">
                     <h1 class="modal-title fs-5" id="changePassLabel">Add a bookmark</h1>
                 </div>
-                <form>
+                <form @submit.prevent="manageBookmark()">
                     <div class="modal-body px-4">
                         <div class="form-group mb-3">
                             <input type="text" class="form-control form-control-lg rounded-pill"
@@ -59,9 +59,12 @@
                     </div>
                     <div class="modal-footer justify-content-center border-0">
                         <button type="button" class="btn btn-outline-dark rounded-pill w-120px py-9px"
-                                data-bs-dismiss="modal">Cancel
+                                @click="bookmarkModal(3,null)">Cancel
                         </button>
-                        <button type="button" class="btn btn-theme w-120px">Confirm</button>
+                        <button type="submit" class="btn btn-theme w-120px">
+                            <span v-if="manageLoading === false">Confirm</span>
+                            <span v-if="manageLoading === true" class="btn-loading"></span>
+                        </button>
                     </div>
                 </form>
             </div>
@@ -73,6 +76,10 @@
 <script>
 import apiService from "../../services/apiService";
 import apiRoutes from "../../services/apiRoutes";
+import {createToaster} from "@meforma/vue-toaster";
+const toaster = createToaster({
+    position: 'top-right',
+});
 
 export default {
     data() {
@@ -89,8 +96,56 @@ export default {
 
     },
     methods: {
-        //=================
-        // ======================
+        /*==========================================
+        * Bookmark modal open/close
+        ============================================*/
+        bookmarkModal(type, data = null) {
+            if (type === 1) {
+                this.bookmarkParam = {
+                    name: '',
+                    url: '',
+                    description: '',
+                }
+                let modal = new bootstrap.Modal(document.getElementById('bookmarkModal'))
+                modal.show();
+            } else if (type === 2) {
+                this.bookmarkParam = {
+                    id: data.id,
+                    name: data.name,
+                    url: data.url,
+                    description: data.description,
+                }
+                let modal = new bootstrap.Modal(document.getElementById('bookmarkModal'))
+                modal.show();
+            } else if (type === 3) {
+                const Modal = document.querySelector('#bookmarkModal');
+                const Instance = bootstrap.Modal.getInstance(Modal);
+                Instance.hide();
+            }
+        },
+
+        /*==========================================
+      * Bookmark API
+      ============================================*/
+        manageBookmark() {
+            this.manageLoading = false;
+            let url = null;
+            if (this.bookmarkParam.id === '') {
+                url = apiRoutes.BookmarkCreate;
+            } else {
+                url = apiRoutes.BookmarkUpdate;
+            }
+            apiService.POST(url,this.bookmarkParam,(res)=>{
+                this.manageLoading = false;
+                if (parseInt(res.status) === 200){
+                    toaster.info(res.msg)
+                    this.bookmarkModal(3,null)
+                }else {
+                    apiService.ErrorHandler(res.errors)
+                }
+            })
+        }
+
     }
 }
 </script>

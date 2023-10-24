@@ -15,6 +15,12 @@ const apiRoutes = {
     ProfileUpdate: apiVersion + 'profile/update',
 
 
+//    Bookmark
+    BookmarkCreate: apiVersion + 'bookmark/create',
+    BookmarkUpdate: apiVersion + 'bookmark/update',
+    BookmarkList: apiVersion + 'bookmark/list',
+    BookmarkDelete: apiVersion + 'bookmark/delete',
+
 //     Media
     Media: apiVersion + 'media/upload',
 }
