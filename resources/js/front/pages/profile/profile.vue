@@ -1,6 +1,19 @@
 <template>
     <div class="profile-page">
         <div class="container">
+            <div class="w-100 text-end ">
+                <a href="javascript:void(0)"
+                   class="d-md-inline-block d-none text-decoration-none fs-5 underline-anim text-dark mb-4 fw-semibold"
+                   data-bs-toggle="tooltip" data-bs-title="Default tooltip"
+                   @click="loginHistoryModal(1)">Login History
+                    <img class="ms-1" :src="`/images/global/history.png`" alt="history">
+                </a>
+
+                <a href="javascript:void(0)" class="d-inline-block d-md-none btn btn-light px-2"
+                   data-bs-toggle="tooltip" data-bs-title="Login History"
+                   @click="loginHistoryModal(1)"><img :src="`/images/global/history.png`" alt="history"></a>
+            </div>
+
             <div class="profile-header d-flex justify-content-center position-relative">
                 <div class="profile-pic shadow">
                     <img v-if="profileData.media === null"
@@ -33,10 +46,6 @@
                             <td class="pb-4"><strong>Address :</strong></td>
                             <td class="pb-4 fst-italic text-muted">N/A</td>
                         </tr>
-                        <tr>
-                            <td></td>
-                            <td class="text-end"></td>
-                        </tr>
                     </table>
 
 
@@ -52,20 +61,18 @@
                     </div>
                     <!--Loading end-->
 
-                    <div class="d-flex align-items-center flex-sm-row flex-column justify-content-between mb-3">
-                        <button type="button" class="btn btn-theme w-50 mx-2 mb-sm-0 mb-4" @click="editModal(1)">Edit
+                    <div
+                        class="d-flex profile-action align-items-center flex-sm-row flex-column justify-content-between mb-3">
+                        <button type="button" class="btn btn-theme mx-2 mb-sm-0 mb-4" @click="editModal(1)">Edit
                             Profile
                         </button>
-                        <button type="button" class="btn btn-theme w-50 mx-2" @click="passwordModal(1)">Change Password
+                        <button type="button" class="btn btn-theme mx-2" @click="passwordModal(1)">Change Password
                         </button>
                     </div>
+
                 </div>
             </div>
-            <div class="w-100 text-end">
-                <a href="javascript:void(0)" class="text-decoration-none fs-5 underline-anim text-dark mb-4 fw-bold"
-                   @click="loginHistoryModal(1)">Login
-                    History</a>
-            </div>
+
         </div>
     </div>
 
@@ -206,7 +213,8 @@
                 <div class="modal-body px-4">
                     <div class="w-100 text-end mb-2">
                         <a href="javascript:void(0)" class="text-decoration-none text-muted underline-anim"
-                           v-if="historyData.length === 0 && historyListLoading === false">Clear all
+                           @click="loginHistoryModal(2),manageDeleteModal(1,'all')"
+                           v-if="historyData.length > 0 && historyListLoading === false">Clear all
                             History</a>
                     </div>
                     <div class="history-list-wrap table-responsive">
@@ -342,6 +350,9 @@ export default {
 
     mounted() {
         this.getProfile()
+        /*tooltip*/
+        const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
+        const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
     },
 
     methods: {
@@ -502,7 +513,7 @@ export default {
         ============================================*/
         historyDelete() {
             this.deleteLoading = true;
-            apiService.POST(apiRoutes.BookmarkDelete, this.deleteParam, (res) => {
+            apiService.POST(apiRoutes.HistoryDelete, this.deleteParam, (res) => {
                 this.deleteLoading = false;
                 if (parseInt(res.status) === 200) {
                     toaster.info(res.msg);
@@ -517,7 +528,7 @@ export default {
         manageDeleteModal(type, id) {
             if (type === 1) {
                 let myModal = new bootstrap.Modal(document.getElementById('deleteModal'))
-                this.deleteParam.id = id
+                this.deleteParam.id = id;
                 myModal.show()
             } else {
                 this.loginHistoryModal(1)

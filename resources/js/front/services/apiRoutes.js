@@ -15,6 +15,7 @@ const apiRoutes = {
     ProfileUpdate: apiVersion + 'profile/update',
     PasswordUpdate: apiVersion + 'profile/update/password',
     HistoryList: apiVersion + 'profile/history/list',
+    HistoryDelete: apiVersion + 'profile/history/delete',
 
 
 //    Bookmark

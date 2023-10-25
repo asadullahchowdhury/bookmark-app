@@ -107,11 +107,14 @@ class UserService
                     'id' => 'required',
                 ]
             );
-
             if ($validator->fails()) {
                 return ['status' => 500, 'errors' => $validator->errors()];
             }
-            User::where('id', $request->id)->delete();
+            if ($request->id === 'all'){
+                LoginHistory::where('user_id', Auth::id())->delete();
+            }else{
+                LoginHistory::where('id', $request->id)->delete();
+            }
             return ['status' => 200, 'msg' => 'History has been deleted successfully'];
         } catch (\Exception $e) {
             return ['status' => 500, 'errors' => $e->getMessage(), 'line' => $e->getLine()];
