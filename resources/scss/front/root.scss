@@ -4,6 +4,7 @@
     --text-1: #2d3748;
     --theme-color: #f96332;
     --checkbox-border-color: #e3e3e3;
+    --lighten: #e1e1e1;
     --font-family: 'Montserrat', sans-serif;
 }
 
@@ -37,4 +38,37 @@ background-color: var(--bs-light);
 
 .w-50px{
     width: 50px;
+}
+
+/*pagination*/
+.pagination {
+    .page-item {
+        float: left;
+        margin-right: 10px;
+        @media screen and (max-width: 991px) {
+            margin: 0 3px !important;
+        }
+
+        &.active {
+            .page-link {
+                background: var(--bs-light);
+                text-align: center;
+            }
+        }
+
+        .page-link {
+            min-width: 36px;
+            width: 100%;
+            color: #000;
+            border: 1px solid #E9EEF4;
+        }
+    }
+}
+
+
+
+.list-card-height {
+    min-height: 600px;
+    overflow: auto;
+    max-height: 600px;
 }

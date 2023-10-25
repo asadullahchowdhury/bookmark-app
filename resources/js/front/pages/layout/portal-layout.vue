@@ -1,6 +1,8 @@
 <template>
     <Header/>
-    <router-view/>
+    <div class="bg-body-tertiary vh-100">
+        <router-view/>
+    </div>
 </template>
 
 <script>

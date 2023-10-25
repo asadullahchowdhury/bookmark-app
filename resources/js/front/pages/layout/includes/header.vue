@@ -23,11 +23,15 @@
                         </li>
 
                         <li class="nav-item underline-anim">
-                            <a class="nav-link " href="javascript:void(0)">Settings</a>
+                            <router-link :to="{name:'Bookmark'}" class="nav-link">Bookmark</router-link>
+                        </li>
+
+                        <li class="nav-item underline-anim">
+                            <router-link :to="{name:'History'}" class="nav-link">Login History</router-link>
                         </li>
 
                         <li class="nav-item d-lg-none d-block underline-anim">
-                            <router-link :to="{name:'Profile'}" class="nav-link " href="javascript:void(0)">Your
+                            <router-link :to="{name:'Profile'}" class="nav-link ">Your
                                 Profile
                             </router-link>
                         </li>
@@ -52,18 +56,24 @@
                         <div class="user-avatar-wrap shadow">
                             <img id="profile-avatar" v-if="profileData.media === null"
                                  :src="`https://ui-avatars.com/api/?name=`+ profileData.full_name" alt="user">
-                            <img id="profile-avatar" v-if="profileData.media != null" :src="profileData.media.full_file_path" alt="user">
+                            <img id="profile-avatar" v-if="profileData.media != null"
+                                 :src="profileData.media.full_file_path" alt="user">
                         </div>
                         <!--                        <img class="user-chevron ms-2" src="/images/global/chevron-down.svg" alt="chevron-down">-->
 
                         <div class="header-dropdown-wrap position-relative">
                             <ul class="header-dropdown shadow rounded-4">
                                 <li>
-                                    <router-link :to="{name:'Profile'}" href="javascript:void(0)">Your Profile
-                                    </router-link>
+                                    <router-link :to="{name:'Profile'}">Your Profile</router-link>
                                 </li>
+
                                 <li>
-                                    <a href="javascript:void(0)">Settings</a>
+                                    <router-link :to="{name:'Profile'}">Bookmark</router-link>
+                                </li>
+
+                                <li>
+                                    <router-link :to="{name:'History'}">Login History
+                                    </router-link>
                                 </li>
                                 <li>
                                     <a href="javascript:void(0)" @click="logout">

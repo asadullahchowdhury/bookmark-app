@@ -1,77 +1,68 @@
 <template>
     <div class="profile-page">
         <div class="container">
-            <div class="w-100 text-end ">
-                <a href="javascript:void(0)"
-                   class="d-md-inline-block d-none text-decoration-none fs-5 underline-anim text-dark mb-4 fw-semibold"
-                   data-bs-toggle="tooltip" data-bs-title="Default tooltip"
-                   @click="loginHistoryModal(1)">Login History
-                    <img class="ms-1" :src="`/images/global/history.png`" alt="history">
-                </a>
+         <div class="card border-0 rounded-4 shadow">
+           <div class="card-body">
+               <div class="profile-header d-flex justify-content-center position-relative">
+                   <div class="profile-pic shadow">
+                       <img v-if="profileData.media === null"
+                            :src="`https://ui-avatars.com/api/?name=`+ profileData.full_name" alt="profile">
+                       <img v-if="profileData.media != null" :src="profileData.media.full_file_path" alt="profile">
+                   </div>
+               </div>
 
-                <a href="javascript:void(0)" class="d-inline-block d-md-none btn btn-light px-2"
-                   data-bs-toggle="tooltip" data-bs-title="Login History"
-                   @click="loginHistoryModal(1)"><img :src="`/images/global/history.png`" alt="history"></a>
-            </div>
-
-            <div class="profile-header d-flex justify-content-center position-relative">
-                <div class="profile-pic shadow">
-                    <img v-if="profileData.media === null"
-                         :src="`https://ui-avatars.com/api/?name=`+ profileData.full_name" alt="profile">
-                    <img v-if="profileData.media != null" :src="profileData.media.full_file_path" alt="profile">
-                </div>
-            </div>
-
-            <div class="row justify-content-center">
-                <div class="col-lg-6 text-center">
-                    <table class="table table-borderless" v-if="profileLoading === false">
-                        <tr>
-                            <td class="pb-4"><strong>Name :</strong></td>
-                            <td class="pb-4">{{ profileData.full_name }}</td>
-                        </tr>
+               <div class="row justify-content-center">
+                   <div class="col-lg-6 text-center">
+                       <table class="table table-borderless" v-if="profileLoading === false">
+                           <tr>
+                               <td class="pb-4"><strong>Name :</strong></td>
+                               <td class="pb-4">{{ profileData.full_name }}</td>
+                           </tr>
 
 
-                        <tr>
-                            <td class="pb-4"><strong>Email :</strong></td>
-                            <td class="pb-4">{{ profileData.email }}</td>
-                        </tr>
+                           <tr>
+                               <td class="pb-4"><strong>Email :</strong></td>
+                               <td class="pb-4">{{ profileData.email }}</td>
+                           </tr>
 
 
-                        <tr>
-                            <td class="pb-4"><strong>Phone :</strong></td>
-                            <td class="pb-4">{{ profileData.phone }}</td>
-                        </tr>
+                           <tr>
+                               <td class="pb-4"><strong>Phone :</strong></td>
+                               <td class="pb-4">{{ profileData.phone }}</td>
+                           </tr>
 
-                        <tr>
-                            <td class="pb-4"><strong>Address :</strong></td>
-                            <td class="pb-4 fst-italic text-muted">N/A</td>
-                        </tr>
-                    </table>
+                           <tr>
+                               <td class="pb-4"><strong>Address :</strong></td>
+                               <td class="pb-4 fst-italic text-muted">N/A</td>
+                           </tr>
+                       </table>
 
 
-                    <!--Loading start-->
-                    <div class="" v-if="profileLoading === true">
-                        <h6 class=" placeholder-glow pt-3">
-                            <span class="placeholder col-12 mb-3"></span>
-                            <span class="placeholder col-11 mb-3"></span>
-                            <span class="placeholder col-6 mb-3"></span>
-                            <span class="placeholder col-8 mb-3"></span>
-                            <span class="placeholder col-8 mb-3"></span>
-                        </h6>
-                    </div>
-                    <!--Loading end-->
+                       <!--Loading start-->
+                       <div class="" v-if="profileLoading === true">
+                           <h6 class=" placeholder-glow pt-3">
+                               <span class="placeholder col-12 mb-3"></span>
+                               <span class="placeholder col-11 mb-3"></span>
+                               <span class="placeholder col-6 mb-3"></span>
+                               <span class="placeholder col-8 mb-3"></span>
+                               <span class="placeholder col-8 mb-3"></span>
+                           </h6>
+                       </div>
+                       <!--Loading end-->
 
-                    <div
-                        class="d-flex profile-action align-items-center flex-sm-row flex-column justify-content-between mb-3">
-                        <button type="button" class="btn btn-theme mx-2 mb-sm-0 mb-4" @click="editModal(1)">Edit
-                            Profile
-                        </button>
-                        <button type="button" class="btn btn-theme mx-2" @click="passwordModal(1)">Change Password
-                        </button>
-                    </div>
+                       <div
+                           class="d-flex profile-action align-items-center flex-sm-row flex-column justify-content-between mb-3">
+                           <button type="button" class="btn btn-theme mx-2 mb-sm-0 mb-4" @click="editModal(1)">Edit
+                               Profile
+                           </button>
+                           <button type="button" class="btn btn-theme mx-2" @click="passwordModal(1)">Change Password
+                           </button>
+                       </div>
 
-                </div>
-            </div>
+                   </div>
+               </div>
+           </div>
+         </div>
 
         </div>
     </div>
@@ -350,6 +341,7 @@ export default {
 
     mounted() {
         this.getProfile()
+
         /*tooltip*/
         const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
         const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))

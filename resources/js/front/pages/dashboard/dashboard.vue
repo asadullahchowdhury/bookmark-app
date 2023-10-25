@@ -2,136 +2,205 @@
     <div class="dashboard">
 
         <div class="container pt-5">
-            <div class="card mt-5 mb-4 rounded-4 py-3 px-0 shadow border-0">
-                <div class="card-header bg-transparent border-0 d-flex justify-content-between align-items-center ">
-                    <h3 class="card-title">Your Bookmarks</h3>
-                    <button class="btn btn-theme" @click="bookmarkModal(1,null)">New <span
-                        class="d-sm-inline d-none">Bookmark</span></button>
-                </div>
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="card card-list mt-5 mb-4 rounded-4 py-3 px-0 shadow border-0">
+                        <div class="card-header bg-transparent border-0 d-flex justify-content-between align-items-center ">
+                            <h3 class="card-title">Your Bookmarks <img :src="`/images/global/bookmark.png`" alt=""></h3>
+                        </div>
 
-                <div class="card-body list-card-height">
-                    <div class="list-wrap d-grid " v-if="tableData.length > 0 && listLoading === false">
-                        <div class="each-book card card-body rounded-4 shadow border-0"
-                             v-for="(each,index) in tableData">
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div class="content d-flex flex-column">
-                                    <div class="name fs-5">
-                                        <div class="fs-5 me-3 fw-bold d-inline">{{ index + 1 }}.</div>
+                        <div class="card-body list-body">
+                            <div class="list-wrap" v-if="tableData.length > 0 && listLoading === false">
+                                <table class="table table-borderless table-hover table-bookmark">
+                                    <thead>
+                                    <tr>
+                                        <th>Name</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr v-for="(each,index) in tableData" class="border-bottom align-middle">
+                                        <td>
+                                            <a :href="each.url" class="text-decoration-none text-dark underline-anim"
+                                               target="_blank">{{ each.name }}</a>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
 
-                                        <a :href="each.url" class="text-decoration-none text-dark underline-anim"
-                                           target="_blank">{{ each.name }}</a>
-                                    </div>
-                                    <div class="collapse ms-3" :id="each.name">
-                                        {{ each.description }}
-                                    </div>
+                            <!--No data-->
+                            <div class="no-data" v-if="tableData.length === 0 && listLoading === false">
+                                <div class="icon">
+                                    <img class="w-25" :src="`/images/global/no-data.svg`" alt="no data">
                                 </div>
-                                <div class="action">
-                                    <a href="javascript:void(0)" class="btn btn-icon me-2" data-bs-toggle="collapse"
-                                       :data-bs-target="'#' + each.name"
-                                       role="button" aria-expanded="false" aria-controls="collapseExample">
-                                        <img :src="`/images/global/message-circle.svg`" alt="desc">
-                                    </a>
-
-                                    <a href="javascript:void(0)" class="btn btn-icon me-2"
-                                       @click="bookmarkModal(2,each)">
-                                        <img :src="`/images/global/edit.svg`" alt="edit">
-                                    </a>
-                                    <a href="javascript:void(0)" class="btn btn-icon"
-                                       @click="manageDeleteModal(1,each.id)">
-                                        <img :src="`/images/global/trash-2.svg`" alt="trash">
-                                    </a>
+                                <div class="no-data-text display-7 my-3">
+                                    You have No Bookmarks!
                                 </div>
                             </div>
-                        </div>
-                    </div>
+                            <!--No data-->
 
-                    <!--No data-->
-                    <div class="no-data" v-if="tableData.length === 0 && listLoading === false">
-                        <div class="icon">
-                            <img :src="`/images/global/no-data.svg`" alt="no data">
+                            <!--Loading start-->
+                            <div class="" v-if="listLoading === true">
+                                <h6 class=" placeholder-glow pt-3">
+                                    <span class="placeholder col-12 mb-3"></span>
+                                    <span class="placeholder col-11 mb-3"></span>
+                                    <span class="placeholder col-6 mb-3"></span>
+                                    <span class="placeholder col-8 mb-3"></span>
+                                    <span class="placeholder col-8 mb-3"></span>
+                                </h6>
+                            </div>
+                            <!--Loading end-->
+
                         </div>
-                        <div class="no-data-text display-6 my-3">
-                            You have No Bookmarks yet !
-                        </div>
-                        <span><small>Click "New" to Create New Bookmark.</small></span>
                     </div>
-                    <!--No data-->
+                </div>
+                <div class="col-lg-6">
+                    <div class="card card-list mt-5 mb-4 rounded-4 py-3 px-0 shadow border-0">
+                        <div class="card-header bg-transparent border-0 d-flex justify-content-between align-items-center ">
+                            <h3 class="card-title">Login History <img :src="`/images/global/history.png`" alt=""></h3>
+                        </div>
+
+                        <div class="card-body list-body">
+                            <div class="history-list-wrap table-responsive">
+                                <table class="table table-history table-borderless table-hover"
+                                       v-if="historyData.length > 0 && historyListLoading === false">
+                                    <thead>
+                                    <tr>
+                                        <th>IP Address</th>
+                                        <th>Time</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr v-for="(each,index) in historyData" class="align-middle border-bottom">
+                                        <td class="text-muted">{{each.ip_address}}</td>
+                                        <td class="text-muted time">{{each.created_at_formatted}}</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+
+
+
+                                <!--Loading start-->
+                                <div class="" v-if="historyListLoading === true">
+                                    <h6 class=" placeholder-glow pt-3">
+                                        <span class="placeholder col-12 mb-3"></span>
+                                        <span class="placeholder col-11 mb-3"></span>
+                                        <span class="placeholder col-6 mb-3"></span>
+                                        <span class="placeholder col-8 mb-3"></span>
+                                        <span class="placeholder col-8 mb-3"></span>
+                                    </h6>
+                                </div>
+                                <!--Loading end-->
+
+                            </div>
+
+                            <!--No data-->
+                            <div class="no-data py-4" v-if="historyData.length === 0 && historyListLoading === false">
+                                <div class="icon">
+                                    <img class="w-25" :src="`/images/global/no-data.svg`" alt="no data">
+                                </div>
+                                <div class="no-data-text display-7 my-3">
+                                    You have No Login History !
+                                </div>
+                            </div>
+                            <!--No data-->
+
+                        </div>
+
+                        <div class="card-footer border-0 bg-white">
+                            <!-- Pagination Start -->
+                            <div class="d-flex justify-content-center" v-if="historyListLoading === false  && historyData.length > 0">
+                                <div class="pagination">
+                                    <div class="page-item" @click="PrevPage()">
+                                        <a class="page-link" href="#">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20"
+                                                 fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                                                 stroke-linejoin="round" class="acorn-icons acorn-icons-chevron-left undefined">
+                                                <path
+                                                    d="M13 16L7.35355 10.3536C7.15829 10.1583 7.15829 9.84171 7.35355 9.64645L13 4"></path>
+                                            </svg>
+                                        </a>
+                                    </div>
+                                    <div v-if="buttons.length <= 6">
+                                        <div v-for="(page, index) in buttons" class="page-item"
+                                             :class="{'active': current_page == page}">
+                                            <a class="page-link" @click="pageChange(page)" href="javascript:void(0)"
+                                               v-text="page"></a>
+                                        </div>
+                                    </div>
+                                    <div v-if="buttons.length > 6">
+                                        <div class="page-item" :class="{'active': current_page == 1}">
+                                            <a class="page-link" @click="pageChange(1)"
+                                               href="javascript:void(0)">1</a>
+                                        </div>
+
+                                        <div v-if="current_page > 3" class="page-item">
+                                            <a class="page-link" @click="pageChange(current_page - 2)"
+                                               href="javascript:void(0)">...</a>
+                                        </div>
+
+                                        <div v-if="current_page == buttons.length" class="page-item"
+                                             :class="{'active': current_page == (current_page - 2)}">
+                                            <a class="page-link" @click="pageChange(current_page - 2)"
+                                               href="javascript:void(0)" v-text="current_page - 2"></a>
+                                        </div>
+
+                                        <div v-if="current_page > 2" class="page-item"
+                                             :class="{'active': current_page == (current_page - 1)}">
+                                            <a class="page-link" @click="pageChange(current_page - 1)"
+                                               href="javascript:void(0)" v-text="current_page - 1"></a>
+                                        </div>
+
+                                        <div v-if="current_page != 1 && current_page != buttons.length"
+                                             class="page-item active">
+                                            <a class="page-link" @click="pageChange(current_page)" href="javascript:void(0)"
+                                               v-text="current_page"></a>
+                                        </div>
+
+                                        <div v-if="current_page < buttons.length - 1" class="page-item"
+                                             :class="{'active': current_page == (current_page + 1)}">
+                                            <a class="page-link" @click="pageChange(current_page + 1)"
+                                               href="javascript:void(0)" v-text="current_page + 1"></a>
+                                        </div>
+
+                                        <div v-if="current_page == 1" class="page-item"
+                                             :class="{'active': current_page == (current_page + 2)}">
+                                            <a class="page-link" @click="pageChange(current_page + 2)"
+                                               href="javascript:void(0)" v-text="current_page + 2"></a>
+                                        </div>
+
+                                        <div v-if="current_page < buttons.length - 2" class="page-item">
+                                            <a class="page-link" @click="pageChange(current_page + 2)"
+                                               href="javascript:void(0)">...</a>
+                                        </div>
+
+                                        <div class="page-item"
+                                             :class="{'active': current_page == (current_page - buttons.length)}">
+                                            <a class="page-link" @click="pageChange(buttons.length)"
+                                               href="javascript:void(0)" v-text="buttons.length"></a>
+                                        </div>
+                                    </div>
+                                    <div class="page-item" @click="NextPage()">
+                                        <a class="page-link" href="#">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20"
+                                                 fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                                                 stroke-linejoin="round"
+                                                 class="acorn-icons acorn-icons-chevron-right undefined">
+                                                <path
+                                                    d="M7 4L12.6464 9.64645C12.8417 9.84171 12.8417 10.1583 12.6464 10.3536L7 16"></path>
+                                            </svg>
+                                        </a>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <!-- Pagination End -->
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-
-
-    <!--Bookmark Modal start-->
-    <div class="modal fade" id="bookmarkModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-         aria-labelledby="changePassLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content rounded-5">
-                <div class="modal-header pt-4 border-0 justify-content-center">
-                    <h1 class="modal-title fs-5" id="changePassLabel">Add a bookmark</h1>
-                </div>
-                <form @submit.prevent="manageBookmark()">
-                    <div class="modal-body px-4">
-                        <div class="form-group mb-3">
-                            <input type="text" class="form-control form-control-lg rounded-pill"
-                                   v-model="bookmarkParam.url"
-                                   placeholder="Your Bookmark Link" name="url">
-                            <div class="error-report"></div>
-                        </div>
-
-                        <div class="form-group mb-3">
-                            <input type="text" class="form-control form-control-lg rounded-pill"
-                                   v-model="bookmarkParam.name"
-                                   placeholder="Name" name="name">
-                            <div class="error-report"></div>
-                        </div>
-
-                        <div class="form-group mb-3">
-                            <textarea name="description" class="form-control form-control-lg rounded-pill"
-                                      v-model="bookmarkParam.description"
-                                      placeholder="Your Note (Optional)" id="" cols="30" rows="2"></textarea>
-                            <div class="error-report"></div>
-                        </div>
-
-                    </div>
-                    <div class="modal-footer justify-content-center border-0">
-                        <button type="button" class="btn btn-outline-dark rounded-pill w-120px py-9px"
-                                @click="bookmarkModal(3,null)">Cancel
-                        </button>
-                        <button type="submit" class="btn btn-theme w-120px">
-                            <span v-if="manageLoading === false">Confirm</span>
-                            <span v-if="manageLoading === true" class="btn-loading"></span>
-                        </button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-    <!--Bookmark Modal end  -->
-
-
-    <!--Delete Modal start-->
-    <div class="modal fade" id="deleteModal" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content rounded-5">
-                <div class="modal-body p-5 text-center">
-                    <div class="delete-icon mb-5">
-                        <img :src="`/images/global/trash.png`" alt="delete icon">
-                    </div>
-                    <h3 class="mb-5">Are you sure?</h3>
-
-                    <button type="button" class="btn btn-theme w-100" aria-label="Confirm"
-                            @click="bookmarkDelete()">
-                        <span v-if="deleteLoading === false">Confirm</span>
-                        <span class="btn-loading" v-if="deleteLoading === true"></span>
-                    </button>
-
-
-                </div>
-            </div>
-        </div>
-    </div>
-    <!--Delete Modal end  -->
 
 </template>
 
@@ -147,24 +216,20 @@ const toaster = createToaster({
 export default {
     data() {
         return {
-            manageLoading: false,
             listLoading: false,
-            bookmarkParam: {
-                id: '',
-                name: '',
-                url: '',
-                description: '',
-            },
             listParam: {
                 keyword: '',
                 date: 'today',
-                limit: 10,
+                limit: 15,
+                page:1,
             },
             tableData: [],
-            deleteParam: {
-                id: '',
+            // login history variables
+            historyListLoading:false,
+            historyParam: {
+                limit: 10,
             },
-            deleteLoading: false,
+            historyData: [],
         }
     },
     mounted() {
@@ -231,11 +296,15 @@ export default {
         ============================================*/
         getBookmarkList() {
             this.listLoading = true;
+            this.listParam.page = this.current_page;
             apiService.POST(apiRoutes.BookmarkList, this.listParam, (res) => {
                 this.listLoading = false;
                 if (parseInt(res.status) === 200) {
                     this.tableData = res.data.data;
-                    console.log(this.tableData)
+                    // pagination
+                    this.total_pages = res.data.total < res.data.per_page ? 1 : Math.ceil((res.data.total / res.data.per_page))
+                    this.current_page = res.data.current_page;
+                    this.buttons = [...Array(this.total_pages).keys()].map(i => i + 1);
                 }
             })
         },
@@ -269,6 +338,36 @@ export default {
                 modal.hide();
             }
         },
+
+
+        // =========================
+        // pagination previous
+        // =========================
+        PrevPage() {
+            if (this.current_page > 1) {
+                this.current_page = this.current_page - 1;
+                this.getBookmarkList()
+            }
+        },
+
+        // =========================
+        // pagination next
+        // =========================
+        NextPage() {
+            if (this.current_page < this.total_pages) {
+                this.current_page = this.current_page + 1;
+                this.getBookmarkList()
+            }
+        },
+
+        // =========================
+        // pagination per page
+        // =========================
+        pageChange(page) {
+            this.current_page = page;
+            this.getBookmarkList();
+        },
+
 
     }
 }

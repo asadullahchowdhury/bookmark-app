@@ -1,46 +1,8 @@
-.dashboard {
-    .list-card-height {
-        min-height: 600px;
+.card-list {
+    height: calc(100vh - 150px);
+
+    .list-body {
+        height: 100%;
         overflow: auto;
-        max-height: 600px;
-    }
-
-    .list-wrap {
-        //grid-template-columns: 1fr 1fr;
-        gap: 20px;
-
-        .each-book {
-            .action {
-                opacity: 0;
-                visibility: hidden;
-                transition: .3s all ease;
-
-                a {
-                    border-radius: 50%;
-                    transition: .3s all ease;
-                    width: 40px;
-                    height: 40px;
-                    display: inline-flex;
-                    justify-content: center;
-                    align-items: center;
-                    img {
-                        width: 20px;
-                        height: 20px;
-                    }
-                    &:hover{
-                        background-color: var(--bs-light);
-                        transition: .3s all ease;
-                    }
-                }
-            }
-
-            &:hover {
-                .action {
-                    opacity: 1;
-                    visibility: visible;
-                    transition: .3s all ease;
-                }
-            }
-        }
     }
 }
