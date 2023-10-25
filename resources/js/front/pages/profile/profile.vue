@@ -33,7 +33,13 @@
                             <td class="pb-4"><strong>Address :</strong></td>
                             <td class="pb-4 fst-italic text-muted">N/A</td>
                         </tr>
+                        <tr>
+                            <td></td>
+                            <td class="text-end"></td>
+                        </tr>
                     </table>
+
+
 
                     <!--Loading start-->
                     <div class="" v-if="profileLoading === true">
@@ -54,6 +60,9 @@
                         </button>
                     </div>
                 </div>
+            </div>
+            <div class="w-100 text-end">
+                <a href="javascript:void(0)" class="text-decoration-none fs-5 underline-anim text-dark mb-4 fw-bold">Login History</a>
             </div>
         </div>
     </div>

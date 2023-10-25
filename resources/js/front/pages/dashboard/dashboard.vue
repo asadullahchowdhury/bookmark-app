@@ -21,12 +21,12 @@
                                         <a :href="each.url" class="text-decoration-none text-dark underline-anim"
                                            target="_blank">{{ each.name }}</a>
                                     </div>
-                                    <div class="collapse ms-3" id="collapseExample">
+                                    <div class="collapse ms-3" :id="each.name">
                                         {{ each.description }}
                                     </div>
                                 </div>
                                 <div class="action">
-                                    <a href="javascript:void(0)" class="btn btn-icon me-2" data-bs-toggle="collapse" data-bs-target="#collapseExample"
+                                    <a href="javascript:void(0)" class="btn btn-icon me-2" data-bs-toggle="collapse" :data-bs-target="'#' + each.name"
                                        role="button" aria-expanded="false" aria-controls="collapseExample">
                                         <img :src="`/images/global/message-circle.svg`" alt="desc">
                                     </a>
