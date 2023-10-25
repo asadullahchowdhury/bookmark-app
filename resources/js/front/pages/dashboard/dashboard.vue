@@ -53,7 +53,7 @@
                         <div class="no-data-text display-6 my-3">
                             You have No Bookmarks yet !
                         </div>
-                        <span><small>Click "Create" to Create New Bookmark.</small></span>
+                        <span><small>Click "New" to Create New Bookmark.</small></span>
                     </div>
                     <!--No data-->
                 </div>

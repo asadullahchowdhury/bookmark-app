@@ -24,7 +24,6 @@ class UserService
     }
 
 
-
     public static function profile_update($request)
     {
         try {
@@ -69,7 +68,7 @@ class UserService
             }
 
             $user = User::where('id', Auth::id())->first();
-            if(Hash::check($request->current_password, $user->password)){
+            if (Hash::check($request->current_password, $user->password)) {
                 $user->password = bcrypt($request->password);
                 $user->save();
             } else {
@@ -97,6 +96,27 @@ class UserService
         }
     }
 
+
+    public static function delete_history($request)
+    {
+
+        try {
+            $validator = Validator::make(
+                $request->all(),
+                [
+                    'id' => 'required',
+                ]
+            );
+
+            if ($validator->fails()) {
+                return ['status' => 500, 'errors' => $validator->errors()];
+            }
+            User::where('id', $request->id)->delete();
+            return ['status' => 200, 'msg' => 'History has been deleted successfully'];
+        } catch (\Exception $e) {
+            return ['status' => 500, 'errors' => $e->getMessage(), 'line' => $e->getLine()];
+        }
+    }
 
 
 }

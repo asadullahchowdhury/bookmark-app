@@ -35,5 +35,11 @@ class UserController extends Controller
         return response()->json($rv, 200);
     }
 
+    public function delete_history(Request $request)
+    {
+        $rv = UserService::delete_history($request);
+        return response()->json($rv, 200);
+    }
+
 
 }

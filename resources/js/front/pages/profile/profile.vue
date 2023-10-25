@@ -83,14 +83,16 @@
                     <div class="modal-body px-4">
                         <div class="form-group mb-5 d-flex justify-content-center">
                             <div class="modal-avatar-wrap">
-                                <img class="modal-avatar" v-if="profileData.media != null"
+                                <img class="modal-avatar" v-if="editParam.avatarFilePath != null"
                                      :src="editParam.avatarFilePath" alt="avatar">
-                                <img class="modal-avatar" v-if="profileData.media === null"
+                                <img class="modal-avatar" v-if="editParam.avatar === null"
                                      :src="`https://ui-avatars.com/api/?name=`+ profileData.full_name"
                                      alt="avatar dummy">
                                 <label for="avatar-upload" class="upload-label btn btn-light">
                                     <input type="file" class="d-none" id="avatar-upload" @change="attachAvatar($event)">
-                                    <img class="edit-icon" :src="`/images/global/edit.svg`" alt="edit">
+                                    <img v-if="uploadLoading === false" class="edit-icon"
+                                         :src="`/images/global/edit.svg`" alt="edit">
+                                    <span v-if="uploadLoading === true" class="btn-loading black"></span>
                                 </label>
                             </div>
                         </div>
@@ -100,14 +102,14 @@
                                 <div class="form-group mb-3">
                                     <input type="text" class="form-control form-control-lg rounded-pill"
                                            placeholder="First Name" name="first_name" v-model="editParam.first_name">
-                                    <div class="error-report"></div>
+                                    <div class="error-report ms-2"></div>
                                 </div>
                             </div>
                             <div class="col-lg-6">
                                 <div class="form-group mb-3">
                                     <input type="text" class="form-control form-control-lg rounded-pill"
                                            placeholder="Last Name" name="last_name" v-model="editParam.last_name">
-                                    <div class="error-report"></div>
+                                    <div class="error-report ms-2"></div>
                                 </div>
                             </div>
                             <div class="col-lg-6">
@@ -223,7 +225,8 @@
                                 <td class="text-muted small time">{{ each.created_at_formatted }}</td>
                                 <td class="text-end">
                                     <a href="javascript:void(0)" class="btn btn-icon">
-                                        <img class="img-fluid" src="/images/global/trash-2.svg" alt="trash">
+                                        <img class="img-fluid" src="/images/global/trash-2.svg" alt="trash"
+                                             @click="loginHistoryModal(2),manageDeleteModal(1,each.id)">
                                     </a>
                                 </td>
                             </tr>
@@ -266,6 +269,29 @@
     </div>
     <!--Login History Modal end  -->
 
+    <!--Delete Modal start-->
+    <div class="modal fade" id="deleteModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content rounded-5">
+                <div class="modal-body p-5 text-center">
+                    <div class="delete-icon mb-5">
+                        <img :src="`/images/global/trash.png`" alt="delete icon">
+                    </div>
+                    <h3 class="mb-5">Are you sure?</h3>
+
+                    <button type="button" class="btn btn-theme w-100" aria-label="Confirm"
+                            @click="historyDelete()">
+                        <span v-if="deleteLoading === false">Confirm</span>
+                        <span class="btn-loading" v-if="deleteLoading === true"></span>
+                    </button>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--Delete Modal end  -->
+
 </template>
 
 
@@ -303,10 +329,14 @@ export default {
             updateProfileLoading: false,
             updatePasswordLoading: false,
             historyListLoading: false,
+            deleteLoading: false,
             historyParam: {
                 limit: 10,
             },
             historyData: [],
+            deleteParam: {
+                id: '',
+            }
         }
     },
 
@@ -341,6 +371,8 @@ export default {
                 modal.show();
                 this.profileData.full_name = this.profileData.first_name + ' ' + this.profileData.last_name;
                 let userData = this.profileData;
+                console.log(userData)
+
                 this.editParam = {
                     id: userData.id,
                     first_name: userData.first_name,
@@ -348,8 +380,10 @@ export default {
                     email: userData.email,
                     phone: userData.phone,
                     avatar: userData.avatar,
-                    avatarFilePath: userData.media.full_file_path
+                    avatarFilePath: userData?.media?.full_file_path
                 }
+
+
             } else if (type === 2) {
                 const Modal = document.querySelector('#profileUpdateModal');
                 const Instance = bootstrap.Modal.getInstance(Modal);
@@ -378,17 +412,18 @@ export default {
        * Avatar image upload API
        ============================================*/
         attachAvatar(event) {
-
+            this.uploadLoading = true;
             let file = event.target.files[0];
             let formData = new FormData();
             formData.append("file", file)
             formData.append("media_type", 1);
             apiService.UPLOAD(apiRoutes.Media, formData, (res) => {
+                this.uploadLoading = false;
                 event.target.value = '';
                 if (res.status === 200) {
-                    // this.profileData.media.full_file_path = res.data.full_file_path
                     this.editParam.avatarFilePath = res.data.full_file_path;
                     this.editParam.avatar = res.data.id
+                    console.log(this.editParam.avatarFilePath)
                 }
             })
 
@@ -432,7 +467,9 @@ export default {
         },
 
 
-        /*password modal open*/
+        /*==========================================
+        * Login history modal open/close
+        ============================================*/
         loginHistoryModal(type) {
             if (type === 1) {
                 this.getHistory();
@@ -447,7 +484,7 @@ export default {
         },
 
         /*==========================================
-        * Bookmark list API
+        * Login history list API
         ============================================*/
         getHistory() {
             this.historyListLoading = true;
@@ -458,7 +495,37 @@ export default {
                     this.historyData = res.data.data
                 }
             })
-        }
+        },
+
+        /*==========================================
+        * login history delete API
+        ============================================*/
+        historyDelete() {
+            this.deleteLoading = true;
+            apiService.POST(apiRoutes.BookmarkDelete, this.deleteParam, (res) => {
+                this.deleteLoading = false;
+                if (parseInt(res.status) === 200) {
+                    toaster.info(res.msg);
+                    this.manageDeleteModal(2, null)
+                }
+            })
+        },
+
+        /*==========================================
+        * Bookmark delete modal close/open
+        ============================================*/
+        manageDeleteModal(type, id) {
+            if (type === 1) {
+                let myModal = new bootstrap.Modal(document.getElementById('deleteModal'))
+                this.deleteParam.id = id
+                myModal.show()
+            } else {
+                this.loginHistoryModal(1)
+                var myModalEl = document.getElementById('deleteModal');
+                var modal = bootstrap.Modal.getInstance(myModalEl)
+                modal.hide();
+            }
+        },
     }
 }
 </script>
