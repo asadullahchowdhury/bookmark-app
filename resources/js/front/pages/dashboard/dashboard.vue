@@ -26,7 +26,8 @@
                                     </div>
                                 </div>
                                 <div class="action">
-                                    <a href="javascript:void(0)" class="btn btn-icon me-2" data-bs-toggle="collapse" :data-bs-target="'#' + each.name"
+                                    <a href="javascript:void(0)" class="btn btn-icon me-2" data-bs-toggle="collapse"
+                                       :data-bs-target="'#' + each.name"
                                        role="button" aria-expanded="false" aria-controls="collapseExample">
                                         <img :src="`/images/global/message-circle.svg`" alt="desc">
                                     </a>
@@ -44,6 +45,7 @@
                         </div>
                     </div>
 
+                    <!--No data-->
                     <div class="no-data" v-if="tableData.length === 0 && listLoading === false">
                         <div class="icon">
                             <img :src="`/images/global/no-data.svg`" alt="no data">
@@ -53,6 +55,7 @@
                         </div>
                         <span><small>Click "Create" to Create New Bookmark.</small></span>
                     </div>
+                    <!--No data-->
                 </div>
             </div>
         </div>

@@ -230,48 +230,8 @@ export default {
         }
     },
     mounted() {
-
-        this.feedBackCarousel()
-        this.partnersCarousel()
     },
     methods: {
-        feedBackCarousel() {
-            $('.feedback-content').owlCarousel({
-                loop: true,
-                margin: 30,
-                nav: false,
-                responsive: {
-                    0: {
-                        items: 1
-                    },
-                    600: {
-                        items: 1
-                    },
-                    1000: {
-                        items: 3
-                    }
-                }
-            })
-        },
-
-        partnersCarousel() {
-            $('.partners-wrap').owlCarousel({
-                loop: true,
-                margin: 100,
-                nav: false,
-                responsive: {
-                    0: {
-                        items: 1
-                    },
-                    600: {
-                        items: 3
-                    },
-                    1000: {
-                        items: 5
-                    }
-                }
-            })
-        }
 
     }
 }

@@ -40,7 +40,6 @@
                     </table>
 
 
-
                     <!--Loading start-->
                     <div class="" v-if="profileLoading === true">
                         <h6 class=" placeholder-glow pt-3">
@@ -52,6 +51,7 @@
                         </h6>
                     </div>
                     <!--Loading end-->
+
                     <div class="d-flex align-items-center flex-sm-row flex-column justify-content-between mb-3">
                         <button type="button" class="btn btn-theme w-50 mx-2 mb-sm-0 mb-4" @click="editModal(1)">Edit
                             Profile
@@ -62,7 +62,9 @@
                 </div>
             </div>
             <div class="w-100 text-end">
-                <a href="javascript:void(0)" class="text-decoration-none fs-5 underline-anim text-dark mb-4 fw-bold">Login History</a>
+                <a href="javascript:void(0)" class="text-decoration-none fs-5 underline-anim text-dark mb-4 fw-bold"
+                   @click="loginHistoryModal(1)">Login
+                    History</a>
             </div>
         </div>
     </div>
@@ -189,6 +191,81 @@
     </div>
     <!--Password Modal end  -->
 
+
+    <!--Login History Modal start-->
+    <div class="modal fade" id="loginHistoryModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+         aria-labelledby="changePassLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content rounded-5">
+                <div class="modal-header pt-4 border-0 justify-content-center">
+                    <h1 class="modal-title fs-5" id="changePassLabel">Your Login History</h1>
+                </div>
+
+                <div class="modal-body px-4">
+                    <div class="w-100 text-end mb-2">
+                        <a href="javascript:void(0)" class="text-decoration-none text-muted underline-anim"
+                           v-if="historyData.length === 0 && historyListLoading === false">Clear all
+                            History</a>
+                    </div>
+                    <div class="history-list-wrap table-responsive">
+                        <table class="table table-history table-borderless table-hover"
+                               v-if="historyData.length > 0 && historyListLoading === false">
+                            <thead>
+                            <tr>
+                                <th class="small">IP</th>
+                                <th class="small">Time</th>
+                                <th></th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr v-for="(each,index) in historyData">
+                                <td class="text-muted small">{{ each.ip_address }}</td>
+                                <td class="text-muted small time">{{ each.created_at_formatted }}</td>
+                                <td class="text-end">
+                                    <a href="javascript:void(0)" class="btn btn-icon">
+                                        <img class="img-fluid" src="/images/global/trash-2.svg" alt="trash">
+                                    </a>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+
+                        <!--No data-->
+                        <div class="no-data py-4" v-if="historyData.length === 0 && historyListLoading === false">
+                            <div class="icon">
+                                <img class="w-25" :src="`/images/global/no-data.svg`" alt="no data">
+                            </div>
+                            <div class="no-data-text display-7 my-3">
+                                You have No Login History !
+                            </div>
+                        </div>
+                        <!--No data-->
+
+                        <!--Loading start-->
+                        <div class="" v-if="historyListLoading === true">
+                            <h6 class=" placeholder-glow pt-3">
+                                <span class="placeholder col-12 mb-3"></span>
+                                <span class="placeholder col-11 mb-3"></span>
+                                <span class="placeholder col-6 mb-3"></span>
+                                <span class="placeholder col-8 mb-3"></span>
+                                <span class="placeholder col-8 mb-3"></span>
+                            </h6>
+                        </div>
+                        <!--Loading end-->
+
+                    </div>
+
+                </div>
+                <div class="modal-footer justify-content-center border-0">
+                    <button type="button" class="btn btn-outline-dark rounded-pill w-120px py-9px"
+                            @click="loginHistoryModal(2)">Close
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--Login History Modal end  -->
+
 </template>
 
 
@@ -225,15 +302,16 @@ export default {
             },
             updateProfileLoading: false,
             updatePasswordLoading: false,
-            historyParam:{
-                limit:10,
-            }
+            historyListLoading: false,
+            historyParam: {
+                limit: 10,
+            },
+            historyData: [],
         }
     },
 
     mounted() {
         this.getProfile()
-        this.getHistory()
     },
 
     methods: {
@@ -252,7 +330,6 @@ export default {
                 }
             })
         },
-
 
 
         /*==========================================
@@ -354,15 +431,31 @@ export default {
 
         },
 
+
+        /*password modal open*/
+        loginHistoryModal(type) {
+            if (type === 1) {
+                this.getHistory();
+                let modal = new bootstrap.Modal(document.getElementById('loginHistoryModal'))
+                modal.show();
+            } else {
+                const Modal = document.querySelector('#loginHistoryModal');
+                const Instance = bootstrap.Modal.getInstance(Modal);
+                Instance.hide();
+            }
+
+        },
+
         /*==========================================
         * Bookmark list API
         ============================================*/
         getHistory() {
-            this.listLoading = true;
+            this.historyListLoading = true;
             apiService.POST(apiRoutes.HistoryList, this.historyParam, (res) => {
-                this.listLoading = false;
+                this.historyListLoading = false;
+                this.historyListLoading = false;
                 if (parseInt(res.status) === 200) {
-                    console.log(res.data)
+                    this.historyData = res.data.data
                 }
             })
         }

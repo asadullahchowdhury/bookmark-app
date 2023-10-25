@@ -1,6 +1,6 @@
 .profile-page {
     .profile-header {
-        margin:150px 0 100px;
+        margin: 150px 0 100px;
 
         @media screen and (max-width: 991px) {
             margin-bottom: 50px;
@@ -37,7 +37,8 @@
     width: 120px;
     height: 120px;
     border-radius: 50%;
-    border:1px solid var(--bs-dark);
+    border: 1px solid var(--bs-dark);
+
     .upload-label {
         padding: 6px 10px;
         position: absolute;
@@ -60,5 +61,27 @@
         border-radius: 50%;
         object-fit: cover;
 
+    }
+}
+
+
+.history-list-wrap {
+    .table-history {
+        tbody {
+            tr {
+                td {
+                    vertical-align: middle;
+
+                    &.time {
+                        @media screen and (max-width: 385px) {
+                            overflow: hidden;
+                            white-space: nowrap;
+                            text-overflow: ellipsis;
+                            max-width: 150px;
+                        }
+                    }
+                }
+            }
+        }
     }
 }

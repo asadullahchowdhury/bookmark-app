@@ -87,9 +87,10 @@ class UserService
     {
         try {
             $user_id = Auth::id();
-            $limit = $request->limit ?? '';
-            $histories = LoginHistory::where('user_id', $user_id)->orderBy('id', 'desc');
-            $histories->paginate($limit);
+
+            $limit = $request->limit ?? 10;
+            $histories = LoginHistory::where('user_id', $user_id)->orderBy('id', 'desc')->paginate($limit);
+
             return ['status' => 200, 'data' => $histories];
         } catch (\Exception $e) {
             return ['status' => 500, 'errors' => $e->getMessage(), 'line' => $e->getLine()];
