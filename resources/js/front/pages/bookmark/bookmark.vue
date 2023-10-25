@@ -167,17 +167,13 @@
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content rounded-5">
                 <div class="modal-header pt-4 border-0 justify-content-center">
-                    <h1 class="modal-title fs-5" id="changePassLabel">Add a bookmark</h1>
+                    <h1 class="modal-title fs-5" id="changePassLabel">
+                        <span v-if="bookmarkParam.id === ''">Add a bookmark</span>
+                        <span v-if="bookmarkParam.id != ''">Update bookmark</span>
+                    </h1>
                 </div>
                 <form @submit.prevent="manageBookmark()">
                     <div class="modal-body px-4">
-                        <div class="form-group mb-3">
-                            <input type="text" class="form-control form-control-lg rounded-pill"
-                                   v-model="bookmarkParam.url"
-                                   placeholder="Your Bookmark Link" name="url">
-                            <div class="error-report ms-2"></div>
-                        </div>
-
                         <div class="form-group mb-3">
                             <input type="text" class="form-control form-control-lg rounded-pill"
                                    v-model="bookmarkParam.name"
@@ -186,11 +182,13 @@
                         </div>
 
                         <div class="form-group mb-3">
-                            <textarea name="description" class="form-control form-control-lg rounded-pill"
-                                      v-model="bookmarkParam.description"
-                                      placeholder="Your Note (Optional)" id="" cols="30" rows="2"></textarea>
-                            <div class="error-report"></div>
+                            <input type="text" class="form-control form-control-lg rounded-pill"
+                                   v-model="bookmarkParam.url"
+                                   placeholder="Your Bookmark Link" name="url">
+                            <div class="error-report ms-2"></div>
                         </div>
+
+
 
                     </div>
                     <div class="modal-footer justify-content-center border-0">
@@ -252,7 +250,6 @@ export default {
                 id: '',
                 name: '',
                 url: '',
-                description: '',
             },
             listParam: {
                 keyword: '',
@@ -286,7 +283,6 @@ export default {
                     id: '',
                     name: '',
                     url: '',
-                    description: '',
                 }
                 let modal = new bootstrap.Modal(document.getElementById('bookmarkModal'))
                 modal.show();
@@ -295,7 +291,6 @@ export default {
                     id: data.id,
                     name: data.name,
                     url: data.url,
-                    description: data.description,
                 }
                 console.log(data.name)
                 let modal = new bootstrap.Modal(document.getElementById('bookmarkModal'))

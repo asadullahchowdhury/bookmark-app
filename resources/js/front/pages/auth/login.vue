@@ -1,13 +1,13 @@
 <template>
     <div class="auth">
-        <div class="auth-page-wrap" style="background-image: url('/images/auth/bookmark.jpg')">
+        <div class="auth-page-wrap">
             <div class="auth-box">
                 <!--Authentication form start-->
                 <form  class="auth-form p-4" autocomplete="off" @submit.prevent="login">
 
                     <div class="box-title display-6 mb-4 text-center"><span>B</span>ookmark <span>A</span>pp</div>
 
-                    <div class="text-center fs-3 text-white mb-4">Login here</div>
+                    <div class="text-center fs-3 text-dark mb-4">Login here</div>
 
                     <div class="error-report-g text-center"></div>
 
@@ -41,7 +41,7 @@
                                     <polyline points="1.5 6 4.5 9 10.5 1"></polyline>
                                     </svg>
                                 </span>
-                                <span class="text-white">Remember Me?</span>
+                                <span class="text-dark">Remember Me?</span>
                             </label>
                         </div>
 
@@ -58,10 +58,10 @@
                         </button>
                     </div>
 
-                    <div class="bottom-text text-center mt-4 text-white">
+                    <div class="bottom-text text-center mt-4 text-dark">
                         Not a member?
                         <router-link :to="{name:'Register'}" href="javascript:void(0)"
-                                     class="underline-anim text-white white fw-semibold ms-2">Create an Account
+                                     class="underline-anim text-dark fw-semibold ms-2">Create an Account
                         </router-link>
                     </div>
                 </form>

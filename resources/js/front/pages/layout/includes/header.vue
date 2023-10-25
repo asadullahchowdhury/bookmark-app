@@ -121,6 +121,7 @@ export default {
         const routeName = this.route.matched.some(route => route.name === 'portalLayout');
         this.layoutName = routeName;
 
+
         this.getProfile()
     },
 

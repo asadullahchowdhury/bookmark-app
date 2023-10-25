@@ -1,6 +1,6 @@
 <template>
     <div class="auth">
-        <div class="auth-page-wrap" style="background-image: url('/images/auth/bookmark.jpg')">
+        <div class="auth-page-wrap">
             <div class="auth-box">
                 <form @submit.prevent="register()" class="auth-form p-4" autocomplete="off">
                     <div class="box-title display-6 mb-4 text-center"><span>B</span>ookmark <span>A</span>pp</div>

@@ -1,68 +1,69 @@
 <template>
     <div class="profile-page">
         <div class="container pt-5">
-         <div class="card border-0 card-list rounded-4 shadow mt-5">
-           <div class="card-body list-body">
-               <div class="profile-header my-md-5 mt-3 mb-4 d-flex justify-content-center position-relative">
-                   <div class="profile-pic shadow">
-                       <img v-if="profileData.media === null"
-                            :src="`https://ui-avatars.com/api/?name=`+ profileData.full_name" alt="profile">
-                       <img v-if="profileData.media != null" :src="profileData.media.full_file_path" alt="profile">
-                   </div>
-               </div>
+            <div class="card border-0 card-list rounded-4 shadow mt-5">
+                <div class="card-body list-body">
+                    <div class="profile-header my-md-5 mt-3 mb-4 d-flex justify-content-center position-relative">
+                        <div class="profile-pic shadow">
+                            <img v-if="profileData.media === null"
+                                 :src="`https://ui-avatars.com/api/?name=`+ profileData.full_name" alt="profile">
+                            <img v-if="profileData.media != null" :src="profileData.media.full_file_path" alt="profile">
+                        </div>
+                    </div>
 
-               <div class="row justify-content-center">
-                   <div class="col-lg-6 text-center">
-                       <table class="table table-borderless" v-if="profileLoading === false">
-                           <tr>
-                               <td class="pb-4"><strong>Name :</strong></td>
-                               <td class="pb-4">{{ profileData.full_name }}</td>
-                           </tr>
-
-
-                           <tr>
-                               <td class="pb-4"><strong>Email :</strong></td>
-                               <td class="pb-4">{{ profileData.email }}</td>
-                           </tr>
+                    <div class="row justify-content-center">
+                        <div class="col-lg-6 text-center">
+                            <table class="table table-borderless" v-if="profileLoading === false">
+                                <tr>
+                                    <td class="pb-4"><strong>Name :</strong></td>
+                                    <td class="pb-4">{{ profileData.full_name }}</td>
+                                </tr>
 
 
-                           <tr>
-                               <td class="pb-4"><strong>Phone :</strong></td>
-                               <td class="pb-4">{{ profileData.phone }}</td>
-                           </tr>
-
-                           <tr>
-                               <td class="pb-4"><strong>Address :</strong></td>
-                               <td class="pb-4 fst-italic text-muted">N/A</td>
-                           </tr>
-                       </table>
+                                <tr>
+                                    <td class="pb-4"><strong>Email :</strong></td>
+                                    <td class="pb-4">{{ profileData.email }}</td>
+                                </tr>
 
 
-                       <!--Loading start-->
-                       <div class="" v-if="profileLoading === true">
-                           <h6 class=" placeholder-glow pt-3">
-                               <span class="placeholder col-12 mb-3"></span>
-                               <span class="placeholder col-11 mb-3"></span>
-                               <span class="placeholder col-6 mb-3"></span>
-                               <span class="placeholder col-8 mb-3"></span>
-                               <span class="placeholder col-8 mb-3"></span>
-                           </h6>
-                       </div>
-                       <!--Loading end-->
+                                <tr>
+                                    <td class="pb-4"><strong>Phone :</strong></td>
+                                    <td class="pb-4">{{ profileData.phone }}</td>
+                                </tr>
 
-                       <div
-                           class="d-flex profile-action align-items-center flex-sm-row flex-column justify-content-between mb-3">
-                           <button type="button" class="btn btn-theme mx-2 mb-sm-0 mb-4" @click="editModal(1)">Edit
-                               Profile
-                           </button>
-                           <button type="button" class="btn btn-theme mx-2" @click="passwordModal(1)">Change Password
-                           </button>
-                       </div>
+                                <tr>
+                                    <td class="pb-4"><strong>Address :</strong></td>
+                                    <td class="pb-4 fst-italic text-muted">N/A</td>
+                                </tr>
+                            </table>
 
-                   </div>
-               </div>
-           </div>
-         </div>
+
+                            <!--Loading start-->
+                            <div class="" v-if="profileLoading === true">
+                                <h6 class=" placeholder-glow pt-3">
+                                    <span class="placeholder col-12 mb-3"></span>
+                                    <span class="placeholder col-11 mb-3"></span>
+                                    <span class="placeholder col-6 mb-3"></span>
+                                    <span class="placeholder col-8 mb-3"></span>
+                                    <span class="placeholder col-8 mb-3"></span>
+                                </h6>
+                            </div>
+                            <!--Loading end-->
+
+                            <div
+                                class="d-flex profile-action align-items-center flex-sm-row flex-column justify-content-between mb-3">
+                                <button type="button" class="btn btn-theme mx-2 mb-sm-0 mb-4" @click="editModal(1)">Edit
+                                    Profile
+                                </button>
+                                <button type="button" class="btn btn-theme mx-2" @click="passwordModal(1)">Change
+                                    Password
+                                </button>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
 
         </div>
     </div>
@@ -86,7 +87,8 @@
                                 <img class="modal-avatar" v-if="editParam.avatar === null"
                                      :src="`https://ui-avatars.com/api/?name=`+ profileData.full_name"
                                      alt="avatar dummy">
-                                <label for="avatar-upload" class="upload-label btn btn-light">
+                                <label for="avatar-upload" class="upload-label btn btn-light" data-bs-toggle="tooltip"
+                                       data-bs-title="Upload Image" data-bs-placement="right">
                                     <input type="file" class="d-none" id="avatar-upload" @change="attachAvatar($event)">
                                     <img v-if="uploadLoading === false" class="edit-icon"
                                          :src="`/images/global/edit.svg`" alt="edit">
@@ -191,106 +193,6 @@
     </div>
     <!--Password Modal end  -->
 
-
-    <!--Login History Modal start-->
-    <div class="modal fade" id="loginHistoryModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-         aria-labelledby="changePassLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content rounded-5">
-                <div class="modal-header pt-4 border-0 justify-content-center">
-                    <h1 class="modal-title fs-5" id="changePassLabel">Your Login History</h1>
-                </div>
-
-                <div class="modal-body px-4">
-                    <div class="w-100 text-end mb-2">
-                        <a href="javascript:void(0)" class="text-decoration-none text-muted underline-anim"
-                           @click="loginHistoryModal(2),manageDeleteModal(1,'all')"
-                           v-if="historyData.length > 0 && historyListLoading === false">Clear all
-                            History</a>
-                    </div>
-                    <div class="history-list-wrap table-responsive">
-                        <table class="table table-history table-borderless table-hover"
-                               v-if="historyData.length > 0 && historyListLoading === false">
-                            <thead>
-                            <tr>
-                                <th class="small">IP</th>
-                                <th class="small">Time</th>
-                                <th></th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr v-for="(each,index) in historyData">
-                                <td class="text-muted small">{{ each.ip_address }}</td>
-                                <td class="text-muted small time">{{ each.created_at_formatted }}</td>
-                                <td class="text-end">
-                                    <a href="javascript:void(0)" class="btn btn-icon">
-                                        <img class="img-fluid" src="/images/global/trash-2.svg" alt="trash"
-                                             @click="loginHistoryModal(2),manageDeleteModal(1,each.id)">
-                                    </a>
-                                </td>
-                            </tr>
-                            </tbody>
-                        </table>
-
-                        <!--No data-->
-                        <div class="no-data py-4" v-if="historyData.length === 0 && historyListLoading === false">
-                            <div class="icon">
-                                <img class="w-25" :src="`/images/global/no-data.svg`" alt="no data">
-                            </div>
-                            <div class="no-data-text display-7 my-3">
-                                You have No Login History !
-                            </div>
-                        </div>
-                        <!--No data-->
-
-                        <!--Loading start-->
-                        <div class="" v-if="historyListLoading === true">
-                            <h6 class=" placeholder-glow pt-3">
-                                <span class="placeholder col-12 mb-3"></span>
-                                <span class="placeholder col-11 mb-3"></span>
-                                <span class="placeholder col-6 mb-3"></span>
-                                <span class="placeholder col-8 mb-3"></span>
-                                <span class="placeholder col-8 mb-3"></span>
-                            </h6>
-                        </div>
-                        <!--Loading end-->
-
-                    </div>
-
-                </div>
-                <div class="modal-footer justify-content-center border-0">
-                    <button type="button" class="btn btn-outline-dark rounded-pill w-120px py-9px"
-                            @click="loginHistoryModal(2)">Close
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!--Login History Modal end  -->
-
-    <!--Delete Modal start-->
-    <div class="modal fade" id="deleteModal" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content rounded-5">
-                <div class="modal-body p-5 text-center">
-                    <div class="delete-icon mb-5">
-                        <img :src="`/images/global/trash.png`" alt="delete icon">
-                    </div>
-                    <h3 class="mb-5">Are you sure?</h3>
-
-                    <button type="button" class="btn btn-theme w-100" aria-label="Confirm"
-                            @click="historyDelete()">
-                        <span v-if="deleteLoading === false">Confirm</span>
-                        <span class="btn-loading" v-if="deleteLoading === true"></span>
-                    </button>
-
-
-                </div>
-            </div>
-        </div>
-    </div>
-    <!--Delete Modal end  -->
-
 </template>
 
 
@@ -327,15 +229,6 @@ export default {
             },
             updateProfileLoading: false,
             updatePasswordLoading: false,
-            historyListLoading: false,
-            deleteLoading: false,
-            historyParam: {
-                limit: 10,
-            },
-            historyData: [],
-            deleteParam: {
-                id: '',
-            }
         }
     },
 
@@ -451,7 +344,9 @@ export default {
         },
 
 
-        /*password modal open*/
+        /*==========================================
+        * Password Modal open/close
+        ============================================*/
         passwordModal(type) {
             if (type === 1) {
                 this.passwordParam = {
@@ -467,67 +362,6 @@ export default {
                 Instance.hide();
             }
 
-        },
-
-
-        /*==========================================
-        * Login history modal open/close
-        ============================================*/
-        loginHistoryModal(type) {
-            if (type === 1) {
-                this.getHistory();
-                let modal = new bootstrap.Modal(document.getElementById('loginHistoryModal'))
-                modal.show();
-            } else {
-                const Modal = document.querySelector('#loginHistoryModal');
-                const Instance = bootstrap.Modal.getInstance(Modal);
-                Instance.hide();
-            }
-
-        },
-
-        /*==========================================
-        * Login history list API
-        ============================================*/
-        getHistory() {
-            this.historyListLoading = true;
-            apiService.POST(apiRoutes.HistoryList, this.historyParam, (res) => {
-                this.historyListLoading = false;
-                this.historyListLoading = false;
-                if (parseInt(res.status) === 200) {
-                    this.historyData = res.data.data
-                }
-            })
-        },
-
-        /*==========================================
-        * login history delete API
-        ============================================*/
-        historyDelete() {
-            this.deleteLoading = true;
-            apiService.POST(apiRoutes.HistoryDelete, this.deleteParam, (res) => {
-                this.deleteLoading = false;
-                if (parseInt(res.status) === 200) {
-                    toaster.info(res.msg);
-                    this.manageDeleteModal(2, null)
-                }
-            })
-        },
-
-        /*==========================================
-        * Bookmark delete modal close/open
-        ============================================*/
-        manageDeleteModal(type, id) {
-            if (type === 1) {
-                let myModal = new bootstrap.Modal(document.getElementById('deleteModal'))
-                this.deleteParam.id = id;
-                myModal.show()
-            } else {
-                this.loginHistoryModal(1)
-                var myModalEl = document.getElementById('deleteModal');
-                var modal = bootstrap.Modal.getInstance(myModalEl)
-                modal.hide();
-            }
         },
     }
 }

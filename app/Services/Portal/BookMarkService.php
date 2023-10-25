@@ -25,7 +25,6 @@ class BookMarkService
             $bookmark = new Bookmark();
             $bookmark->name = $request->name;
             $bookmark->url = $request->url;
-            $bookmark->description = $request->description;
 
             $bookmark->save();
             return['status' => 200, 'msg' => 'Bookmark has been Saved successfully.'];
@@ -47,7 +46,6 @@ class BookMarkService
                         if (!empty($request->q)) {
                             $q->where('name', 'LIKE', '%' . $request->q . '%');
                             $q->where('url', 'LIKE', '%' . $request->q . '%');
-                            $q->orWhere('description', 'LIKE', '%' . $request->q . '%');
                         }
                     }
                 )
@@ -77,7 +75,6 @@ class BookMarkService
             $bookmark = Bookmark::where('id', $request->id)->first();
             $bookmark->name = $request->name;
             $bookmark->url = $request->url;
-            $bookmark->description = $request->description;
             $bookmark->save();
             return['status' => 200, 'msg' => 'Bookmark has been Updated successfully.'];
 
