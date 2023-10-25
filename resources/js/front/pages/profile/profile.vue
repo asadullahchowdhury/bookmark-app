@@ -1,9 +1,9 @@
 <template>
     <div class="profile-page">
-        <div class="container">
-         <div class="card border-0 rounded-4 shadow">
-           <div class="card-body">
-               <div class="profile-header d-flex justify-content-center position-relative">
+        <div class="container pt-5">
+         <div class="card border-0 card-list rounded-4 shadow mt-5">
+           <div class="card-body list-body">
+               <div class="profile-header my-md-5 mt-3 mb-4 d-flex justify-content-center position-relative">
                    <div class="profile-pic shadow">
                        <img v-if="profileData.media === null"
                             :src="`https://ui-avatars.com/api/?name=`+ profileData.full_name" alt="profile">
