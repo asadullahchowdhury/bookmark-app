@@ -209,10 +209,10 @@
 
 
 <script>
-import apiRoutes from "../../services/apiRoutes.js";
-import apiService from "../../services/apiService.js";
+
 import router from "../../router/router.js";
 import Footer from "../../pages/layout/includes/footer.vue"
+import {useRoute} from "vue-router";
 
 
 export default {
@@ -230,6 +230,7 @@ export default {
         }
     },
     mounted() {
+
     },
     methods: {
 

@@ -1,7 +1,7 @@
 .auth {
     .auth-page-wrap {
         width: 100%;
-        min-height: 100vh;
+        min-height: calc(100vh - 71px);
         background-size: cover;
         background-repeat: no-repeat;
         display: flex;
@@ -12,7 +12,7 @@
         .auth-box {
             position: relative;
             z-index: 1;
-            max-width: 400px;
+            max-width: 450px;
             width: 100%;
 
             .box-title {
@@ -33,7 +33,6 @@
                 position: relative;
 
                 .form-control {
-                    background-color: rgba(255, 255, 255, 0.2) !important;
                     border-radius: 30px !important;
                     padding: 15px 20px 15px 60px;
                     font-size: .8571em;
@@ -47,15 +46,10 @@
 
                     &:focus {
                         transition: .3s all ease-out;
-                        background-color: rgba(255, 255, 255, 0.4) !important;
-                        border: none;
+                        border-color: var(--theme-color);
+                        box-shadow: 0 0 10px 20px rgba(0,0,0,5);
                     }
 
-                    &:focus:active {
-                        transition: .3s all ease-out;
-                        background-color: rgba(255, 255, 255, 0.4) !important;
-                        border: none;
-                    }
                 }
 
                 .placeholder-icon {

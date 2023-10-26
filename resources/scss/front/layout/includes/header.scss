@@ -1,11 +1,11 @@
 .header {
     width: 100%;
-    position: absolute;
     z-index: 100;
     top: 0;
+
     .navbar {
         .navbar-brand {
-            color: var(--white);
+            color: var(--black);
             letter-spacing: 4px;
             font-size: 30px;
             font-weight: 500;
@@ -14,16 +14,28 @@
                 -webkit-text-fill-color: transparent; /* Will override color (regardless of order) */
                 -webkit-text-stroke-width: 2px;
                 font-weight: 700;
-                -webkit-text-stroke-color: var(--white);
+                -webkit-text-stroke-color: var(--black);
             }
         }
 
         .navbar-nav {
             .nav-item {
                 .nav-link {
-                    color: var(--white);
+                    color: var(--black);
                     font-size: 18px;
                     font-weight: 500;
+                }
+            }
+        }
+
+        .login-btn {
+            color: var(--black);
+
+            &.underline-anim {
+                &.text-white {
+                    &:before {
+                        background-color: var(--white);
+                    }
                 }
             }
         }
@@ -45,14 +57,14 @@
                     }
                 }
 
-              /*  .user-chevron {
-                    transition: .3s al ease-in-out;
-                }*/
+                /*  .user-chevron {
+                      transition: .3s al ease-in-out;
+                  }*/
 
                 .header-dropdown-wrap {
                     .header-dropdown {
                         width: 200px;
-                        background-color: var(--white);
+                        background-color: var(--black);
                         margin: 0;
                         padding: 10px 0;
                         position: absolute;
@@ -66,7 +78,7 @@
                         &:before {
                             position: absolute;
                             content: '';
-                            border: 10px solid var(--white);
+                            border: 10px solid var(--black);
                             border-left-color: transparent;
                             border-bottom-color: transparent;
                             width: 0;
@@ -97,10 +109,10 @@
 
                 &:hover {
 
-                /*    .user-chevron {
-                        transform: rotate(180deg);
-                        transition: .3s all ease-in-out;
-                    }*/
+                    /*    .user-chevron {
+                            transform: rotate(180deg);
+                            transition: .3s all ease-in-out;
+                        }*/
 
                     .header-dropdown {
                         transition: .3s all ease-in-out;
@@ -113,21 +125,23 @@
         }
     }
 
-//    dark version
+    //    light version
 
-    &.dark{
-        .navbar{
-            .navbar-brand{
-                color:var(--black);
-                span{
-                    -webkit-text-stroke-color: var(--black);
+    &.light {
+        position: absolute;
+        .navbar {
+            .navbar-brand {
+                color: var(--white);
+
+                span {
+                    -webkit-text-stroke-color: var(--white);
                 }
             }
 
             .navbar-nav {
                 .nav-item {
                     .nav-link {
-                        color: var(--black);
+                        color: var(--white);
                     }
                 }
             }

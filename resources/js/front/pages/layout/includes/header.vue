@@ -1,5 +1,5 @@
 <template>
-    <div class="header" :class="{'dark' : layoutName === true}">
+    <div id="header" class="header" :class="{'light' : currentRouteName === 'Home'}">
         <nav class="navbar navbar-expand-lg">
             <div class="container">
                 <router-link :to="{name:'Home'}" class="navbar-brand ps-3" :class="{'me-auto': profileData === null}">
@@ -46,7 +46,7 @@
                 </div>
 
                 <div class="" v-if="profileData === null">
-                    <router-link :to="{name:'Login'}" class="text-decoration-none text-white underline-anim white">
+                    <router-link :to="{name:'Login'}" class="text-decoration-none underline-anim login-btn" :class="{'text-white' : currentRouteName === 'Home'}">
                         Login
                     </router-link>
                 </div>
@@ -110,21 +110,23 @@ export default {
             logoutLoading: false,
             profileData: null,
             route: '',
+            fullPath: '',
             layoutName: false,
-
+            currentRouteName: this.$route.name,
         }
     },
 
     mounted() {
-        //defines the route for adding class in header for dark and light version.
-        this.route = useRoute();
-        const routeName = this.route.matched.some(route => route.name === 'portalLayout');
-        this.layoutName = routeName;
-
-
-        this.getProfile()
+            this.getProfile();
     },
 
+
+    watch: {
+        '$route.name': function (newRouteName, oldRouteName) {
+            this.currentRouteName = newRouteName;
+            console.log(this.currentRouteName)
+        },
+    },
     methods: {
         getProfile() {
             this.profileLoading = true;
@@ -149,7 +151,7 @@ export default {
                     window.location.reload();
                 }
             })
-        }
+        },
     }
 }
 </script>
