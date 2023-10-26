@@ -1,69 +1,71 @@
 <template>
     <div class="profile-page">
-        <div class="container pt-5">
-            <div class="card border-0 card-list rounded-4 shadow mt-5">
-                <div class="card-body list-body">
-                    <div class="profile-header my-md-5 mt-3 mb-4 d-flex justify-content-center position-relative">
-                        <div class="profile-pic shadow">
-                            <img v-if="profileData.media === null"
-                                 :src="`https://ui-avatars.com/api/?name=`+ profileData.full_name" alt="profile">
-                            <img v-if="profileData.media != null" :src="profileData.media.full_file_path" alt="profile">
-                        </div>
-                    </div>
+        <div class="container">
+          <div class="row">
+              <div class="card mt-5 border-0 card-list rounded-4 shadow mt-5">
+                  <div class="card-body list-body">
+                      <div class="profile-header my-md-5 mt-3 mb-4 d-flex justify-content-center position-relative">
+                          <div class="profile-pic shadow">
+                              <img v-if="profileData.media === null"
+                                   :src="`https://ui-avatars.com/api/?name=`+ profileData.full_name" alt="profile">
+                              <img v-if="profileData.media != null" :src="profileData.media.full_file_path" alt="profile">
+                          </div>
+                      </div>
 
-                    <div class="row justify-content-center">
-                        <div class="col-lg-6 text-center">
-                            <table class="table table-borderless" v-if="profileLoading === false">
-                                <tr>
-                                    <td class="pb-4"><strong>Name :</strong></td>
-                                    <td class="pb-4">{{ profileData.full_name }}</td>
-                                </tr>
-
-
-                                <tr>
-                                    <td class="pb-4"><strong>Email :</strong></td>
-                                    <td class="pb-4">{{ profileData.email }}</td>
-                                </tr>
+                      <div class="row justify-content-center">
+                          <div class="col-lg-6 text-center">
+                              <table class="table table-borderless" v-if="profileLoading === false">
+                                  <tr>
+                                      <td class="pb-4"><strong>Name :</strong></td>
+                                      <td class="pb-4">{{ profileData.full_name }}</td>
+                                  </tr>
 
 
-                                <tr>
-                                    <td class="pb-4"><strong>Phone :</strong></td>
-                                    <td class="pb-4">{{ profileData.phone }}</td>
-                                </tr>
-
-                                <tr>
-                                    <td class="pb-4"><strong>Address :</strong></td>
-                                    <td class="pb-4 fst-italic text-muted">N/A</td>
-                                </tr>
-                            </table>
+                                  <tr>
+                                      <td class="pb-4"><strong>Email :</strong></td>
+                                      <td class="pb-4">{{ profileData.email }}</td>
+                                  </tr>
 
 
-                            <!--Loading start-->
-                            <div class="" v-if="profileLoading === true">
-                                <h6 class=" placeholder-glow pt-3">
-                                    <span class="placeholder col-12 mb-3"></span>
-                                    <span class="placeholder col-11 mb-3"></span>
-                                    <span class="placeholder col-6 mb-3"></span>
-                                    <span class="placeholder col-8 mb-3"></span>
-                                    <span class="placeholder col-8 mb-3"></span>
-                                </h6>
-                            </div>
-                            <!--Loading end-->
+                                  <tr>
+                                      <td class="pb-4"><strong>Phone :</strong></td>
+                                      <td class="pb-4">{{ profileData.phone }}</td>
+                                  </tr>
 
-                            <div
-                                class="d-flex profile-action align-items-center flex-sm-row flex-column justify-content-between mb-3">
-                                <button type="button" class="btn btn-theme mx-2 mb-sm-0 mb-4" @click="editModal(1)">Edit
-                                    Profile
-                                </button>
-                                <button type="button" class="btn btn-theme mx-2" @click="passwordModal(1)">Change
-                                    Password
-                                </button>
-                            </div>
+                                  <tr>
+                                      <td class="pb-4"><strong>Address :</strong></td>
+                                      <td class="pb-4 fst-italic text-muted">N/A</td>
+                                  </tr>
+                              </table>
 
-                        </div>
-                    </div>
-                </div>
-            </div>
+
+                              <!--Loading start-->
+                              <div class="" v-if="profileLoading === true">
+                                  <h6 class=" placeholder-glow pt-3">
+                                      <span class="placeholder col-12 mb-3"></span>
+                                      <span class="placeholder col-11 mb-3"></span>
+                                      <span class="placeholder col-6 mb-3"></span>
+                                      <span class="placeholder col-8 mb-3"></span>
+                                      <span class="placeholder col-8 mb-3"></span>
+                                  </h6>
+                              </div>
+                              <!--Loading end-->
+
+                              <div
+                                  class="d-flex profile-action align-items-center flex-sm-row flex-column justify-content-between mb-3">
+                                  <button type="button" class="btn btn-theme mx-2 mb-sm-0 mb-4" @click="editModal(1)">Edit
+                                      Profile
+                                  </button>
+                                  <button type="button" class="btn btn-theme mx-2" @click="passwordModal(1)">Change
+                                      Password
+                                  </button>
+                              </div>
+
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
 
         </div>
     </div>
