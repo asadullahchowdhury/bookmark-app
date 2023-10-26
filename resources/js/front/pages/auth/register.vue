@@ -3,7 +3,7 @@
         <div class="row">
             <div class="col-lg-6 d-lg-flex d-none">
                 <div class="page-cover w-100 h-100 d-flex justify-content-center align-items-center">
-                    <img src="/images/auth/desk-2.svg" alt="auth cover" class="img-fluid">
+                    <img :src="`/images/auth/desk-2.svg`" alt="auth cover" class="img-fluid">
                 </div>
             </div>
             <div class="col-lg-6">
