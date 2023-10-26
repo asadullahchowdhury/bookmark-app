@@ -209,10 +209,10 @@
 
 
 <script>
-import apiRoutes from "../../services/apiRoutes.js";
-import apiService from "../../services/apiService.js";
+
 import router from "../../router/router.js";
 import Footer from "../../pages/layout/includes/footer.vue"
+import {useRoute} from "vue-router";
 
 
 export default {
@@ -231,47 +231,8 @@ export default {
     },
     mounted() {
 
-        this.feedBackCarousel()
-        this.partnersCarousel()
     },
     methods: {
-        feedBackCarousel() {
-            $('.feedback-content').owlCarousel({
-                loop: true,
-                margin: 30,
-                nav: false,
-                responsive: {
-                    0: {
-                        items: 1
-                    },
-                    600: {
-                        items: 1
-                    },
-                    1000: {
-                        items: 3
-                    }
-                }
-            })
-        },
-
-        partnersCarousel() {
-            $('.partners-wrap').owlCarousel({
-                loop: true,
-                margin: 100,
-                nav: false,
-                responsive: {
-                    0: {
-                        items: 1
-                    },
-                    600: {
-                        items: 3
-                    },
-                    1000: {
-                        items: 5
-                    }
-                }
-            })
-        }
 
     }
 }

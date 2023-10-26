@@ -22,7 +22,8 @@ return new class extends Migration
             $table->bigInteger('reset_code')->nullable();
             $table->string('password');
             $table->rememberToken();
-            $table->timestamps();
+            $table->dateTime('created_at')->useCurrent();
+            $table->timestamp('updated_at')->nullable()->useCurrentOnUpdate();
         });
     }
 

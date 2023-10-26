@@ -41,7 +41,7 @@
 
 
 .no-data {
-    padding: 100px 0;
+    height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -52,4 +52,12 @@
             width: 200px;
         }
     }
+}
+
+
+
+.error-report {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--bs-danger);
 }

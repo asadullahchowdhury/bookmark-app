@@ -1,59 +1,72 @@
 <template>
     <div class="profile-page">
         <div class="container">
-            <div class="profile-header d-flex justify-content-center position-relative">
-                <div class="profile-pic shadow">
-                    <img src="/images/global/book-cover.jpg" alt="profile" class="img-fluid">
-                </div>
-            </div>
+          <div class="row">
+              <div class="card mt-5 border-0 card-list rounded-4 shadow mt-5">
+                  <div class="card-body list-body">
+                      <div class="profile-header my-md-5 mt-3 mb-4 d-flex justify-content-center position-relative">
+                          <div class="profile-pic shadow">
+                              <img v-if="profileData.media === null"
+                                   :src="`https://ui-avatars.com/api/?name=`+ profileData.full_name" alt="profile">
+                              <img v-if="profileData.media != null" :src="profileData.media.full_file_path" alt="profile">
+                          </div>
+                      </div>
 
-            <div class="row justify-content-center">
-                <div class="col-lg-6 text-center">
-                    <table class="table table-borderless" v-if="profileLoading === false">
-                        <tr>
-                            <td class="pb-4"><strong>Name :</strong></td>
-                            <td class="pb-4">{{ profileData.full_name }}</td>
-                        </tr>
+                      <div class="row justify-content-center">
+                          <div class="col-lg-6 text-center">
+                              <table class="table table-borderless" v-if="profileLoading === false">
+                                  <tr>
+                                      <td class="pb-4"><strong>Name :</strong></td>
+                                      <td class="pb-4">{{ profileData.full_name }}</td>
+                                  </tr>
 
 
-                        <tr>
-                            <td class="pb-4"><strong>Email :</strong></td>
-                            <td class="pb-4">{{ profileData.email }}</td>
-                        </tr>
+                                  <tr>
+                                      <td class="pb-4"><strong>Email :</strong></td>
+                                      <td class="pb-4">{{ profileData.email }}</td>
+                                  </tr>
 
 
-                        <tr>
-                            <td class="pb-4"><strong>Phone :</strong></td>
-                            <td class="pb-4">{{ profileData.phone }}</td>
-                        </tr>
+                                  <tr>
+                                      <td class="pb-4"><strong>Phone :</strong></td>
+                                      <td class="pb-4">{{ profileData.phone }}</td>
+                                  </tr>
 
-                        <tr>
-                            <td class="pb-4"><strong>Address :</strong></td>
-                            <td class="pb-4 fst-italic text-muted">N/A</td>
-                        </tr>
-                    </table>
+                                  <tr>
+                                      <td class="pb-4"><strong>Address :</strong></td>
+                                      <td class="pb-4 fst-italic text-muted">N/A</td>
+                                  </tr>
+                              </table>
 
-                    <!--Loading start-->
-                    <div class="" v-if="profileLoading === true">
-                        <h6 class=" placeholder-glow pt-3">
-                            <span class="placeholder col-12 mb-3"></span>
-                            <span class="placeholder col-11 mb-3"></span>
-                            <span class="placeholder col-6 mb-3"></span>
-                            <span class="placeholder col-8 mb-3"></span>
-                            <span class="placeholder col-8 mb-3"></span>
-                        </h6>
-                    </div>
-                    <!--Loading end-->
-                    <div class="d-flex align-items-center flex-sm-row flex-column justify-content-between mb-3">
-                        <button type="button" class="btn btn-theme w-50 mx-2 mb-sm-0 mb-4" @click="editModal(1)">Edit
-                            Profile
-                        </button>
-                        <button type="button" class="btn btn-theme w-50 mx-2" data-bs-toggle="modal"
-                                data-bs-target="#changePassModal">Change Password
-                        </button>
-                    </div>
-                </div>
-            </div>
+
+                              <!--Loading start-->
+                              <div class="" v-if="profileLoading === true">
+                                  <h6 class=" placeholder-glow pt-3">
+                                      <span class="placeholder col-12 mb-3"></span>
+                                      <span class="placeholder col-11 mb-3"></span>
+                                      <span class="placeholder col-6 mb-3"></span>
+                                      <span class="placeholder col-8 mb-3"></span>
+                                      <span class="placeholder col-8 mb-3"></span>
+                                  </h6>
+                              </div>
+                              <!--Loading end-->
+
+                              <div
+                                  class="d-flex profile-action align-items-center flex-sm-row flex-column justify-content-between mb-3">
+                                  <button type="button" class="btn btn-theme mx-2 mb-sm-0 mb-4" @click="editModal(1)">Edit
+                                      Profile
+                                  </button>
+                                  <button type="button" class="btn btn-theme mx-2" @click="passwordModal(1)">Change
+                                      Password
+                                  </button>
+                              </div>
+
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+
         </div>
     </div>
 
@@ -71,11 +84,17 @@
                     <div class="modal-body px-4">
                         <div class="form-group mb-5 d-flex justify-content-center">
                             <div class="modal-avatar-wrap">
-                                <img class="modal-avatar" v-if="editParam.avatar != null" :src="editParam.avatarFilePath" alt="avatar">
-                                <img class="modal-avatar" v-if="editParam.avatar === null" :src="`/images/global/book-cover.jpg`" alt="avatar">
-                                <label for="avatar-upload" class="upload-label btn btn-light">
+                                <img class="modal-avatar" v-if="editParam.avatarFilePath != null"
+                                     :src="editParam.avatarFilePath" alt="avatar">
+                                <img class="modal-avatar" v-if="editParam.avatar === null"
+                                     :src="`https://ui-avatars.com/api/?name=`+ profileData.full_name"
+                                     alt="avatar dummy">
+                                <label for="avatar-upload" class="upload-label btn btn-light" data-bs-toggle="tooltip"
+                                       data-bs-title="Upload Image" data-bs-placement="right">
                                     <input type="file" class="d-none" id="avatar-upload" @change="attachAvatar($event)">
-                                    <img class="edit-icon" :src="`/images/global/edit.svg`" alt="edit">
+                                    <img v-if="uploadLoading === false" class="edit-icon"
+                                         :src="`/images/global/edit.svg`" alt="edit">
+                                    <span v-if="uploadLoading === true" class="btn-loading black"></span>
                                 </label>
                             </div>
                         </div>
@@ -85,14 +104,14 @@
                                 <div class="form-group mb-3">
                                     <input type="text" class="form-control form-control-lg rounded-pill"
                                            placeholder="First Name" name="first_name" v-model="editParam.first_name">
-                                    <div class="error-report"></div>
+                                    <div class="error-report ms-2"></div>
                                 </div>
                             </div>
                             <div class="col-lg-6">
                                 <div class="form-group mb-3">
                                     <input type="text" class="form-control form-control-lg rounded-pill"
                                            placeholder="Last Name" name="last_name" v-model="editParam.last_name">
-                                    <div class="error-report"></div>
+                                    <div class="error-report ms-2"></div>
                                 </div>
                             </div>
                             <div class="col-lg-6">
@@ -136,31 +155,39 @@
                 <div class="modal-header pt-4 border-0 justify-content-center">
                     <h1 class="modal-title fs-5" id="changePassLabel">Change Password</h1>
                 </div>
-                <form>
+                <form @submit.prevent="updatePassword()">
 
 
                     <div class="modal-body px-4">
                         <div class="form-group mb-3">
                             <input type="text" class="form-control form-control-lg rounded-pill"
-                                   placeholder="Current Password" name="password">
+                                   placeholder="Current Password" name="current_password"
+                                   v-model="passwordParam.current_password">
+                            <div class="error-report ms-2"></div>
                         </div>
 
                         <div class="form-group mb-3">
                             <input type="text" class="form-control form-control-lg rounded-pill"
-                                   placeholder="New Password" name="new_password">
+                                   placeholder="New Password" name="password" v-model="passwordParam.password">
+                            <div class="error-report ms-2"></div>
                         </div>
 
                         <div class="form-group mb-3">
                             <input type="text" class="form-control form-control-lg rounded-pill"
-                                   placeholder="Confirm New Password" name="password_confirmation">
+                                   placeholder="Confirm New Password" name="password_confirmation"
+                                   v-model="passwordParam.password_confirmation">
+                            <div class="error-report ms-2"></div>
                         </div>
 
                     </div>
                     <div class="modal-footer justify-content-center border-0">
                         <button type="button" class="btn btn-outline-dark rounded-pill w-120px py-9px"
-                                data-bs-dismiss="modal">Cancel
+                                @click="passwordModal(2)">Cancel
                         </button>
-                        <button type="button" class="btn btn-theme w-120px">Confirm</button>
+                        <button type="submit" class="btn btn-theme w-120px">
+                            <span v-if="updatePasswordLoading === false">Confirm</span>
+                            <span class="btn-loading" v-if="updatePasswordLoading === true">  </span>
+                        </button>
                     </div>
                 </form>
             </div>
@@ -173,9 +200,9 @@
 
 <script>
 import apiService from "../../services/apiService.js";
-import apiRoute from "../../services/apiRoutes.js";
-import {createToaster} from "@meforma/vue-toaster";
 import apiRoutes from "../../services/apiRoutes.js";
+import {createToaster} from "@meforma/vue-toaster";
+
 
 const toaster = createToaster({
     position: 'top-right',
@@ -185,6 +212,7 @@ export default {
     data() {
         return {
             profileLoading: false,
+            uploadLoading: false,
             profileData: {},
             editParam: {
                 id: '',
@@ -193,7 +221,13 @@ export default {
                 email: '',
                 phone: '',
                 avatar: '',
-                avatarFilePath:null,
+                avatarFilePath: null,
+            },
+            passwordParam: {
+                current_password: '',
+                password: '',
+                password_confirmation: '',
+
             },
             updateProfileLoading: false,
             updatePasswordLoading: false,
@@ -202,32 +236,42 @@ export default {
 
     mounted() {
         this.getProfile()
+
+        /*tooltip*/
+        const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
+        const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
     },
 
     methods: {
+        /*==========================================
+        * Get profile data API
+        ============================================*/
         getProfile() {
             this.profileLoading = true;
             apiService.ClearErrorHandler();
-            apiService.GET(apiRoute.ProfileDetails, (res) => {
+            apiService.GET(apiRoutes.ProfileDetails, (res) => {
                 this.profileLoading = false;
                 if (res.status === 200) {
                     this.profileData = res.data
                     this.profileData.full_name = this.profileData.first_name + ' ' + this.profileData.last_name;
-                    const headerAvatar = document.querySelector('.profile-pic img');
-                    headerAvatar.src = this.profileData.avatar !== null ? this.profileData.media.full_file_path : `https://ui-avatars.com/api/?name=${this.profileData.full_name}`;
+
                 }
             })
         },
 
 
+        /*==========================================
+        * Profile edit modal open/close
+        ============================================*/
         editModal(type) {
+            apiService.ClearErrorHandler();
             if (type === 1) {
                 let modal = new bootstrap.Modal(document.getElementById('profileUpdateModal'))
                 modal.show();
                 this.profileData.full_name = this.profileData.first_name + ' ' + this.profileData.last_name;
-                const avatar = document.querySelector('.modal-avatar');
-                avatar.src = this.profileData.avatar !== null ? this.profileData.media.full_file_path : `https://ui-avatars.com/api/?name=${this.profileData.full_name}`;
                 let userData = this.profileData;
+                console.log(userData)
+
                 this.editParam = {
                     id: userData.id,
                     first_name: userData.first_name,
@@ -235,7 +279,10 @@ export default {
                     email: userData.email,
                     phone: userData.phone,
                     avatar: userData.avatar,
+                    avatarFilePath: userData?.media?.full_file_path
                 }
+
+
             } else if (type === 2) {
                 const Modal = document.querySelector('#profileUpdateModal');
                 const Instance = bootstrap.Modal.getInstance(Modal);
@@ -243,7 +290,9 @@ export default {
             }
         },
 
-
+        /*==========================================
+        * Profile update API
+        ============================================*/
         updateProfile() {
             this.updateProfileLoading = true;
             apiService.POST(apiRoutes.ProfileUpdate, this.editParam, (res) => {
@@ -252,27 +301,72 @@ export default {
                     toaster.info(res.msg)
                     this.editModal(2)
                     this.getProfile();
+                    $('#profile-avatar').attr('src', this.editParam.avatarFilePath);
                 } else apiService.ErrorHandler(res.errors)
             })
         },
 
 
-        /* avatar attachment */
+        /*==========================================
+       * Avatar image upload API
+       ============================================*/
         attachAvatar(event) {
+            this.uploadLoading = true;
             let file = event.target.files[0];
             let formData = new FormData();
             formData.append("file", file)
             formData.append("media_type", 1);
             apiService.UPLOAD(apiRoutes.Media, formData, (res) => {
+                this.uploadLoading = false;
                 event.target.value = '';
                 if (res.status === 200) {
-                    this.editParam.avatarFilePath = res.data.full_file_path
+                    this.editParam.avatarFilePath = res.data.full_file_path;
                     this.editParam.avatar = res.data.id
+                    console.log(this.editParam.avatarFilePath)
                 }
             })
 
         },
 
+
+        /*==========================================
+        * Password Changing API
+        ============================================*/
+        updatePassword() {
+            this.updatePasswordLoading = true;
+            apiService.POST(apiRoutes.PasswordUpdate, this.passwordParam, (res) => {
+                this.updatePasswordLoading = false;
+                if (res.status === 200) {
+                    toaster.info(res.msg)
+                    this.passwordModal(2);
+                } else {
+                    apiService.ErrorHandler(res.errors)
+                }
+
+            })
+        },
+
+
+        /*==========================================
+        * Password Modal open/close
+        ============================================*/
+        passwordModal(type) {
+            apiService.ClearErrorHandler();
+            if (type === 1) {
+                this.passwordParam = {
+                    password: '',
+                    current_password: '',
+                    password_confirmation: '',
+                }
+                let modal = new bootstrap.Modal(document.getElementById('changePassModal'))
+                modal.show();
+            } else {
+                const Modal = document.querySelector('#changePassModal');
+                const Instance = bootstrap.Modal.getInstance(Modal);
+                Instance.hide();
+            }
+
+        },
     }
 }
 </script>

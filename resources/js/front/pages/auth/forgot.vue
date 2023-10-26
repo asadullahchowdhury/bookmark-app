@@ -1,113 +1,121 @@
 <template>
-    <div class="auth">
-        <div class="auth-page-wrap" style="background-image: url('/images/auth/bookmark.jpg')">
-            <div class="auth-box">
-                <!--Forgot password section start-->
-                <form @submit.prevent="forgot" class="auth-form p-4" autocomplete="off" v-if="forgotType === 1">
-                    <div class="box-title display-6 mb-4 text-center"><span>B</span>ookmark <span>A</span>pp</div>
+    <div class="auth container">
+       <div class="row">
+           <div class="col-lg-6 d-lg-flex d-none">
+               <div class="page-cover w-100 h-100 d-flex justify-content-center align-items-center">
+                   <img :src="`/images/auth/desk-1.svg`" alt="auth cover" class="img-fluid">
+               </div>
+           </div>
+           <div class="col-lg-6">
+               <div class="auth-page-wrap">
+                   <div class="auth-box card border-0 p-sm-4 shadow rounded-4">
+                       <!--Forgot password section start-->
+                       <form @submit.prevent="forgot" class="auth-form p-4" autocomplete="off" v-if="forgotType === 1">
+                           <div class="box-title display-6 mb-4 text-center"><span>B</span>ookmark <span>A</span>pp</div>
 
-                    <div class="text-center fs-3 text-white mb-4">Forgot Password</div>
-                    <div class="form-group mb-3">
-                        <input type="email" class="form-control shadow-none" placeholder="Email Address" name="email"
-                               v-model="forgotParam.email"
-                               autocomplete="off">
-                        <img class="placeholder-icon" :src="`/images/global/mail.svg`" alt="mail">
-                        <div class="error-report ms-2"></div>
-                    </div>
+                           <div class="text-center fs-3 text-dark mb-4">Forgot Password</div>
+                           <div class="form-group mb-3">
+                               <input type="email" class="form-control shadow-none" placeholder="Email Address" name="email"
+                                      v-model="forgotParam.email"
+                                      autocomplete="off">
+                               <img class="placeholder-icon" :src="`/images/global/mail.svg`" alt="mail">
+                               <div class="error-report ms-2"></div>
+                           </div>
 
-                    <div class="form-group mt-4">
-                        <button type="submit" class="btn btn-theme w-100">
-                            Forgot Password
-                            <span class="ms-2" v-if="forgotLoading != true"><img :src="`/images/global/arrow-right.svg`"
-                                                                                 alt="arrow-right"></span>
-                            <span class="ms-2 btn-loading" v-if="forgotLoading === true"></span>
-                        </button>
-                    </div>
+                           <div class="form-group mt-4">
+                               <button type="submit" class="btn btn-theme w-100">
+                                   Forgot Password
+                                   <span class="ms-2" v-if="forgotLoading != true"><img :src="`/images/global/arrow-right.svg`"
+                                                                                        alt="arrow-right"></span>
+                                   <span class="ms-2 btn-loading" v-if="forgotLoading === true"></span>
+                               </button>
+                           </div>
 
-                    <div class="bottom-text text-center mt-4 text-white">
-                        Remember your password?
-                        <router-link :to="{name:'Login'}"
-                                     class="underline-anim text-white white fw-semibold ms-2">Login here..
-                        </router-link>
-                    </div>
-                </form>
-                <!--Forgot password section end  -->
+                           <div class="bottom-text text-center mt-4 text-dark">
+                               Remember your password?
+                               <router-link :to="{name:'Login'}"
+                                            class="underline-anim text-dark fw-semibold ms-2">Login here..
+                               </router-link>
+                           </div>
+                       </form>
+                       <!--Forgot password section end  -->
 
-                <!--Reset password section start-->
-                <form @submit.prevent="reset" class="auth-form p-4" autocomplete="off" v-if="forgotType === 2">
-                    <div class="box-title display-6 mb-4 text-center"><span>B</span>ookmark <span>A</span>pp</div>
+                       <!--Reset password section start-->
+                       <form @submit.prevent="reset" class="auth-form p-4" autocomplete="off" v-if="forgotType === 2">
+                           <div class="box-title display-6 mb-4 text-center"><span>B</span>ookmark <span>A</span>pp</div>
 
-                    <div class="text-center fs-3 text-white mb-4">Reset Password</div>
+                           <div class="text-center fs-3 text-dark mb-4">Reset Password</div>
 
-                    <div class="form-group mb-3">
-                        <input type="text" class="form-control shadow-none" placeholder="Email Address" name="email"
-                               disabled v-model="resetParam.email"
-                               autocomplete="off">
-                        <img class="placeholder-icon" :src="`/images/global/mail.svg`" alt="mail">
-                        <div class="error-report"></div>
-                    </div>
+                           <div class="form-group mb-3">
+                               <input type="text" class="form-control shadow-none" placeholder="Email Address" name="email"
+                                      disabled v-model="resetParam.email"
+                                      autocomplete="off">
+                               <img class="placeholder-icon" :src="`/images/global/mail.svg`" alt="mail">
+                               <div class="error-report"></div>
+                           </div>
 
-                    <div class="form-group mb-3">
-                        <input type="text" class="form-control shadow-none" placeholder="Reset Code"
-                               @keypress="checkNumber($event)"
-                               v-model="resetParam.code"
-                               name="code"
-                               autocomplete="off">
-                        <img class="placeholder-icon" :src="`/images/global/hash.svg`" alt="hash">
-                        <div class="error-report"></div>
-                    </div>
+                           <div class="form-group mb-3">
+                               <input type="text" class="form-control shadow-none" placeholder="Reset Code"
+                                      @keypress="checkNumber($event)"
+                                      v-model="resetParam.code"
+                                      name="code"
+                                      autocomplete="off">
+                               <img class="placeholder-icon" :src="`/images/global/hash.svg`" alt="hash">
+                               <div class="error-report"></div>
+                           </div>
 
-                    <div class="form-group mb-3">
-                        <input :type="passwordFieldType" class="form-control shadow-none" placeholder="New Password"
-                               v-model="resetParam.password"
-                               name="password" autocomplete="off">
-                        <img class="placeholder-icon" :src="`/images/global/lock.svg`" alt="lock">
-                        <div class="error-report"></div>
-                    </div>
+                           <div class="form-group mb-3">
+                               <input :type="passwordFieldType" class="form-control shadow-none" placeholder="New Password"
+                                      v-model="resetParam.password"
+                                      name="password" autocomplete="off">
+                               <img class="placeholder-icon" :src="`/images/global/lock.svg`" alt="lock">
+                               <div class="error-report"></div>
+                           </div>
 
-                    <div class="form-group mb-3">
-                        <input :type="passwordFieldType" class="form-control shadow-none"
-                               v-model="resetParam.password_confirmation"
-                               placeholder="Password Confirmation"
-                               name="password_confirmation" autocomplete="off">
-                        <img class="placeholder-icon" :src="`/images/global/lock.svg`" alt="lock">
-                        <div class="error-report"></div>
-                    </div>
+                           <div class="form-group mb-3">
+                               <input :type="passwordFieldType" class="form-control shadow-none"
+                                      v-model="resetParam.password_confirmation"
+                                      placeholder="Password Confirmation"
+                                      name="password_confirmation" autocomplete="off">
+                               <img class="placeholder-icon" :src="`/images/global/lock.svg`" alt="lock">
+                               <div class="error-report"></div>
+                           </div>
 
-                    <div class="form-group ms-2">
-                        <div class="checkbox-wrapper">
-                            <input class="inp-cbx" id="remember" type="checkbox" @change="passwordVisibility"/>
-                            <label class="cbx" for="remember">
+                           <div class="form-group ms-2">
+                               <div class="checkbox-wrapper">
+                                   <input class="inp-cbx" id="remember" type="checkbox" @change="passwordVisibility"/>
+                                   <label class="cbx" for="remember">
                                 <span>
                                     <svg width="12px" height="10px" viewbox="0 0 12 10">
                                     <polyline points="1.5 6 4.5 9 10.5 1"></polyline>
                                     </svg>
                                 </span>
-                                <span class="text-white" v-if="passwordFieldType === 'password'">Show Password</span>
-                                <span class="text-white" v-if="passwordFieldType === 'text'">Hide Password</span>
-                            </label>
-                        </div>
-                    </div>
+                                       <span>Show Password</span>
+                                   </label>
+                               </div>
+                           </div>
 
-                    <div class="form-group mt-4">
-                        <button type="submit" class="btn btn-theme w-100">
-                            Reset Password
-                            <span class="ms-2" v-if="resetLoading === false"><img
-                                :src="`/images/global/arrow-right.svg`" alt="arrow-right"></span>
-                            <span class="ms-2 btn-loading" v-if="resetLoading === true"></span>
-                        </button>
-                    </div>
+                           <div class="form-group mt-4">
+                               <button type="submit" class="btn btn-theme w-100">
+                                   Reset Password
+                                   <span class="ms-2" v-if="resetLoading === false"><img
+                                       :src="`/images/global/arrow-right.svg`" alt="arrow-right"></span>
+                                   <span class="ms-2 btn-loading" v-if="resetLoading === true"></span>
+                               </button>
+                           </div>
 
-                    <div class="bottom-text text-center mt-4 text-white">
-                        Remember your password?
-                        <router-link :to="{name:'Login'}"
-                                     class="underline-anim text-white white fw-semibold ms-2">Login here..
-                        </router-link>
-                    </div>
-                </form>
-                <!--Reset password section end  -->
-            </div>
-        </div>
+                           <div class="bottom-text text-center mt-4 text-dark">
+                               Remember your password?
+                               <router-link :to="{name:'Login'}"
+                                            class="underline-anim text-dark fw-semibold ms-2">Login here..
+                               </router-link>
+                           </div>
+                       </form>
+                       <!--Reset password section end  -->
+                   </div>
+               </div>
+           </div>
+       </div>
     </div>
 </template>
 

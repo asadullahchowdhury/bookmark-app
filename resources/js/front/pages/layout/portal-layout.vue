@@ -1,6 +1,8 @@
 <template>
     <Header/>
-    <router-view/>
+    <div class="bg-body-tertiary portal-height">
+        <router-view/>
+    </div>
 </template>
 
 <script>

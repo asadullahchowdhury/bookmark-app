@@ -1,0 +1,8 @@
+.card-list {
+    height: calc(100vh - 150px);
+
+    .list-body {
+        height: 100%;
+        overflow: auto;
+    }
+}

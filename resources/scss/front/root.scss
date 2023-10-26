@@ -4,6 +4,7 @@
     --text-1: #2d3748;
     --theme-color: #f96332;
     --checkbox-border-color: #e3e3e3;
+    --lighten: #e1e1e1;
     --font-family: 'Montserrat', sans-serif;
 }
 
@@ -12,25 +13,53 @@ body {
 }
 
 
-.error-report {
-    font-size: 12px;
-    color: var(--bs-danger);
-}
-
 .w-120px {
     width: 120px;
 }
 
-.py-9px{
+.py-9px {
     padding-top: 9px;
     padding-bottom: 9px;
 }
 
 
-
-.bg-lg-light{
+.bg-lg-light {
     @media screen and (max-width: 991px) {
-background-color: var(--bs-light);
+        background-color: var(--bs-light);
     }
 }
 
+
+.w-50px {
+    width: 50px;
+}
+
+/*pagination*/
+.pagination {
+    .page-item {
+        float: left;
+        margin-right: 10px;
+        @media screen and (max-width: 991px) {
+            margin: 0 3px !important;
+        }
+
+        &.active {
+            .page-link {
+                background: var(--bs-light);
+                text-align: center;
+            }
+        }
+
+        .page-link {
+            min-width: 36px;
+            width: 100%;
+            color: #000;
+            border: 1px solid #E9EEF4;
+        }
+    }
+}
+
+
+.portal-height {
+    min-height: calc(100vh - 71px);
+}

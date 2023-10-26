@@ -1,7 +1,7 @@
 .auth {
     .auth-page-wrap {
         width: 100%;
-        min-height: 100vh;
+        min-height: calc(100vh - 71px);
         background-size: cover;
         background-repeat: no-repeat;
         display: flex;
@@ -9,32 +9,21 @@
         align-items: center;
         position: relative;
 
-        &:before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            padding: 0;
-            background: linear-gradient(0deg, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.8));
-        }
-
         .auth-box {
             position: relative;
             z-index: 1;
-            max-width: 400px;
+            max-width: 450px;
             width: 100%;
 
             .box-title {
-                color: var(--white);
+                color: var(--black);
                 letter-spacing: 5px;
 
                 span {
                     -webkit-text-fill-color: transparent; /* Will override color (regardless of order) */
                     -webkit-text-stroke-width: 2px;
                     font-weight: 700;
-                    -webkit-text-stroke-color: var(--white);
+                    -webkit-text-stroke-color: var(--black);
                     margin-bottom: 30px;
                 }
             }
@@ -44,30 +33,23 @@
                 position: relative;
 
                 .form-control {
-                    background-color: rgba(255, 255, 255, 0.2) !important;
                     border-radius: 30px !important;
                     padding: 15px 20px 15px 60px;
                     font-size: .8571em;
-                    border: none;
                     transition: .3s all ease-out;
-                    color: var(--white);
+                    color: var(--black);
 
 
                     &::-webkit-input-placeholder {
-                        color: var(--white);
+                        color: var(--black);
                     }
 
                     &:focus {
                         transition: .3s all ease-out;
-                        background-color: rgba(255, 255, 255, 0.4) !important;
-                        border: none;
+                        border-color: var(--theme-color);
+                        box-shadow: 0 0 10px 20px rgba(0,0,0,5);
                     }
 
-                    &:focus:active {
-                        transition: .3s all ease-out;
-                        background-color: rgba(255, 255, 255, 0.4) !important;
-                        border: none;
-                    }
                 }
 
                 .placeholder-icon {

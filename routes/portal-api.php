@@ -19,7 +19,7 @@ use App\Http\Controllers\BookMarkController;
 Route::prefix('bookmark')->group(function () {
 
 //    Bookmark create API
-    Route::get('create', [BookMarkController::class, 'create'])->name('Bookmark.Create');
+    Route::post('create', [BookMarkController::class, 'create'])->name('Bookmark.Create');
 
     //    Bookmark update API
     Route::post('update', [BookMarkController::class, 'update'])->name('Bookmark.Update');

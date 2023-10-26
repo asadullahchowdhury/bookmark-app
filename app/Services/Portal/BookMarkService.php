@@ -1,12 +1,8 @@
 <?php
 
-namespace App\Services;
+namespace App\Services\Portal;
 
 use App\Models\Bookmark;
-use App\Models\Product;
-use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
-use Illuminate\Foundation\Validation\ValidatesRequests;
-use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Support\Facades\Validator;
 
 class BookMarkService
@@ -29,7 +25,6 @@ class BookMarkService
             $bookmark = new Bookmark();
             $bookmark->name = $request->name;
             $bookmark->url = $request->url;
-            $bookmark->description = $request->description;
 
             $bookmark->save();
             return['status' => 200, 'msg' => 'Bookmark has been Saved successfully.'];
@@ -51,7 +46,6 @@ class BookMarkService
                         if (!empty($request->q)) {
                             $q->where('name', 'LIKE', '%' . $request->q . '%');
                             $q->where('url', 'LIKE', '%' . $request->q . '%');
-                            $q->orWhere('description', 'LIKE', '%' . $request->q . '%');
                         }
                     }
                 )
@@ -81,7 +75,6 @@ class BookMarkService
             $bookmark = Bookmark::where('id', $request->id)->first();
             $bookmark->name = $request->name;
             $bookmark->url = $request->url;
-            $bookmark->description = $request->description;
             $bookmark->save();
             return['status' => 200, 'msg' => 'Bookmark has been Updated successfully.'];
 

@@ -32,7 +32,9 @@ Route::prefix('profile')->group(function () {
     Route::get('details', [UserController::class, 'profile_details'])->name('Profile.Details');
     Route::post('update', [UserController::class, 'profile_update'])->name('Profile.Update');
     Route::post('update/password', [UserController::class, 'profile_update_password'])->name('Profile.Update.Password');
-//    Route::get('logout', [AuthController::class, 'logout'])->name('Profile.Logout');
+    Route::post('history/list', [UserController::class, 'login_history_list'])->name('Profile.Login.History');
+    Route::post('history/delete', [UserController::class, 'delete_history'])->name('Profile.History.Delete');
+
 });
 
 // Media

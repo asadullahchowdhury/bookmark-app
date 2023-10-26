@@ -20,6 +20,12 @@ import Profile from  "../pages/profile/profile.vue"
 // Dashboard
 import Dashboard from "../pages/dashboard/dashboard.vue"
 
+// History
+import History from "../pages/history/history.vue"
+
+// Bookmark
+import Bookmark from "../pages/bookmark/bookmark.vue";
+
 //URL
 const ROOT_URL = '/';
 const PORTAL_URL = "/portal/";
@@ -46,7 +52,9 @@ const routes = [
       path: PORTAL_URL, name: 'portalLayout', component: PortalLayout,
         children: [
             {path: PORTAL_URL , name:'Dashboard' ,component:Dashboard, meta:{title: 'Dashboard'}},
-            {path: PORTAL_URL + 'profile', name:'Profile' ,component:Profile, meta:{title: 'Profile'}}
+            {path: PORTAL_URL + 'profile', name:'Profile' ,component:Profile, meta:{title: 'Profile'}},
+            {path: PORTAL_URL + 'bookmark', name:'Bookmark' ,component:Bookmark, meta:{title: 'Bookmark'}},
+            {path: PORTAL_URL + 'history', name:'History' ,component:History, meta:{title: 'Login History'}}
         ]
     }
 ]
