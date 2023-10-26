@@ -1,7 +1,7 @@
 <template>
     <div class="dashboard">
 
-        <div class="container pt-5">
+        <div class="container">
             <div class="row">
                 <div class="col-lg-6">
                     <div class="card card-list mt-5 mb-4 rounded-4 py-3 px-0 shadow border-0">

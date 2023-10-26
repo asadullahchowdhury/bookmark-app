@@ -1,6 +1,6 @@
 <template>
     <Header/>
-    <div class="bg-body-tertiary vh-100">
+    <div class="bg-body-tertiary portal-height">
         <router-view/>
     </div>
 </template>

@@ -64,7 +64,7 @@
                 .header-dropdown-wrap {
                     .header-dropdown {
                         width: 200px;
-                        background-color: var(--black);
+                        background-color: var(--white);
                         margin: 0;
                         padding: 10px 0;
                         position: absolute;
@@ -73,12 +73,13 @@
                         opacity: 0;
                         visibility: hidden;
                         transition: .3s all ease-in-out;
+                        z-index: 100;
                         transform: scale(0);
 
                         &:before {
                             position: absolute;
                             content: '';
-                            border: 10px solid var(--black);
+                            border: 10px solid var(--white);
                             border-left-color: transparent;
                             border-bottom-color: transparent;
                             width: 0;

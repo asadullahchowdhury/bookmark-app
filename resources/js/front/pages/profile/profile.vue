@@ -262,6 +262,7 @@ export default {
         * Profile edit modal open/close
         ============================================*/
         editModal(type) {
+            apiService.ClearErrorHandler();
             if (type === 1) {
                 let modal = new bootstrap.Modal(document.getElementById('profileUpdateModal'))
                 modal.show();
@@ -348,6 +349,7 @@ export default {
         * Password Modal open/close
         ============================================*/
         passwordModal(type) {
+            apiService.ClearErrorHandler();
             if (type === 1) {
                 this.passwordParam = {
                     password: '',

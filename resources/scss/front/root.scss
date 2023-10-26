@@ -13,26 +13,24 @@ body {
 }
 
 
-
 .w-120px {
     width: 120px;
 }
 
-.py-9px{
+.py-9px {
     padding-top: 9px;
     padding-bottom: 9px;
 }
 
 
-
-.bg-lg-light{
+.bg-lg-light {
     @media screen and (max-width: 991px) {
-background-color: var(--bs-light);
+        background-color: var(--bs-light);
     }
 }
 
 
-.w-50px{
+.w-50px {
     width: 50px;
 }
 
@@ -62,9 +60,6 @@ background-color: var(--bs-light);
 }
 
 
-
-.list-card-height {
-    min-height: 600px;
-    overflow: auto;
-    max-height: 600px;
+.portal-height {
+    min-height: calc(100vh - 71px);
 }
