@@ -47,7 +47,7 @@
                            <div class="text-center fs-3 text-dark mb-4">Reset Password</div>
 
                            <div class="form-group mb-3">
-                               <input type="text" class="form-control shadow-none" placeholder="Email Address" name="email"
+                               <input type="hidden" class="form-control shadow-none" placeholder="Email Address" name="email"
                                       disabled v-model="resetParam.email"
                                       autocomplete="off">
                                <img class="placeholder-icon" :src="`/images/global/mail.svg`" alt="mail">
@@ -176,6 +176,7 @@ export default {
             apiService.POST(apiRoutes.Forgot, this.forgotParam, (res) => {
                 this.forgotLoading = false;
                 if (parseInt(res.status) === 200) {
+                    console.log(res)
                     toaster.info(res.msg)
                     this.forgotType = 2;
                     this.resetParam.email = this.forgotParam.email;

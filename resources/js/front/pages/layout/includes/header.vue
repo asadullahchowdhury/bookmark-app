@@ -45,7 +45,7 @@
                     </ul>
                 </div>
 
-                <div class="" v-if="profileData === null">
+                <div class="" v-if="profileData === null && currentRouteName === 'Home'">
                     <router-link :to="{name:'Login'}" class="text-decoration-none underline-anim login-btn" :class="{'text-white' : currentRouteName === 'Home'}">
                         Login
                     </router-link>
